@@ -25,6 +25,7 @@ class TelnetConnection{
     fun disconnect() {
         try {
             socket.close()
+            socket = Socket()
         }
         catch (e: Exception) {
             e.printStackTrace()
