@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+tools:context=".view.ArrowControlsDxDyDzFragment">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageButton
+        android:id="@+id/ib_up_z"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/custom_selector_btn_left_dz"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ib_left_x"
+        android:layout_width="0dp"
+
+        android:layout_height="wrap_content"
+
+
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/custom_selector_btn_left_dy"
+        app:layout_constraintEnd_toStartOf="@+id/ib_right_x"
+        app:layout_constraintTop_toTopOf="@+id/ib_up_y" />
+
+    <ImageButton
+        android:id="@+id/ib_down_z"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+
+        android:layout_marginStart="8dp"
+        android:background="@drawable/custom_selector_btn_right_dz"
+        app:layout_constraintStart_toEndOf="@+id/ib_up_z"
+        app:layout_constraintTop_toTopOf="@+id/ib_up_z" />
+
+    <ImageButton
+        android:id="@+id/ib_down_y"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="8dp"
+        android:background="@drawable/custom_selector_btn_down_dx"
+        app:layout_constraintStart_toEndOf="@+id/ib_left_x"
+        app:layout_constraintTop_toBottomOf="@+id/ib_up_y" />
+
+    <ImageButton
+        android:id="@+id/ib_up_y"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/custom_selector_btn_up_dx"
+        app:layout_constraintStart_toStartOf="@+id/ib_up_z"
+        app:layout_constraintTop_toBottomOf="@+id/ib_up_z" />
+
+    <ImageButton
+        android:id="@+id/ib_right_x"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+
+        android:background="@drawable/custom_selector_btn_right_dy"
+        app:layout_constraintStart_toEndOf="@+id/ib_up_y"
+        app:layout_constraintTop_toTopOf="@+id/ib_left_x" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
