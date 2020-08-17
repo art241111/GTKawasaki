@@ -6,11 +6,25 @@ import java.net.Socket
 import java.net.UnknownHostException
 
 class TelnetConnection(){
-    private var socket: Socket = Socket()
+    var socket: Socket = Socket()
+    private set
 
-    constructor(server: String,
-                port: Int,
-                user: String): this() {
+    fun createTCPLink(server: String,
+                       port: Int){
+        try {
+            socket= Socket(server, port)
+        } catch (e: UnknownHostException){
+            // TODO: Migrate to log
+            print("Problem with create socket. \n $e")
+        } catch (e: IOException){
+            // TODO: Migrate to log
+            print("Problem with create socket. \n $e")
+        }
+    }
+
+    fun createTelnetLink(server: String,
+                       port: Int,
+                       user: String){
         try {
             socket= Socket(server, port)
 
@@ -24,23 +38,6 @@ class TelnetConnection(){
             // TODO: Migrate to log
             print("Problem with create socket. \n $e")
         }
-    }
-
-    constructor(server: String,
-                port: Int): this() {
-        try {
-            socket= Socket(server, port)
-        } catch (e: UnknownHostException){
-            // TODO: Migrate to log
-            print("Problem with create socket. \n $e")
-        } catch (e: IOException){
-            // TODO: Migrate to log
-            print("Problem with create socket. \n $e")
-        }
-    }
-
-    fun getSocket(): Socket {
-        return socket
     }
 
     fun disconnect() {

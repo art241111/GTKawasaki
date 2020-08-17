@@ -14,13 +14,15 @@ class KawasakiRobot(address: String = "127.0.0.1",
 
     init {
         thread {
-            specifications.client = TelnetConnection(address,port)
+            specifications.client.createTCPLink(address,port)
             specifications.writer.startSendCommands()
         }
     }
 
     fun disconnect(){
         specifications.writer.stopSendCommands()
-        specifications.client.getSocket().close()
+        thread {
+            specifications.client.socket.close()
+        }
     }
 }
