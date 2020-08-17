@@ -1,14 +1,15 @@
 package ru.art241111.graphicaltoolforkawasaki.repository
 
+import io.reactivex.rxjava3.subjects.BehaviorSubject
 import ru.art241111.graphicaltoolforkawasaki.repository.robotAPI.KawasakiRobot
-import kotlin.concurrent.thread
+
 
 class RepositoryForRobotApi {
-    private val robot = KawasakiRobot(address = "192.168.31.52",
+    val robot = KawasakiRobot(address = "192.168.31.52",
                                       port = 49152)
 
     fun isConnect() =
-        robot.specifications.client.getSocket().isConnected
+        robot.specifications.client.socket.isConnected
 
     fun updateInfoAboutPosition() =
         robot.service.updateInfoAboutPosition()

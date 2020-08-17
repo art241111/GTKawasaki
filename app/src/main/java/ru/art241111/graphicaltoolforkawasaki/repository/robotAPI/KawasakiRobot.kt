@@ -21,8 +21,6 @@ class KawasakiRobot(address: String = "127.0.0.1",
 
     fun disconnect(){
         specifications.writer.stopSendCommands()
-        thread {
-            specifications.client.socket.close()
-        }
+        specifications.client.disconnect()
     }
 }

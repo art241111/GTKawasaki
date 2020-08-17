@@ -8,7 +8,7 @@ import java.net.Socket
 import java.util.*
 import kotlin.concurrent.thread
 
-class RemoteWriter(val robotEntity: RobotEntity) {
+class RemoteWriter(private val robotEntity: RobotEntity) {
     private val commandsQueue: Queue<String> = LinkedList<String>()
     private var connection = false
 
@@ -27,7 +27,7 @@ class RemoteWriter(val robotEntity: RobotEntity) {
 
    fun startSendCommands(){
          val  client = robotEntity.client
-         socket = client.getSocket()
+         socket = client.socket
          out = PrintStream(socket.getOutputStream())
 
          connection = socket.isConnected
@@ -48,7 +48,7 @@ class RemoteWriter(val robotEntity: RobotEntity) {
     }
 
     fun stopSendCommands(){
-        write("q")
+        sendCommand("q")
         connection = false
     }
 
@@ -57,7 +57,6 @@ class RemoteWriter(val robotEntity: RobotEntity) {
             try {
                 out.println(message)
                 out.flush()
-
                 return true
             } catch (e: Exception) {
                 e.printStackTrace()

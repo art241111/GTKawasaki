@@ -34,19 +34,28 @@ class ControlPanel : Fragment() {
         setConnectButtonListener()
 
         return binding.root
+
     }
 
     private fun setConnectButtonListener() {
         binding.ivConnection.setOnClickListener {
-            val repositoryForRobotApi = RepositoryForRobotApi()
+            if(!binding.connectStatus!!){
+                val repositoryForRobotApi = RepositoryForRobotApi()
 
-            try {
-                Thread.sleep(100L)
-            } catch (e: java.lang.Exception) {
+                try {
+                    Thread.sleep(500L)
+                } catch (e: java.lang.Exception) {
+                }
+
+                binding.connectStatus = repositoryForRobotApi.isConnect()
+                viewModel.robot = repositoryForRobotApi
+            } else{
+                viewModel.robot.disconnect()
+                viewModel.robot.robot.specifications.client.socket.close()
+
+                binding.connectStatus = viewModel.robot.isConnect()
             }
 
-            binding.connectStatus = repositoryForRobotApi.isConnect()
-            viewModel.robot = repositoryForRobotApi
         }
     }
 

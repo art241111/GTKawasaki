@@ -101,8 +101,8 @@
             app:layout_constraintGuide_begin="298dp" />
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView7"
-            android:name="ru.art241111.graphicaltoolforkawasaki.ControlPanel"
+            android:id="@+id/fragmentContainerView8"
+            android:name="ru.art241111.graphicaltoolforkawasaki.view.ControlPanel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/tabHost"

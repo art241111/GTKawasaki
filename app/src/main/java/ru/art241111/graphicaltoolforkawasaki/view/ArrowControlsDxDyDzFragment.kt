@@ -42,7 +42,7 @@ class ArrowControlsDxDyDzFragment : Fragment() {
         binding.executePendingBindings()
 
 
-        repositoryForRobotApi = RepositoryForRobotApi()
+//        repositoryForRobotApi = RepositoryForRobotApi()
         setClickListeners()
 
         return binding.root

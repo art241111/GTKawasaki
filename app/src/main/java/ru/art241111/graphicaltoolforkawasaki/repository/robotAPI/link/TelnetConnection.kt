@@ -4,8 +4,9 @@ import java.io.IOException
 import java.io.PrintStream
 import java.net.Socket
 import java.net.UnknownHostException
+import kotlin.concurrent.thread
 
-class TelnetConnection(){
+class TelnetConnection{
     var socket: Socket = Socket()
     private set
 
@@ -21,10 +22,12 @@ class TelnetConnection(){
     }
 
     fun disconnect() {
-        try {
-            socket.close()
-        } catch (e: Exception) {
-            e.printStackTrace()
+        thread {
+            try {
+                socket.close()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 
