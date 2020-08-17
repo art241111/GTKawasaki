@@ -9,35 +9,15 @@ class TelnetConnection(){
     var socket: Socket = Socket()
     private set
 
-    fun createTCPLink(server: String,
-                       port: Int){
-        try {
-            socket= Socket(server, port)
-        } catch (e: UnknownHostException){
-            // TODO: Migrate to log
-            print("Problem with create socket. \n $e")
-        } catch (e: IOException){
-            // TODO: Migrate to log
-            print("Problem with create socket. \n $e")
-        }
+    fun createTCPLink(server: String, port: Int){
+        createSocket(server,port)
     }
 
     fun createTelnetLink(server: String,
-                       port: Int,
-                       user: String){
-        try {
-            socket= Socket(server, port)
-
-            if(socket.isConnected){
-                authorization(user)
-            }
-        } catch (e: UnknownHostException){
-            // TODO: Migrate to log
-            print("Problem with create socket. \n $e")
-        } catch (e: IOException){
-            // TODO: Migrate to log
-            print("Problem with create socket. \n $e")
-        }
+                         port: Int,
+                         user: String){
+        createSocket(server, port)
+        authorization(user)
     }
 
     fun disconnect() {
@@ -48,11 +28,26 @@ class TelnetConnection(){
         }
     }
 
-    private fun authorization(user: String){
-        val writer =  PrintStream(socket.getOutputStream())
+    private fun createSocket(server: String,
+                             port: Int){
+        try {
+            socket= Socket(server, port)
+        } catch (e: UnknownHostException){
+            // TODO: Migrate to log
+            print("Problem with create socket. \n $e")
+        } catch (e: IOException){
+            // TODO: Migrate to log
+            print("Problem with create socket. \n $e")
+        }
+    }
 
-        //TODO: Think about how to do it differently
-        writer.println(user)
-        writer.flush()
+    private fun authorization(user: String){
+        if(socket.isConnected){
+            val writer =  PrintStream(socket.getOutputStream())
+
+            //TODO: Think about how to do it differently
+            writer.println(user)
+            writer.flush()
+        }
     }
 }
