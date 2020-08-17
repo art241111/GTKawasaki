@@ -1,21 +1,22 @@
 package ru.art241111.graphicaltoolforkawasaki.view
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.content.SharedPreferences.Editor
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
-import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentControlPanelBinding
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentDataForLinkBinding
 import ru.art241111.graphicaltoolforkawasaki.repository.RepositoryForRobotApi
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
-import kotlin.concurrent.thread
 
 
 /**
@@ -27,6 +28,15 @@ class DataForLinkFragment : Fragment() {
     private lateinit var binding: FragmentDataForLinkBinding
     private lateinit var viewModel: RobotViewModel
 
+    // Shared preferences
+    private var preferences: SharedPreferences? = null
+
+    private var ip = "192.168.31.52"
+    private val APP_PREFERENCES_IP = "IP"
+
+    private var port = "49152"
+    private val APP_PREFERENCES_PORT = "PORT"
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Create viewModel
@@ -34,37 +44,95 @@ class DataForLinkFragment : Fragment() {
 
         // Connect to data binding
         binding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_data_for_link, container, false)
+                R.layout.fragment_data_for_link, container, false)
         binding.executePendingBindings()
 
-        // TODO: Get from shared preferences
-        binding.defaultIp = "192.168.31.52"
-        binding.defaultPort = "49152"
-
+        updateDate()
         setButtonListener()
+
         return binding.root
+    }
+
+    private fun updateDate() {
+        getIpAndPortFromSharedPreferences()
+        binding.defaultIp = ip
+        binding.defaultPort = port
+    }
+
+    private fun getIpAndPortFromSharedPreferences() {
+        preferences = this.activity
+                ?.getSharedPreferences("CharacteristicsOfTheConnection", Context.MODE_PRIVATE)
+
+        if(preferences != null){
+            ip = getFromSharedPreferences(APP_PREFERENCES_IP, ip)
+            port = getFromSharedPreferences(APP_PREFERENCES_PORT, port)
+        }
+    }
+
+    private fun getFromSharedPreferences(key:String,
+                                         defaultValue: String): String{
+        return if(preferences!!.contains(key)) {
+            preferences!!.getString(key, "") ?: defaultValue
+
+        } else {
+            updateSharedPreferences(key,defaultValue)
+
+            defaultValue
+        }
+    }
+
+    private fun updateSharedPreferences(preferencesKey: String, newValue: String) {
+        if(preferences != null){
+            val editor: Editor = preferences!!.edit()
+            editor.putString(preferencesKey, newValue)
+            editor.apply()
+        }
     }
 
     private fun setButtonListener() {
         binding.bConnect.setOnClickListener {
-            val repositoryForRobotApi = RepositoryForRobotApi()
-            repositoryForRobotApi.connectToRobotTCP()
+            updateIpAndPort()
 
-            try {
-                Thread.sleep(500L)
-            } catch (e: java.lang.Exception) {
-            }
-
-            if (!repositoryForRobotApi.isConnect()){
-                repositoryForRobotApi.disconnect()
-                Toast.makeText(activity as MainActivity,"Подключение не удалось", Toast.LENGTH_LONG).show()
+            if (createConnection()){
+                Toast.makeText(activity as MainActivity, "Подключение не удалось", Toast.LENGTH_LONG).show()
             } else{
-                viewModel.robot = repositoryForRobotApi
                 findNavController().navigate(R.id.arrowControlsFragment)
             }
         }
     }
 
+    private fun updateIpAndPort(){
+        ip = updateValue(ip, binding.etIp.text.toString(), APP_PREFERENCES_IP)
+        port = updateValue(port, binding.etPort.text.toString(), APP_PREFERENCES_PORT)
+    }
+
+        private fun updateValue(oldValue:String,newValue: String, Key: String): String{
+            return if(oldValue != newValue){
+                updateSharedPreferences(Key, newValue)
+                newValue
+            } else{
+                oldValue
+            }
+        }
+
+    private fun createConnection(): Boolean{
+        val repositoryForRobotApi = RepositoryForRobotApi()
+        repositoryForRobotApi.connectToRobotTCP(address = ip, port = port.toInt())
+
+        try {
+            Thread.sleep(500L)
+        } catch (e: java.lang.Exception) {
+        }
+
+        return if(!repositoryForRobotApi.isConnect()){
+            repositoryForRobotApi.disconnect()
+            false
+        } else{
+            viewModel.robot = repositoryForRobotApi
+            true
+        }
+
+    }
 
     companion object {
         /**
