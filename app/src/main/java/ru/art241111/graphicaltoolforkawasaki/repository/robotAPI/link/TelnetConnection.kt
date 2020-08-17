@@ -41,6 +41,9 @@ class TelnetConnection{
         } catch (e: IOException){
             // TODO: Migrate to log
             print("Problem with create socket. \n $e")
+        } catch (e:java.lang.Exception){
+            // TODO: Migrate to log
+            print("Problem with create socket. \n $e")
         }
     }
 
