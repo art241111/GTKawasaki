@@ -1,5 +1,6 @@
 package ru.art241111.graphicaltoolforkawasaki.view
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -34,46 +35,57 @@ class ArrowControlsFragmentXYZ : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // Create viewModel
         viewModel = ViewModelProvider(activity as MainActivity).get(RobotViewModel::class.java)
+
+        // Connect to data binding
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_arrow_controls_xyz, container, false)
         binding.executePendingBindings()
 
-        repositoryForRobotApi = RepositoryForRobotApi()
-        whenButtonPressed = WhenButtonPressed(repositoryForRobotApi)
+        // Create repository
+        // TODO: migrate creation to viewModel
+//        repositoryForRobotApi = RepositoryForRobotApi()
+
+        // Create buttonPressedListener and set it
         setClickListeners()
 
         return binding.root
     }
 
     private fun setClickListeners() {
-        // Move by Z
-        onTouchListener(binding.ibUpZ, Buttons.UpZ)
-        onTouchListener(binding.ibDownZ, Buttons.DownZ)
 
-        // Move by X
-        onTouchListener(binding.ibRightX, Buttons.UpX)
-        onTouchListener(binding.ibLeftX, Buttons.DownX)
+            // Move by Z
+            onTouchListener(binding.ibUpZ, Buttons.UpZ)
+            onTouchListener(binding.ibDownZ, Buttons.DownZ)
 
-        // Move by Z
-        onTouchListener(binding.ibUpY, Buttons.UpY)
-        onTouchListener(binding.ibDownY, Buttons.DownY)
+            // Move by X
+            onTouchListener(binding.ibRightX, Buttons.UpX)
+            onTouchListener(binding.ibLeftX, Buttons.DownX)
+
+            // Move by Z
+            onTouchListener(binding.ibUpY, Buttons.UpY)
+            onTouchListener(binding.ibDownY, Buttons.DownY)
+
     }
 
-    private fun onButtonUpZClickListener() {
-        onTouchListener(binding.ibUpZ, Buttons.UpZ)
-    }
-
+    @SuppressLint("ClickableViewAccessibility")
     private fun onTouchListener(view: View, button: Buttons){
-        view.setOnTouchListener(View.OnTouchListener { v, event -> when(event.action){
-            MotionEvent.ACTION_DOWN -> {
-                whenButtonPressed.press = true
-                whenButtonPressed.arrowPressed(button)
-            }
-            MotionEvent.ACTION_UP ->{
-                whenButtonPressed.press = false
-            }
+        view.setOnTouchListener(View.OnTouchListener { v, event ->
 
+            if (viewModel.robot.isConnect()){
+                repositoryForRobotApi = viewModel.robot
+                whenButtonPressed = WhenButtonPressed(repositoryForRobotApi)
+
+                when(event.action){
+                    MotionEvent.ACTION_DOWN -> {
+                        whenButtonPressed.press = true
+                        whenButtonPressed.arrowPressed(button)
+                    }
+                    MotionEvent.ACTION_UP ->{
+                        whenButtonPressed.press = false
+                    }
+            }
         }
             return@OnTouchListener false
 

@@ -7,6 +7,9 @@ class RepositoryForRobotApi {
     private val robot = KawasakiRobot(address = "192.168.31.52",
                                       port = 49152)
 
+    fun isConnect() =
+        robot.specifications.client.getSocket().isConnected
+
     fun updateInfoAboutPosition() =
         robot.service.updateInfoAboutPosition()
 
