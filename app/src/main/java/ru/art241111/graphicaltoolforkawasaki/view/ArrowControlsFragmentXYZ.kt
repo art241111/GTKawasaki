@@ -93,7 +93,9 @@ class ArrowControlsFragmentXYZ : Fragment() {
     }
 
     override fun onDestroyView() {
-        repositoryForRobotApi.disconnect()
+        if (::repositoryForRobotApi.isInitialized) {
+            repositoryForRobotApi.disconnect()
+        }
         super.onDestroyView()
     }
 

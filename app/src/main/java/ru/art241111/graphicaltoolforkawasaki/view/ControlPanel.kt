@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentControlPanelBinding
@@ -40,15 +41,17 @@ class ControlPanel : Fragment() {
     private fun setConnectButtonListener() {
         binding.ivConnection.setOnClickListener {
             if(!binding.connectStatus!!){
-                val repositoryForRobotApi = RepositoryForRobotApi()
+                findNavController().navigate(R.id.dataForLinkFragment)
 
-                try {
-                    Thread.sleep(500L)
-                } catch (e: java.lang.Exception) {
-                }
-
-                binding.connectStatus = repositoryForRobotApi.isConnect()
-                viewModel.robot = repositoryForRobotApi
+//                val repositoryForRobotApi = RepositoryForRobotApi()
+//
+//                try {
+//                    Thread.sleep(500L)
+//                } catch (e: java.lang.Exception) {
+//                }
+//
+//                binding.connectStatus = repositoryForRobotApi.isConnect()
+//                viewModel.robot = repositoryForRobotApi
             } else{
                 viewModel.robot.disconnect()
                 viewModel.robot.robot.specifications.client.socket.close()
