@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentArrowControlsXyzBinding
+import ru.art241111.graphicaltoolforkawasaki.view.util.AmountOfMovement
 import ru.art241111.graphicaltoolforkawasaki.view.util.Buttons
 import ru.art241111.graphicaltoolforkawasaki.view.util.WhenButtonPressed
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
@@ -47,16 +48,16 @@ class ArrowControlsFragmentXYZ : Fragment() {
         val whenButtonPressed = WhenButtonPressed(repositoryForRobotApi)
 
         // Move by Z
-        whenButtonPressed.onTouchListener(binding.ibUpZ, Buttons.UpZ)
-        whenButtonPressed.onTouchListener(binding.ibDownZ, Buttons.DownZ)
+        whenButtonPressed.onTouchListener(binding.ibUpZ, Buttons.UpZ,AmountOfMovement.FAST)
+        whenButtonPressed.onTouchListener(binding.ibDownZ, Buttons.DownZ,AmountOfMovement.FAST)
 
         // Move by X
-        whenButtonPressed.onTouchListener(binding.ibRightX, Buttons.UpX)
-        whenButtonPressed.onTouchListener(binding.ibLeftX, Buttons.DownX)
+        whenButtonPressed.onTouchListener(binding.ibRightX, Buttons.UpX,AmountOfMovement.FAST)
+        whenButtonPressed.onTouchListener(binding.ibLeftX, Buttons.DownX,AmountOfMovement.FAST)
 
         // Move by Z
-        whenButtonPressed.onTouchListener(binding.ibUpY, Buttons.UpY)
-        whenButtonPressed.onTouchListener(binding.ibDownY, Buttons.DownY)
+        whenButtonPressed.onTouchListener(binding.ibUpY, Buttons.UpY,AmountOfMovement.FAST)
+        whenButtonPressed.onTouchListener(binding.ibDownY, Buttons.DownY,AmountOfMovement.FAST)
     }
 
     override fun onDestroyView() {
