@@ -63,12 +63,6 @@ class ArrowControlsFragmentXYZ : Fragment() {
         whenButtonPressed.onTouchListener(binding.ibDownY, Buttons.DownY,AmountOfMovement.FAST)
     }
 
-    override fun onDestroyView() {
-        repositoryForRobotApi.disconnect()
-
-        super.onDestroyView()
-    }
-
     companion object {
         /**
          * Use this factory method to create a new instance of
