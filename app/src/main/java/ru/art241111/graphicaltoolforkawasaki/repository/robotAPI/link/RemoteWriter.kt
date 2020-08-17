@@ -37,7 +37,10 @@ class RemoteWriter(val robotEntity: RobotEntity) {
                  if(robotEntity.state == State.ERROR){
                      commandsQueue.clear()
                  } else if((robotEntity.state == State.WAITING_COMMAND) and (!commandsQueue.isEmpty())){
-                     write(commandsQueue.poll().trim())
+                     val comm = commandsQueue.poll()
+                     if( comm != null){
+                         write(comm.trim())
+                     }
                  }
 //                 Delay.little()
              }

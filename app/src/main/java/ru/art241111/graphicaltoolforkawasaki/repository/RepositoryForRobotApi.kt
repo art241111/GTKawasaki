@@ -4,7 +4,7 @@ import ru.art241111.graphicaltoolforkawasaki.repository.robotAPI.KawasakiRobot
 import kotlin.concurrent.thread
 
 class RepositoryForRobotApi {
-    private val robot = KawasakiRobot(address = "192.168.0.2",
+    private val robot = KawasakiRobot(address = "192.168.31.52",
                                       port = 49152)
 
     fun updateInfoAboutPosition() =

@@ -13,6 +13,8 @@ import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentArrowControlsXyzBinding
 import ru.art241111.graphicaltoolforkawasaki.repository.RepositoryForRobotApi
+import ru.art241111.graphicaltoolforkawasaki.view.util.Buttons
+import ru.art241111.graphicaltoolforkawasaki.view.util.WhenButtonPressed
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
 import kotlin.concurrent.thread
 
@@ -26,6 +28,8 @@ class ArrowControlsFragmentXYZ : Fragment() {
     private lateinit var viewModel: RobotViewModel
     private lateinit var repositoryForRobotApi: RepositoryForRobotApi
 
+    private lateinit var whenButtonPressed: WhenButtonPressed
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,8 +39,8 @@ class ArrowControlsFragmentXYZ : Fragment() {
             R.layout.fragment_arrow_controls_xyz, container, false)
         binding.executePendingBindings()
 
-
         repositoryForRobotApi = RepositoryForRobotApi()
+        whenButtonPressed = WhenButtonPressed(repositoryForRobotApi)
         setClickListeners()
 
         return binding.root
@@ -44,81 +48,43 @@ class ArrowControlsFragmentXYZ : Fragment() {
 
     private fun setClickListeners() {
         // Move by Z
-        onButtonUpZClickListener()
-        onButtonDownZClickListener()
+        onTouchListener(binding.ibUpZ, Buttons.UpZ)
+        onTouchListener(binding.ibDownZ, Buttons.DownZ)
 
         // Move by X
-        onButtonRightXClickListener()
-        onButtonLeftXClickListener()
+        onTouchListener(binding.ibRightX, Buttons.UpX)
+        onTouchListener(binding.ibLeftX, Buttons.DownX)
 
         // Move by Z
-        onButtonUpYClickListener()
-        onButtonDownYClickListener()
+        onTouchListener(binding.ibUpY, Buttons.UpY)
+        onTouchListener(binding.ibDownY, Buttons.DownY)
     }
 
     private fun onButtonUpZClickListener() {
-        binding.ibUpZ.setOnTouchListener(View.OnTouchListener { v, event -> when(event.action){
+        onTouchListener(binding.ibUpZ, Buttons.UpZ)
+    }
+
+    private fun onTouchListener(view: View, button: Buttons){
+        view.setOnTouchListener(View.OnTouchListener { v, event -> when(event.action){
             MotionEvent.ACTION_DOWN -> {
-                press = true
-                pressZUp()
+                whenButtonPressed.press = true
+                whenButtonPressed.arrowPressed(button)
             }
             MotionEvent.ACTION_UP ->{
-                press = false
+                whenButtonPressed.press = false
             }
 
         }
             return@OnTouchListener false
+
         })
     }
 
-    var press = false
-    private fun pressZUp(){
-        thread {
-            while (press){
-                repositoryForRobotApi.moveByZ(1)
-                try {
-                    Thread.sleep(50L)
-                } catch (e: java.lang.Exception) {
-                }
-            }
-        }
-    }
-
-
-    private fun onButtonDownZClickListener() {
-        binding.ibDownZ.setOnClickListener{
-            repositoryForRobotApi.moveByZ(-1)
-        }
-    }
-
-    private fun onButtonRightXClickListener() {
-        binding.ibRightX.setOnClickListener{
-            repositoryForRobotApi.moveByX(1)
-        }
-    }
-
-    private fun onButtonLeftXClickListener() {
-        binding.ibLeftX.setOnClickListener{
-            repositoryForRobotApi.moveByX(-1)
-        }
-    }
-
-    private fun onButtonUpYClickListener() {
-        binding.ibUpY.setOnClickListener {
-            repositoryForRobotApi.moveByY(1)
-        }
-    }
-
-    private fun onButtonDownYClickListener() {
-        binding.ibDownY.setOnClickListener{
-            repositoryForRobotApi.moveByY(-1)
-        }
-    }
-
-    override fun onDetach() {
+    override fun onDestroyView() {
         repositoryForRobotApi.disconnect()
-        super.onDetach()
+        super.onDestroyView()
     }
+
     companion object {
         /**
          * Use this factory method to create a new instance of
