@@ -3,7 +3,6 @@ package ru.art241111.graphicaltoolforkawasaki.view
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -11,11 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentArrowControlsDxdydzBinding
-import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentArrowControlsXyzBinding
-import ru.art241111.graphicaltoolforkawasaki.repository.RepositoryForRobotApi
+import ru.art241111.graphicaltoolforkawasaki.view.util.Buttons
+import ru.art241111.graphicaltoolforkawasaki.view.util.WhenButtonPressed
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
-import java.lang.Exception
-import kotlin.concurrent.thread
 
 /**
  * A simple [Fragment] subclass.
@@ -25,7 +22,8 @@ import kotlin.concurrent.thread
 class ArrowControlsDxDyDzFragment : Fragment() {
     private lateinit var binding: FragmentArrowControlsDxdydzBinding
     private lateinit var viewModel: RobotViewModel
-    private lateinit var repositoryForRobotApi: RepositoryForRobotApi
+
+    private var repositoryForRobotApi = viewModel.robot
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,84 +34,25 @@ class ArrowControlsDxDyDzFragment : Fragment() {
             R.layout.fragment_arrow_controls_dxdydz, container, false)
         binding.executePendingBindings()
 
-
-//        repositoryForRobotApi = RepositoryForRobotApi()
         setClickListeners()
 
         return binding.root
     }
 
     private fun setClickListeners() {
+        val whenButtonPressed = WhenButtonPressed(repositoryForRobotApi)
+
         // Move by Z
-        onButtonUpZClickListener()
-        onButtonDownZClickListener()
+        whenButtonPressed.onTouchListener(binding.ibUpZ, Buttons.UpDZ)
+        whenButtonPressed.onTouchListener(binding.ibDownZ, Buttons.DownDZ)
 
         // Move by X
-        onButtonRightXClickListener()
-        onButtonLeftXClickListener()
+        whenButtonPressed.onTouchListener(binding.ibRightX, Buttons.UpDX)
+        whenButtonPressed.onTouchListener(binding.ibLeftX, Buttons.DownDX)
 
         // Move by Z
-        onButtonUpYClickListener()
-        onButtonDownYClickListener()
-    }
-
-    private fun onButtonUpZClickListener() {
-        binding.ibUpZ.setOnTouchListener(View.OnTouchListener { v, event -> when(event.action){
-            MotionEvent.ACTION_DOWN -> {
-                press = true
-                pressZUp()
-            }
-            MotionEvent.ACTION_UP ->{
-                press = false
-            }
-
-        }
-            return@OnTouchListener false
-        })
-    }
-
-    var press = false
-    private fun pressZUp(){
-        thread {
-            while (press){
-                repositoryForRobotApi.moveByZ(1)
-                try {
-                    Thread.sleep(50L)
-                } catch (e: Exception) {
-                }
-            }
-        }
-    }
-
-
-    private fun onButtonDownZClickListener() {
-        binding.ibDownZ.setOnClickListener{
-            repositoryForRobotApi.moveByZ(-1)
-        }
-    }
-
-    private fun onButtonRightXClickListener() {
-        binding.ibRightX.setOnClickListener{
-            repositoryForRobotApi.moveByX(1)
-        }
-    }
-
-    private fun onButtonLeftXClickListener() {
-        binding.ibLeftX.setOnClickListener{
-            repositoryForRobotApi.moveByX(-1)
-        }
-    }
-
-    private fun onButtonUpYClickListener() {
-        binding.ibUpY.setOnClickListener {
-            repositoryForRobotApi.moveByY(1)
-        }
-    }
-
-    private fun onButtonDownYClickListener() {
-        binding.ibDownY.setOnClickListener{
-            repositoryForRobotApi.moveByY(-1)
-        }
+        whenButtonPressed.onTouchListener(binding.ibUpY, Buttons.UpDY)
+        whenButtonPressed.onTouchListener(binding.ibDownY, Buttons.DownDY)
     }
 
     companion object {
@@ -121,8 +60,6 @@ class ArrowControlsDxDyDzFragment : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
          * @return A new instance of fragment fragment_arrow_controls_dxdydz.
          */
         // TODO: Rename and change types and number of parameters

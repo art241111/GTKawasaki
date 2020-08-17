@@ -1,23 +1,18 @@
 package ru.art241111.graphicaltoolforkawasaki.view
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentArrowControlsXyzBinding
-import ru.art241111.graphicaltoolforkawasaki.repository.RepositoryForRobotApi
 import ru.art241111.graphicaltoolforkawasaki.view.util.Buttons
 import ru.art241111.graphicaltoolforkawasaki.view.util.WhenButtonPressed
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
-import kotlin.concurrent.thread
 
 /**
  * A simple [Fragment] subclass.
@@ -27,9 +22,8 @@ import kotlin.concurrent.thread
 class ArrowControlsFragmentXYZ : Fragment() {
     private lateinit var binding: FragmentArrowControlsXyzBinding
     private lateinit var viewModel: RobotViewModel
-    private lateinit var repositoryForRobotApi: RepositoryForRobotApi
 
-    private lateinit var whenButtonPressed: WhenButtonPressed
+    private var repositoryForRobotApi = viewModel.robot
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,55 +37,31 @@ class ArrowControlsFragmentXYZ : Fragment() {
             R.layout.fragment_arrow_controls_xyz, container, false)
         binding.executePendingBindings()
 
-        // Create repository
-        // TODO: migrate creation to viewModel
-//        repositoryForRobotApi = RepositoryForRobotApi()
-
         // Create buttonPressedListener and set it
         setClickListeners()
-
-        repositoryForRobotApi = viewModel.robot
-        whenButtonPressed = WhenButtonPressed(repositoryForRobotApi)
 
         return binding.root
     }
 
     private fun setClickListeners() {
-            // Move by Z
-            onTouchListener(binding.ibUpZ, Buttons.UpZ)
-            onTouchListener(binding.ibDownZ, Buttons.DownZ)
+        val whenButtonPressed = WhenButtonPressed(repositoryForRobotApi)
 
-            // Move by X
-            onTouchListener(binding.ibRightX, Buttons.UpX)
-            onTouchListener(binding.ibLeftX, Buttons.DownX)
+        // Move by Z
+        whenButtonPressed.onTouchListener(binding.ibUpZ, Buttons.UpZ)
+        whenButtonPressed.onTouchListener(binding.ibDownZ, Buttons.DownZ)
 
-            // Move by Z
-            onTouchListener(binding.ibUpY, Buttons.UpY)
-            onTouchListener(binding.ibDownY, Buttons.DownY)
+        // Move by X
+        whenButtonPressed.onTouchListener(binding.ibRightX, Buttons.UpX)
+        whenButtonPressed.onTouchListener(binding.ibLeftX, Buttons.DownX)
 
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    private fun onTouchListener(view: View, button: Buttons){
-        view.setOnTouchListener(View.OnTouchListener { v, event ->
-                when(event.action){
-                    MotionEvent.ACTION_DOWN -> {
-                        whenButtonPressed.press = true
-                        whenButtonPressed.arrowPressed(button)
-                    }
-                    MotionEvent.ACTION_UP ->{
-                        whenButtonPressed.press = false
-                    }
-        }
-            return@OnTouchListener false
-
-        })
+        // Move by Z
+        whenButtonPressed.onTouchListener(binding.ibUpY, Buttons.UpY)
+        whenButtonPressed.onTouchListener(binding.ibDownY, Buttons.DownY)
     }
 
     override fun onDestroyView() {
-        if (::repositoryForRobotApi.isInitialized) {
-            repositoryForRobotApi.disconnect()
-        }
+        repositoryForRobotApi.disconnect()
+
         super.onDestroyView()
     }
 

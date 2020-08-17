@@ -1,5 +1,8 @@
 package ru.art241111.graphicaltoolforkawasaki.view.util
 
+import android.annotation.SuppressLint
+import android.view.MotionEvent
+import android.view.View
 import ru.art241111.graphicaltoolforkawasaki.repository.RepositoryForRobotApi
 import kotlin.concurrent.thread
 
@@ -8,6 +11,23 @@ class WhenButtonPressed(private val robot: RepositoryForRobotApi) {
     private val slowCoefficient = 1
 
     var press = false
+
+    @SuppressLint("ClickableViewAccessibility")
+    fun onTouchListener(view: View, button: Buttons){
+        view.setOnTouchListener(View.OnTouchListener { _, event ->
+            when(event.action){
+                MotionEvent.ACTION_DOWN -> {
+                    press = true
+                    arrowPressed(button)
+                }
+                MotionEvent.ACTION_UP ->{
+                    press = false
+                }
+            }
+            return@OnTouchListener false
+
+        })
+    }
 
     fun arrowPressed(button:Buttons){
         thread {
