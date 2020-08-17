@@ -29,7 +29,7 @@ class WhenButtonPressed(private val robot: RepositoryForRobotApi) {
         })
     }
 
-    fun arrowPressed(button:Buttons){
+    private fun arrowPressed(button:Buttons){
         thread {
             while (press){
                 when(button){
