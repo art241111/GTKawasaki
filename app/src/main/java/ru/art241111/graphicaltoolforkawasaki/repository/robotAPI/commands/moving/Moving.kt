@@ -12,4 +12,12 @@ class Moving(private val robotEntity: RobotEntity) {
 
     fun moveByZ(position: Int) =
             robotEntity.writer.sendCommandWithChangeStatus(MovingCommand.MOVE_BY_Z.command + position)
+    fun moveByDX(position: Int) =
+        robotEntity.writer.sendCommandWithChangeStatus(MovingCommand.MOVE_BY_DX.command + position)
+
+    fun moveByDY(position: Int) =
+        robotEntity.writer.sendCommandWithChangeStatus(MovingCommand.MOVE_BY_DY.command + position)
+
+    fun moveByDZ(position: Int) =
+        robotEntity.writer.sendCommandWithChangeStatus(MovingCommand.MOVE_BY_DZ.command + position)
 }

@@ -19,12 +19,13 @@ class WhenButtonPressed(private val robot: RepositoryForRobotApi) {
                     Buttons.DownX -> robot.moveByX(-fastCoefficient)
                     Buttons.UpY -> robot.moveByY(fastCoefficient)
                     Buttons.DownY -> robot.moveByY(-fastCoefficient)
-//            "UpDZ" -> robot.moving.moveByDz(fastCoefficient)
-//            "DownDZ" -> robot.moving.moveByDz(-fastCoefficient)
-//            "UpDX" -> robot.moving.moveByDx(fastCoefficient)
-//            "DownDX" -> robot.moving.moveByDx(-fastCoefficient)
-//            "UpDY" -> robot.moving.moveByDy(fastCoefficient)
-//            "DownDY" -> robot.moving.moveByDy(-fastCoefficient)
+
+                    Buttons.UpDZ -> robot.moveByDZ(fastCoefficient)
+                    Buttons.DownDZ -> robot.moveByDZ(-fastCoefficient)
+                    Buttons.UpDX -> robot.moveByDX(fastCoefficient)
+                    Buttons.DownDX -> robot.moveByDX(-fastCoefficient)
+                    Buttons.UpDY -> robot.moveByDY(fastCoefficient)
+                    Buttons.DownDY -> robot.moveByDY(-fastCoefficient)
                 }
 
                 try {

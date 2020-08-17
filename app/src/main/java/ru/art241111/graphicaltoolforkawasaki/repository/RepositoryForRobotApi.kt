@@ -22,10 +22,19 @@ class RepositoryForRobotApi {
     fun moveByY(position: Int) =
         robot.moving.moveByY(position)
 
-    fun disconnect(){
-        robot.disconnect()
-    }
     fun moveByZ(position: Int) =
         robot.moving.moveByZ(position)
 
+    fun moveByDX(position: Int) =
+        robot.moving.moveByX(position)
+
+    fun moveByDY(position: Int) =
+        robot.moving.moveByY(position)
+
+    fun moveByDZ(position: Int) =
+        robot.moving.moveByZ(position)
+
+    fun disconnect(){
+        robot.disconnect()
+    }
 }
