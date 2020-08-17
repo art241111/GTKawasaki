@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentArrowControlsDxdydzBinding
+import ru.art241111.graphicaltoolforkawasaki.repository.RepositoryForRobotApi
 import ru.art241111.graphicaltoolforkawasaki.view.util.AmountOfMovement
 import ru.art241111.graphicaltoolforkawasaki.view.util.Buttons
 import ru.art241111.graphicaltoolforkawasaki.view.util.WhenButtonPressed
@@ -24,7 +25,7 @@ class ArrowControlsDxDyDzFragment : Fragment() {
     private lateinit var binding: FragmentArrowControlsDxdydzBinding
     private lateinit var viewModel: RobotViewModel
 
-    private var repositoryForRobotApi = viewModel.robot
+    private lateinit var repositoryForRobotApi: RepositoryForRobotApi
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +36,9 @@ class ArrowControlsDxDyDzFragment : Fragment() {
             R.layout.fragment_arrow_controls_dxdydz, container, false)
         binding.executePendingBindings()
 
+        repositoryForRobotApi = viewModel.robot
+
+        // Create buttonPressedListener and set it
         setClickListeners()
 
         return binding.root
@@ -63,7 +67,6 @@ class ArrowControlsDxDyDzFragment : Fragment() {
          *
          * @return A new instance of fragment fragment_arrow_controls_dxdydz.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =ArrowControlsDxDyDzFragment().apply{}
     }

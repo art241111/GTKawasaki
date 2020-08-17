@@ -1,214 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
     tools:context=".view.BottomControlXYZFragment">
 
-    <FrameLayout
-        android:id="@+id/fl_x_down"
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/button_x_down"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@drawable/background_control_button_left"
-            android:scaleType="fitXY" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:clickable="false"
-            android:text="-X"
-            android:textColor="@color/white"
-            tools:layout_editor_absoluteX="96dp"
-            tools:layout_editor_absoluteY="172dp" />
-    </FrameLayout>
-
-
-    <EditText
-        android:id="@+id/et_x_coordinate"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:ems="10"
+        >
 
-        android:inputType="number"
+        <FrameLayout
+            android:id="@+id/fl_x_down"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        android:text="10"
-        android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/fl_x_down"
-        app:layout_constraintTop_toTopOf="parent" />
+            <ImageButton
+                android:id="@+id/button_x_down"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/background_control_button_left"
+                android:scaleType="fitXY" />
 
-    <FrameLayout
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/et_x_coordinate"
-        app:layout_constraintTop_toTopOf="@+id/fl_x_down">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:clickable="false"
+                android:text="-X"
+                android:textColor="@color/white"
+                tools:layout_editor_absoluteX="96dp"
+                tools:layout_editor_absoluteY="172dp" />
+        </FrameLayout>
 
-        <ImageButton
-            android:id="@+id/button_x_up"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@drawable/background_control_button_right"
-            android:scaleType="fitXY" />
 
-        <TextView
+        <EditText
+            android:id="@+id/et_x_coordinate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:clickable="false"
-            android:text="X+"
-            android:textColor="@color/white"
-            tools:layout_editor_absoluteX="96dp"
-            tools:layout_editor_absoluteY="172dp" />
-    </FrameLayout>
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:ems="10"
 
-    <FrameLayout
-        android:id="@+id/fl_y_down"
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fl_x_down">
+            android:inputType="number"
 
-        <ImageButton
-            android:id="@+id/button_y_down"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@drawable/background_control_button_left"
-            android:scaleType="fitXY" />
+            android:text="10"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@+id/fl_x_down"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/et_x_coordinate"
+            app:layout_constraintTop_toTopOf="@+id/fl_x_down">
+
+            <ImageButton
+                android:id="@+id/button_x_up"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/background_control_button_right"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:clickable="false"
+                android:text="X+"
+                android:textColor="@color/white"
+                tools:layout_editor_absoluteX="96dp"
+                tools:layout_editor_absoluteY="172dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_y_down"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fl_x_down">
+
+            <ImageButton
+                android:id="@+id/button_y_down"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/background_control_button_left"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:clickable="false"
+                android:text="-Y"
+                android:textColor="@color/white"
+                tools:layout_editor_absoluteX="96dp"
+                tools:layout_editor_absoluteY="172dp" />
+        </FrameLayout>
+
+
+        <EditText
+            android:id="@+id/et_y_coordinate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:clickable="false"
-            android:text="-Y"
-            android:textColor="@color/white"
-            tools:layout_editor_absoluteX="96dp"
-            tools:layout_editor_absoluteY="172dp" />
-    </FrameLayout>
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+
+            android:inputType="number"
+            android:text="10"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@+id/fl_y_down"
+            app:layout_constraintTop_toBottomOf="@+id/et_x_coordinate" />
+
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@+id/et_x_coordinate"
+            app:layout_constraintTop_toTopOf="@+id/fl_y_down">
+
+            <ImageButton
+                android:id="@+id/button_y_up"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/background_control_button_right"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:clickable="false"
+                android:text="Y+"
+                android:textColor="@color/white"
+                tools:layout_editor_absoluteX="96dp"
+                tools:layout_editor_absoluteY="172dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_z_down"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fl_y_down">
+
+            <ImageButton
+                android:id="@+id/button_z_down"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/background_control_button_left"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:clickable="false"
+                android:text="-Z"
+                android:textColor="@color/white"
+                tools:layout_editor_absoluteX="96dp"
+                tools:layout_editor_absoluteY="172dp" />
+        </FrameLayout>
 
 
-    <EditText
-        android:id="@+id/et_y_coordinate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-
-        android:inputType="number"
-        android:text="10"
-        android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/fl_y_down"
-        app:layout_constraintTop_toBottomOf="@+id/et_x_coordinate" />
-
-    <FrameLayout
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@+id/et_x_coordinate"
-        app:layout_constraintTop_toTopOf="@+id/fl_y_down">
-
-        <ImageButton
-            android:id="@+id/button_y_up"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@drawable/background_control_button_right"
-            android:scaleType="fitXY" />
-
-        <TextView
+        <EditText
+            android:id="@+id/et_z_coordinate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:clickable="false"
-            android:text="Y+"
-            android:textColor="@color/white"
-            tools:layout_editor_absoluteX="96dp"
-            tools:layout_editor_absoluteY="172dp" />
-    </FrameLayout>
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
 
-    <FrameLayout
-        android:id="@+id/fl_z_down"
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fl_y_down">
+            android:ems="10"
+            android:inputType="number"
+            android:text="10"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fl_z_down"
+            app:layout_constraintTop_toBottomOf="@+id/et_y_coordinate" />
 
-        <ImageButton
-            android:id="@+id/button_z_down"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@drawable/background_control_button_left"
-            android:scaleType="fitXY" />
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@+id/et_x_coordinate"
+            app:layout_constraintTop_toTopOf="@+id/fl_z_down">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:clickable="false"
-            android:text="-Z"
-            android:textColor="@color/white"
-            tools:layout_editor_absoluteX="96dp"
-            tools:layout_editor_absoluteY="172dp" />
-    </FrameLayout>
+            <ImageButton
+                android:id="@+id/button_z_up"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/background_control_button_right"
+                android:scaleType="fitXY" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:clickable="false"
+                android:text="Z+"
+                android:textColor="@color/white"
+                tools:layout_editor_absoluteX="96dp"
+                tools:layout_editor_absoluteY="172dp" />
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <EditText
-        android:id="@+id/et_z_coordinate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-
-        android:ems="10"
-        android:inputType="number"
-        android:text="10"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fl_z_down"
-        app:layout_constraintTop_toBottomOf="@+id/et_y_coordinate" />
-
-    <FrameLayout
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@+id/et_x_coordinate"
-        app:layout_constraintTop_toTopOf="@+id/fl_z_down">
-
-        <ImageButton
-            android:id="@+id/button_z_up"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@drawable/background_control_button_right"
-            android:scaleType="fitXY" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:clickable="false"
-            android:text="Z+"
-            android:textColor="@color/white"
-            tools:layout_editor_absoluteX="96dp"
-            tools:layout_editor_absoluteY="172dp" />
-    </FrameLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

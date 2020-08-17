@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentArrowControlsXyzBinding
+import ru.art241111.graphicaltoolforkawasaki.repository.RepositoryForRobotApi
 import ru.art241111.graphicaltoolforkawasaki.view.util.AmountOfMovement
 import ru.art241111.graphicaltoolforkawasaki.view.util.Buttons
 import ru.art241111.graphicaltoolforkawasaki.view.util.WhenButtonPressed
@@ -24,7 +25,7 @@ class ArrowControlsFragmentXYZ : Fragment() {
     private lateinit var binding: FragmentArrowControlsXyzBinding
     private lateinit var viewModel: RobotViewModel
 
-    private var repositoryForRobotApi = viewModel.robot
+    private lateinit var repositoryForRobotApi: RepositoryForRobotApi
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +38,8 @@ class ArrowControlsFragmentXYZ : Fragment() {
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_arrow_controls_xyz, container, false)
         binding.executePendingBindings()
+
+        repositoryForRobotApi = viewModel.robot
 
         // Create buttonPressedListener and set it
         setClickListeners()
