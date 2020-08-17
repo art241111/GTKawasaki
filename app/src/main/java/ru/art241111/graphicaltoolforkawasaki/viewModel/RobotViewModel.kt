@@ -7,5 +7,5 @@ import ru.art241111.graphicaltoolforkawasaki.repository.RepositoryForRobotApi
 class RobotViewModel(application: Application)
     : AndroidViewModel(application) {
 
-    lateinit var robot: RepositoryForRobotApi
+    var robot: RepositoryForRobotApi = RepositoryForRobotApi()
 }

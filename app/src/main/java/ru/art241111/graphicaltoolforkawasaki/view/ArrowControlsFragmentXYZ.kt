@@ -50,11 +50,13 @@ class ArrowControlsFragmentXYZ : Fragment() {
         // Create buttonPressedListener and set it
         setClickListeners()
 
+        repositoryForRobotApi = viewModel.robot
+        whenButtonPressed = WhenButtonPressed(repositoryForRobotApi)
+
         return binding.root
     }
 
     private fun setClickListeners() {
-
             // Move by Z
             onTouchListener(binding.ibUpZ, Buttons.UpZ)
             onTouchListener(binding.ibDownZ, Buttons.DownZ)
@@ -72,11 +74,6 @@ class ArrowControlsFragmentXYZ : Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     private fun onTouchListener(view: View, button: Buttons){
         view.setOnTouchListener(View.OnTouchListener { v, event ->
-
-            if (viewModel.robot.isConnect()){
-                repositoryForRobotApi = viewModel.robot
-                whenButtonPressed = WhenButtonPressed(repositoryForRobotApi)
-
                 when(event.action){
                     MotionEvent.ACTION_DOWN -> {
                         whenButtonPressed.press = true
@@ -85,7 +82,6 @@ class ArrowControlsFragmentXYZ : Fragment() {
                     MotionEvent.ACTION_UP ->{
                         whenButtonPressed.press = false
                     }
-            }
         }
             return@OnTouchListener false
 

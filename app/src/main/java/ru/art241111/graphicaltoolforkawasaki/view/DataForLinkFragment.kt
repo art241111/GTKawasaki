@@ -5,13 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentControlPanelBinding
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentDataForLinkBinding
+import ru.art241111.graphicaltoolforkawasaki.repository.RepositoryForRobotApi
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
+import kotlin.concurrent.thread
 
 
 /**
@@ -37,8 +41,30 @@ class DataForLinkFragment : Fragment() {
         binding.defaultIp = "192.168.31.52"
         binding.defaultPort = "49152"
 
+        setButtonListener()
         return binding.root
     }
+
+    private fun setButtonListener() {
+        binding.bConnect.setOnClickListener {
+            val repositoryForRobotApi = RepositoryForRobotApi()
+            repositoryForRobotApi.connectToRobotTCP()
+
+            try {
+                Thread.sleep(500L)
+            } catch (e: java.lang.Exception) {
+            }
+
+            if (!repositoryForRobotApi.isConnect()){
+                repositoryForRobotApi.disconnect()
+                Toast.makeText(activity as MainActivity,"Подключение не удалось", Toast.LENGTH_LONG).show()
+            } else{
+                viewModel.robot = repositoryForRobotApi
+                findNavController().navigate(R.id.arrowControlsFragment)
+            }
+        }
+    }
+
 
     companion object {
         /**

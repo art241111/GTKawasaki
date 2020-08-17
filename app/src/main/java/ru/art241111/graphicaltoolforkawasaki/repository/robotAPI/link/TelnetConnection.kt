@@ -11,28 +11,30 @@ class TelnetConnection{
     private set
 
     fun createTCPLink(server: String, port: Int){
-        createSocket(server,port)
+        createSocket(server, port)
     }
 
-    fun createTelnetLink(server: String,
-                         port: Int,
-                         user: String){
+    fun createTelnetLink(
+        server: String,
+        port: Int,
+        user: String){
         createSocket(server, port)
         authorization(user)
     }
 
     fun disconnect() {
-        thread {
-            try {
-                socket.close()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+        try {
+            socket.close()
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
-    private fun createSocket(server: String,
-                             port: Int){
+    private fun createSocket(
+        server: String,
+        port: Int
+    ){
         try {
             socket= Socket(server, port)
         } catch (e: UnknownHostException){
@@ -41,7 +43,7 @@ class TelnetConnection{
         } catch (e: IOException){
             // TODO: Migrate to log
             print("Problem with create socket. \n $e")
-        } catch (e:java.lang.Exception){
+        } catch (e: java.lang.Exception){
             // TODO: Migrate to log
             print("Problem with create socket. \n $e")
         }

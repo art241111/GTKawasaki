@@ -31,7 +31,7 @@ class ControlPanel : Fragment() {
                 R.layout.fragment_control_panel, container, false)
         binding.executePendingBindings()
 
-        binding.connectStatus = false
+        binding.connectStatus = viewModel.robot.isConnect()
         setConnectButtonListener()
 
         return binding.root
@@ -42,19 +42,8 @@ class ControlPanel : Fragment() {
         binding.ivConnection.setOnClickListener {
             if(!binding.connectStatus!!){
                 findNavController().navigate(R.id.dataForLinkFragment)
-
-//                val repositoryForRobotApi = RepositoryForRobotApi()
-//
-//                try {
-//                    Thread.sleep(500L)
-//                } catch (e: java.lang.Exception) {
-//                }
-//
-//                binding.connectStatus = repositoryForRobotApi.isConnect()
-//                viewModel.robot = repositoryForRobotApi
             } else{
                 viewModel.robot.disconnect()
-                viewModel.robot.robot.specifications.client.socket.close()
 
                 binding.connectStatus = viewModel.robot.isConnect()
             }

@@ -5,8 +5,12 @@ import ru.art241111.graphicaltoolforkawasaki.repository.robotAPI.KawasakiRobot
 
 
 class RepositoryForRobotApi {
-    val robot = KawasakiRobot(address = "192.168.31.52",
-                                      port = 49152)
+    var robot = KawasakiRobot()
+
+    fun connectToRobotTCP(address: String = "192.168.31.52",
+                       port: Int = 49152){
+        robot.connectTCP(address, port)
+    }
 
     fun isConnect() =
         robot.specifications.client.socket.isConnected
