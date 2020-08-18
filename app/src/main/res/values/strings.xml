@@ -2,4 +2,13 @@
     <string name="app_name">GraphicalToolForKawasaki</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="coordinateOptions">
+        <item>X</item>
+        <item>Y</item>
+        <item>Z</item>
+        <item>DX</item>
+        <item>DY</item>
+        <item>DZ</item>
+    </string-array>
 </resources>

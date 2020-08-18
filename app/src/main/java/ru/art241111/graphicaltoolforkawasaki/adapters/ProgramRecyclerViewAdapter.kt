@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.art241111.graphicaltoolforkawasaki.adapters.protocols.OnItemClickListener
-import ru.art241111.graphicaltoolforkawasaki.databinding.RecyclerViewPointsItemBinding
 import ru.art241111.graphicaltoolforkawasaki.databinding.RecyclerViewProgramItemBinding
 
 class ProgramRecyclerViewAdapter(private var items: List<String>,
@@ -16,7 +15,7 @@ class ProgramRecyclerViewAdapter(private var items: List<String>,
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(program: String, listener: OnItemClickListener?) {
-            binding.programName = program
+            binding.programName = program.replace("@"," ")
 
             if (listener != null) {
                 binding.root.setOnClickListener { listener.onItemClick(layoutPosition) }

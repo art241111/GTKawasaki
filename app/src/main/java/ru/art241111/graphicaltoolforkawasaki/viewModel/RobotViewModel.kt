@@ -12,4 +12,8 @@ class RobotViewModel(application: Application)
 
     val pointList = MutableLiveData<MutableList<String>>()
     val programList = MutableLiveData<MutableList<String>>()
+
+    init {
+        programList.value = arrayListOf()
+    }
 }

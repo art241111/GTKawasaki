@@ -3,8 +3,11 @@ package ru.art241111.graphicaltoolforkawasaki.view
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -67,14 +70,44 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
     private fun setButtonListener() {
         binding.ibAddProgram.setOnClickListener {
             if(viewModel.programList.value == null)
-                viewModel.programList.value = arrayListOf("Hello")
-            else
-                viewModel.programList.value?.add("Hello")
+                viewModel.programList.value = arrayListOf()
 
-            updateItems()
+            showPopup(it)
+
+
+//            else
+//                viewModel.programList.value?.add("Hello")
+//
+//            updateItems()
 
 //            findNavController().navigate(R.id.addPointsFragment)
         }
+    }
+
+    private fun showPopup(view: View) {
+        val popup = PopupMenu(activity, view)
+        popup.inflate(R.menu.management_options_menu)
+
+        popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item: MenuItem? ->
+
+            when (item!!.itemId) {
+                R.id.moveAction -> {
+                    findNavController().navigate(R.id.addMoveActionFragment)
+
+//                    viewModel.programList.value?.add(item.title.toString())
+                }
+                R.id.header2 -> {
+                    viewModel.programList.value?.add(item.title.toString())
+                }
+                R.id.header3 -> {
+                    viewModel.programList.value?.add(item.title.toString())
+                }
+            }
+            updateItems()
+            true
+        })
+
+        popup.show()
     }
 
     private fun updateItems(){

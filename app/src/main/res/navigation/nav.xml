@@ -33,4 +33,18 @@
             android:id="@+id/action_showPointsFragment_to_addPointsFragment"
             app:destination="@id/addPointsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/showProgramFragment"
+        android:name="ru.art241111.graphicaltoolforkawasaki.view.ShowProgramFragment"
+        android:label="fragment_show_program"
+        tools:layout="@layout/fragment_show_program" >
+        <action
+            android:id="@+id/action_showProgramFragment_to_addMoveActionFragment"
+            app:destination="@id/addMoveActionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addMoveActionFragment"
+        android:name="ru.art241111.graphicaltoolforkawasaki.view.AddMoveActionFragment"
+        android:label="fragment_add_move_action"
+        tools:layout="@layout/fragment_add_move_action" />
 </navigation>
