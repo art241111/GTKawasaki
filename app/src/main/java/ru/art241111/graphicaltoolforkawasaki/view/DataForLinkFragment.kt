@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -16,6 +17,7 @@ import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentDataForLinkBinding
 import ru.art241111.graphicaltoolforkawasaki.repository.RepositoryForRobotApi
+import ru.art241111.graphicaltoolforkawasaki.utils.Delay
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
 
 
@@ -92,13 +94,22 @@ class DataForLinkFragment : Fragment() {
     private fun setButtonListener() {
         binding.bConnect.setOnClickListener {
             updateIpAndPort()
+            clearFocus()
 
             if (createConnection()){
-                Toast.makeText(activity as MainActivity, "Подключение не удалось", Toast.LENGTH_LONG).show()
+                // TODO: Check
+                findNavController().popBackStack(R.id.mainScreenFragment,true)
             } else{
-                findNavController().navigate(R.id.arrowControlsFragment)
+                Toast.makeText(activity as MainActivity, "Подключение не удалось", Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    private fun clearFocus() {
+        binding.etIp.clearFocus()
+        binding.etPort.clearFocus()
+
+        this.requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
     }
 
     private fun updateIpAndPort(){
@@ -119,19 +130,15 @@ class DataForLinkFragment : Fragment() {
         val repositoryForRobotApi = RepositoryForRobotApi()
         repositoryForRobotApi.connectToRobotTCP(address = ip, port = port.toInt())
 
-        try {
-            Thread.sleep(500L)
-        } catch (e: java.lang.Exception) {
-        }
+        Delay.customDelay(500L)
 
-        return if(!repositoryForRobotApi.isConnect()){
-            repositoryForRobotApi.disconnect()
-            false
-        } else{
+        return if(repositoryForRobotApi.isConnect()){
             viewModel.robot = repositoryForRobotApi
             true
+        } else{
+            repositoryForRobotApi.disconnect()
+            false
         }
-
     }
 
     companion object {

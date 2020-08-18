@@ -3,20 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/arrowControlsFragment">
+    app:startDestination="@id/mainScreenFragment">
 
-    <fragment
-        android:id="@+id/arrowControlsFragment"
-        android:name="ru.art241111.graphicaltoolforkawasaki.view.ArrowControlsFragment"
-        android:label="fragment_arrow_controls"
-        tools:layout="@layout/fragment_arrow_controls" >
-        <action
-            android:id="@+id/action_arrowControlsFragment_to_dataForLinkFragment"
-            app:destination="@id/dataForLinkFragment" />
-    </fragment>
     <fragment
         android:id="@+id/dataForLinkFragment"
         android:name="ru.art241111.graphicaltoolforkawasaki.view.DataForLinkFragment"
         android:label="fragment_data_for_link"
         tools:layout="@layout/fragment_data_for_link" />
+    <fragment
+        android:id="@+id/mainScreenFragment"
+        android:name="ru.art241111.graphicaltoolforkawasaki.MainScreenFragment"
+        android:label="fragment_main_screen"
+        tools:layout="@layout/fragment_main_screen" >
+        <action
+            android:id="@+id/action_mainScreenFragment_to_dataForLinkFragment"
+            app:destination="@id/dataForLinkFragment" />
+    </fragment>
 </navigation>

@@ -21,9 +21,12 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="18dp"
-            android:src="@{connect_status ? @drawable/connect_button :@drawable/disconnect_button}"
-            app:layout_constraintEnd_toEndOf="parent"
+
+            android:src="@{connect_status ? @drawable/ic_baseline_link_24 :@drawable/ic_baseline_link_off_24}"
+            android:cropToPadding="true"
+            android:background="@{connect_status ? @drawable/connect_button :@drawable/disconnect_button}"
+            app:layout_constraintEnd_toEndOf="@+id/tv_connection"
+            app:layout_constraintStart_toStartOf="@+id/tv_connection"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView

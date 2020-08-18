@@ -32,7 +32,9 @@
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_connect" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_connect"
+            android:singleLine="true"
+            />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_port"
@@ -44,7 +46,9 @@
             android:text="@{default_port}"
             app:layout_constraintEnd_toEndOf="@+id/et_ip"
             app:layout_constraintStart_toStartOf="@+id/et_ip"
-            app:layout_constraintTop_toBottomOf="@+id/et_ip" />
+            app:layout_constraintTop_toBottomOf="@+id/et_ip"
+            android:singleLine="true"
+            />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/b_connect"
