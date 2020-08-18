@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,21 +16,20 @@ import ru.art241111.graphicaltoolforkawasaki.adapters.PointsRecyclerViewAdapter
 import ru.art241111.graphicaltoolforkawasaki.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentShowPointsBinding
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
-import androidx.lifecycle.Observer
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ShowPointsFragment.newInstance] factory method to
+ * Use the [ShowProgramFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ShowPointsFragment : Fragment(), OnItemClickListener {
+class ShowProgramFragment : Fragment(), OnItemClickListener {
     private lateinit var binding: FragmentShowPointsBinding
     private lateinit var viewModel: RobotViewModel
 
-    private lateinit var pointRecyclerView: PointsRecyclerViewAdapter
+    private lateinit var programRecyclerView: PointsRecyclerViewAdapter
 
     override fun onItemClick(position: Int) {
-        viewModel.pointList.value?.removeAt(position)
+        viewModel.programList.value?.removeAt(position)
         updateItems()
     }
 
@@ -42,7 +42,7 @@ class ShowPointsFragment : Fragment(), OnItemClickListener {
 
         // Connect to data binding
         binding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_show_points, container, false)
+            R.layout.fragment_show_program, container, false)
         binding.executePendingBindings()
 
         setButtonListener()
@@ -54,39 +54,36 @@ class ShowPointsFragment : Fragment(), OnItemClickListener {
     }
 
     private fun customizationRecycleView() {
-        pointRecyclerView = PointsRecyclerViewAdapter(arrayListOf(), this)
+        programRecyclerView = PointsRecyclerViewAdapter(arrayListOf(), this)
 
         binding.rvShowPoints.layoutManager = LinearLayoutManager(activity)
-        binding.rvShowPoints.adapter = pointRecyclerView
+        binding.rvShowPoints.adapter = programRecyclerView
 
         updateItems()
     }
 
     private fun setButtonListener() {
-        binding.ibAddNewPoint.setOnClickListener {
-            findNavController().navigate(R.id.addPointsFragment)
-        }
+        viewModel.programList.value?.add("Hello")
+//        binding.ibAddNewPoint.setOnClickListener {
+//            findNavController().navigate(R.id.addPointsFragment)
+//        }
     }
 
     private fun updateItems(){
         viewModel.pointList.observe(activity as MainActivity,
             Observer{
-                it?.let{ pointRecyclerView.replaceData(it.toList())}
+                it?.let{ programRecyclerView.replaceData(it.toList())}
             })
     }
-
-
-
     companion object {
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
-         * @return A new instance of fragment ShowPointsFragment.
+         *
+         * @return A new instance of fragment ShowProgramFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance() = ShowPointsFragment().apply {}
+        fun newInstance() = ShowProgramFragment().apply {}
     }
-
-
 }

@@ -11,4 +11,5 @@ class RobotViewModel(application: Application)
     var robot: RepositoryForRobotApi = RepositoryForRobotApi()
 
     val pointList = MutableLiveData<MutableList<String>>()
+    val programList = MutableLiveData<MutableList<String>>()
 }
