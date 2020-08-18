@@ -19,7 +19,6 @@ class Service(private var robotEntity: RobotEntity) {
 
     fun clearQueue() = robotEntity.writer.cleanQueue()
 
-
     fun updateInfoAboutPosition() = robotEntity.writer
             .sendCommand(ROBOT_POSITION.command)
 }
