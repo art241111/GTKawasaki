@@ -4,14 +4,16 @@ import kawasakiRobots.utils.Service
 import ru.art241111.graphicaltoolforkawasaki.repository.robotAPI.commands.moving.Moving
 import ru.art241111.graphicaltoolforkawasaki.repository.robotAPI.link.TelnetConnection
 import kotlin.concurrent.thread
+private const val defaultAddress = "127.0.0.1"
+private const val defaultPort = 9105
 
 class KawasakiRobot{
     val specifications = RobotEntity()
     val moving = Moving(specifications)
     val service = Service(specifications)
 
-    fun connectTCP(address: String = "127.0.0.1",
-                port: Int = 9105){
+    fun connectTCP(address: String = defaultAddress,
+                port: Int = defaultPort){
         thread {
             specifications.client.createTCPLink(address,port)
 
@@ -21,8 +23,8 @@ class KawasakiRobot{
         }
     }
 
-    fun connectTelnet(address: String = "127.0.0.1",
-                      port: Int = 9105,
+    fun connectTelnet(address: String = defaultAddress,
+                      port: Int = defaultPort,
                       login: String = "as"){
         thread {
             specifications.client.createTelnetLink(address,port, login)
