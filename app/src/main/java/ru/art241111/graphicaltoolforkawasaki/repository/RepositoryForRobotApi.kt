@@ -5,7 +5,11 @@ import ru.art241111.graphicaltoolforkawasaki.repository.robotAPI.KawasakiRobot
 
 
 class RepositoryForRobotApi {
-    var robot = KawasakiRobot()
+    private var robot = KawasakiRobot()
+
+    fun cleanQueue(){
+        robot.service.clearQueue()
+    }
 
     fun connectToRobotTCP(address: String = "192.168.31.52",
                        port: Int = 49152){

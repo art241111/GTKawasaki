@@ -3,6 +3,7 @@ package ru.art241111.graphicaltoolforkawasaki.repository.robotAPI.link
 import android.util.Log
 import link.State
 import ru.art241111.graphicaltoolforkawasaki.repository.robotAPI.RobotEntity
+import ru.art241111.graphicaltoolforkawasaki.utils.Delay
 import java.io.PrintStream
 import java.net.Socket
 import java.util.*
@@ -25,6 +26,9 @@ class RemoteWriter(private val robotEntity: RobotEntity) {
         return commandsQueue.add(command)
     }
 
+    fun cleanQueue(){
+        commandsQueue.clear()
+    }
    fun startSendCommands(){
          val  client = robotEntity.client
          socket = client.socket
@@ -42,13 +46,13 @@ class RemoteWriter(private val robotEntity: RobotEntity) {
                          write(comm.trim())
                      }
                  }
-//                 Delay.little()
              }
           }
     }
 
     fun stopSendCommands(){
         sendCommand("q")
+        Delay.middle()
         connection = false
     }
 

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.MotionEvent
 import android.view.View
 import ru.art241111.graphicaltoolforkawasaki.repository.RepositoryForRobotApi
+import ru.art241111.graphicaltoolforkawasaki.utils.Delay
 import kotlin.concurrent.thread
 
 class WhenButtonPressed(private val robot: RepositoryForRobotApi) {
@@ -18,6 +19,7 @@ class WhenButtonPressed(private val robot: RepositoryForRobotApi) {
                     arrowPressed(button,determiningTheCoefficient(coefficient))
                 }
                 MotionEvent.ACTION_UP ->{
+                    robot.cleanQueue()
                     press = false
                 }
             }
@@ -27,12 +29,13 @@ class WhenButtonPressed(private val robot: RepositoryForRobotApi) {
 
     private fun determiningTheCoefficient(coefficient: AmountOfMovement):Int =
         when(coefficient){
-            AmountOfMovement.FAST -> 10
+            AmountOfMovement.FAST -> 20
             AmountOfMovement.SLOW -> 1
         }
 
     private fun arrowPressed(button:Buttons, coefficient: Int){
         thread {
+            robot.cleanQueue()
             while (press){
                 when(button){
                     Buttons.UpZ -> robot.moveByZ(coefficient)
@@ -50,10 +53,7 @@ class WhenButtonPressed(private val robot: RepositoryForRobotApi) {
                     Buttons.DownDY -> robot.moveByDY(-coefficient)
                 }
 
-                try {
-                    Thread.sleep(10L)
-                } catch (e: java.lang.Exception) {
-                }
+                Delay.customDelay(100L)
             }
         }
     }
