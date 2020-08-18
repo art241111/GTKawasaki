@@ -4,7 +4,7 @@
           android:state_pressed="true">
 
         <shape android:shape="oval">
-            <solid android:color="#1B5E20"/>
+            <solid android:color="@color/design_default_color_primary_dark"/>
         </shape>
 
         <bitmap>
@@ -15,7 +15,7 @@
         android:state_pressed="false">
 
         <shape android:shape="oval">
-            <solid android:color="#1B5E20"/>
+            <solid android:color="@color/design_default_color_primary_dark"/>
         </shape>
     </item>
 
@@ -23,7 +23,7 @@
         android:state_pressed="true">
 
         <shape android:shape="oval">
-            <solid android:color="#1B5E20"/>
+            <solid android:color="@color/design_default_color_primary_dark"/>
         </shape>
     </item>
 
@@ -31,7 +31,7 @@
         android:state_pressed="false">
 
         <shape android:shape="oval">
-            <solid android:color="#21C82D"/>
+            <solid android:color="@color/design_default_color_primary"/>
         </shape>
     </item>
 </selector>
