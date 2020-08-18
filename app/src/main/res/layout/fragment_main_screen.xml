@@ -7,17 +7,6 @@
     tools:context=".view.MainScreenFragment">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fc_program_and_point"
-        android:name="ru.art241111.graphicaltoolforkawasaki.view.ProgrammAndPointFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/fc_control_panel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_program_and_point" />
-
-    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fc_control_panel"
         android:name="ru.art241111.graphicaltoolforkawasaki.view.ControlPanel"
         android:layout_width="0dp"
@@ -26,4 +15,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout="@layout/fragment_control_panel" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView9"
+        android:name="ru.art241111.graphicaltoolforkawasaki.view.ProgramAndPointFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/fc_control_panel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_program_and_point" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,8 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.adapters.PointsRecyclerViewAdapter
+import ru.art241111.graphicaltoolforkawasaki.adapters.ProgramRecyclerViewAdapter
 import ru.art241111.graphicaltoolforkawasaki.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentShowPointsBinding
+import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentShowProgramBinding
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
 
 /**
@@ -23,10 +25,10 @@ import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
  * create an instance of this fragment.
  */
 class ShowProgramFragment : Fragment(), OnItemClickListener {
-    private lateinit var binding: FragmentShowPointsBinding
+    private lateinit var binding: FragmentShowProgramBinding
     private lateinit var viewModel: RobotViewModel
 
-    private lateinit var programRecyclerView: PointsRecyclerViewAdapter
+    private lateinit var programRecyclerView: ProgramRecyclerViewAdapter
 
     override fun onItemClick(position: Int) {
         viewModel.programList.value?.removeAt(position)
@@ -54,23 +56,29 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
     }
 
     private fun customizationRecycleView() {
-        programRecyclerView = PointsRecyclerViewAdapter(arrayListOf(), this)
+        programRecyclerView = ProgramRecyclerViewAdapter(arrayListOf(), this)
 
-        binding.rvShowPoints.layoutManager = LinearLayoutManager(activity)
-        binding.rvShowPoints.adapter = programRecyclerView
+        binding.rvShowProgram.layoutManager = LinearLayoutManager(activity)
+        binding.rvShowProgram.adapter = programRecyclerView
 
         updateItems()
     }
 
     private fun setButtonListener() {
-        viewModel.programList.value?.add("Hello")
-//        binding.ibAddNewPoint.setOnClickListener {
+        binding.ibAddProgram.setOnClickListener {
+            if(viewModel.programList.value == null)
+                viewModel.programList.value = arrayListOf("Hello")
+            else
+                viewModel.programList.value?.add("Hello")
+
+            updateItems()
+
 //            findNavController().navigate(R.id.addPointsFragment)
-//        }
+        }
     }
 
     private fun updateItems(){
-        viewModel.pointList.observe(activity as MainActivity,
+        viewModel.programList.observe(activity as MainActivity,
             Observer{
                 it?.let{ programRecyclerView.replaceData(it.toList())}
             })
