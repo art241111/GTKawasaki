@@ -12,11 +12,25 @@
         tools:layout="@layout/fragment_data_for_link" />
     <fragment
         android:id="@+id/mainScreenFragment"
-        android:name="ru.art241111.graphicaltoolforkawasaki.MainScreenFragment"
+        android:name="ru.art241111.graphicaltoolforkawasaki.view.MainScreenFragment"
         android:label="fragment_main_screen"
         tools:layout="@layout/fragment_main_screen" >
         <action
             android:id="@+id/action_mainScreenFragment_to_dataForLinkFragment"
             app:destination="@id/dataForLinkFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPointsFragment"
+        android:name="ru.art241111.graphicaltoolforkawasaki.view.AddPointsFragment"
+        android:label="fragment_add_points"
+        tools:layout="@layout/fragment_add_points" />
+    <fragment
+        android:id="@+id/showPointsFragment"
+        android:name="ru.art241111.graphicaltoolforkawasaki.view.ShowPointsFragment"
+        android:label="fragment_show_points"
+        tools:layout="@layout/fragment_show_points" >
+        <action
+            android:id="@+id/action_showPointsFragment_to_addPointsFragment"
+            app:destination="@id/addPointsFragment" />
     </fragment>
 </navigation>
