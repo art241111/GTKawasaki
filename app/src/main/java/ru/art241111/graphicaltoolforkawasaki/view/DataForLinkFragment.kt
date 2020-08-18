@@ -98,7 +98,7 @@ class DataForLinkFragment : Fragment() {
 
             if (createConnection()){
                 // TODO: Check
-                findNavController().navigate(R.id.mainScreenFragment)
+                findNavController().popBackStack()
             } else{
                 Toast.makeText(activity as MainActivity, "Подключение не удалось", Toast.LENGTH_LONG).show()
             }
