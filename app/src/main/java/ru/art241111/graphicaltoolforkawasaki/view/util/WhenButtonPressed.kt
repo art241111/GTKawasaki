@@ -51,7 +51,7 @@ class WhenButtonPressed(private val robot: RepositoryForRobotApi) {
                 }
 
                 try {
-                    Thread.sleep(50L)
+                    Thread.sleep(10L)
                 } catch (e: java.lang.Exception) {
                 }
             }

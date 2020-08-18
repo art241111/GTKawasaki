@@ -55,7 +55,7 @@ class RemoteWriter(private val robotEntity: RobotEntity) {
     private fun write(message: String): Boolean {
         if(socket.isConnected){
             try {
-                out.println(message)
+                out.println(message.trim())
                 out.flush()
                 return true
             } catch (e: Exception) {

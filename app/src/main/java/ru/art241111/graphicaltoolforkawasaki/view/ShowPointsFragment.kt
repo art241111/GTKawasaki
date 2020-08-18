@@ -76,6 +76,5 @@ class ShowPointsFragment : Fragment(), OnItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        TODO("Not yet implemented")
     }
 }
