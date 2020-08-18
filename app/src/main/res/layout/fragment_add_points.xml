@@ -65,10 +65,10 @@
             android:name="ru.art241111.graphicaltoolforkawasaki.view.ArrowControlsFragment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView8"
             tools:layout="@layout/fragment_arrow_controls" />
 
         <androidx.fragment.app.FragmentContainerView
@@ -76,10 +76,11 @@
             android:name="ru.art241111.graphicaltoolforkawasaki.view.ControlPanel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/fragmentContainerView7"
+            android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/b_add_point"
             tools:layout="@layout/fragment_control_panel" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
