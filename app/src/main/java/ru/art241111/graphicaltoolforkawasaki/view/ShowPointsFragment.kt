@@ -8,18 +8,21 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
-import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentDataForLinkBinding
+import ru.art241111.graphicaltoolforkawasaki.adapters.PointsRecyclerViewAdapter
+import ru.art241111.graphicaltoolforkawasaki.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentShowPointsBinding
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
+import androidx.lifecycle.Observer
 
 /**
  * A simple [Fragment] subclass.
  * Use the [ShowPointsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ShowPointsFragment : Fragment() {
+class ShowPointsFragment : Fragment(), OnItemClickListener {
     private lateinit var binding: FragmentShowPointsBinding
     private lateinit var viewModel: RobotViewModel
 
@@ -37,7 +40,22 @@ class ShowPointsFragment : Fragment() {
 
         setButtonListener()
 
+        // Customization RecycleView: set layoutManager, adapter, data.
+        customizationRecycleView()
+
         return binding.root
+    }
+
+    private fun customizationRecycleView() {
+        val pointRecyclerView = PointsRecyclerViewAdapter(arrayListOf(), this)
+
+        binding.rvShowPoints.layoutManager = LinearLayoutManager(activity)
+        binding.rvShowPoints.adapter = pointRecyclerView
+
+        viewModel.pointList.observe(activity as MainActivity,
+            Observer{
+                it?.let{ pointRecyclerView.replaceData(it.toList())}
+            })
     }
 
     private fun setButtonListener() {
@@ -55,5 +73,9 @@ class ShowPointsFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() = ShowPointsFragment().apply {}
+    }
+
+    override fun onItemClick(position: Int) {
+        TODO("Not yet implemented")
     }
 }
