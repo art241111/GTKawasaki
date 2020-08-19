@@ -74,6 +74,7 @@ class RepositoryForRobotApi {
                     }
                     "Открыть захват" -> Log.d("send", "open gripper")
                     "Закрыть захват" -> Log.d("send", "close gripper")
+                    "MOVE TO POINT" -> Log.d("send", "move to point")
                     else -> print("error")
                 }
                 Delay.customDelay(1000L)

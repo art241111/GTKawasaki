@@ -89,7 +89,8 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
                     viewModel.programList.value?.add(item.title.toString())
                 R.id.closeGripper ->
                     viewModel.programList.value?.add(item.title.toString())
-
+                R.id.moveToPointAction ->
+                    findNavController().navigate(R.id.addMovingToPointFragment)
             }
             updateItems()
             true

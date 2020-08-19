@@ -5,35 +5,33 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentAddMoveActionBinding
+import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentAddMovingToPointBinding
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentShowProgramBinding
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
 
 /**
  * A simple [Fragment] subclass.
- * Use the [AddMoveActionFragment.newInstance] factory method to
+ * Use the [AddMovingToPointFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class AddMoveActionFragment : Fragment() {
-    private lateinit var binding: FragmentAddMoveActionBinding
+class AddMovingToPointFragment : Fragment() {
+    private lateinit var binding: FragmentAddMovingToPointBinding
     private lateinit var viewModel: RobotViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         // Create viewModel
         viewModel = ViewModelProvider(activity as MainActivity).get(RobotViewModel::class.java)
 
         // Connect to data binding
         binding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_add_move_action, container, false)
+            R.layout.fragment_add_moving_to_point, container, false)
         binding.executePendingBindings()
 
         setButtonListener()
@@ -42,11 +40,8 @@ class AddMoveActionFragment : Fragment() {
     }
 
     private fun setButtonListener() {
-        binding.bAddMoveAction.setOnClickListener {
-            val value = binding.etTheShiftDistance.text.toString()
-            val coordinate = binding.spinner.selectedItem.toString()
-
-            viewModel.programList.value?.add("MOVE@$coordinate@$value")
+        binding.bSaveCommand.setOnClickListener {
+            viewModel.programList.value?.add("MOVE TO POINT")
 
             findNavController().popBackStack()
         }
@@ -57,9 +52,9 @@ class AddMoveActionFragment : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @return A new instance of fragment AddMoveActionFragment.
+         * @return A new instance of fragment AddMovingToPointFragment.
          */
         @JvmStatic
-        fun newInstance() = AddMoveActionFragment().apply { }
+        fun newInstance() = AddMovingToPointFragment().apply {}
     }
 }

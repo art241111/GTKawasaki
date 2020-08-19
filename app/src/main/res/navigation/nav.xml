@@ -41,10 +41,18 @@
         <action
             android:id="@+id/action_showProgramFragment_to_addMoveActionFragment"
             app:destination="@id/addMoveActionFragment" />
+        <action
+            android:id="@+id/action_showProgramFragment_to_addMovingToPointFragment"
+            app:destination="@id/addMovingToPointFragment" />
     </fragment>
     <fragment
         android:id="@+id/addMoveActionFragment"
         android:name="ru.art241111.graphicaltoolforkawasaki.view.AddMoveActionFragment"
         android:label="fragment_add_move_action"
         tools:layout="@layout/fragment_add_move_action" />
+    <fragment
+        android:id="@+id/addMovingToPointFragment"
+        android:name="ru.art241111.graphicaltoolforkawasaki.view.AddMovingToPointFragment"
+        android:label="fragment_add_moving_to_point"
+        tools:layout="@layout/fragment_add_moving_to_point" />
 </navigation>
