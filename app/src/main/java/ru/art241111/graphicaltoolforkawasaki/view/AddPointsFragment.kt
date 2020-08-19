@@ -45,9 +45,9 @@ class AddPointsFragment : Fragment() {
     private fun setClickListeners() {
         binding.bAddPoint.setOnClickListener {
             val name = binding.etPointName.text.toString()
-            val coordinate = binding.etPointCoordinates.text.toString()
+            val coordinate = "0,0,0,0,0,0"
 
-            if(name != "" && coordinate != ""){
+            if(name != "" ){
                 if (viewModel.pointList.value == null)
                     viewModel.pointList.value = mutableListOf()
                 viewModel.pointList.value?.add("$name@$coordinate")
