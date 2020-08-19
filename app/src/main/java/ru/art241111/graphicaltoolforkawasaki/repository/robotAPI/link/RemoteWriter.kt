@@ -30,24 +30,24 @@ class RemoteWriter(private val robotEntity: RobotEntity) {
         commandsQueue.clear()
     }
    fun startSendCommands(){
-         val  client = robotEntity.client
-         socket = client.socket
-         out = PrintStream(socket.getOutputStream())
+       val  client = robotEntity.client
+       socket = client.socket
+       out = PrintStream(socket.getOutputStream())
 
-         connection = socket.isConnected
+       connection = socket.isConnected
 
-         thread {
-             while (connection){
-                 if(robotEntity.state == State.ERROR){
-                     commandsQueue.clear()
-                 } else if((robotEntity.state == State.WAITING_COMMAND) and (!commandsQueue.isEmpty())){
-                     val comm = commandsQueue.poll()
-                     if( comm != null){
-                         write(comm.trim())
-                     }
-                 }
-             }
-          }
+       thread {
+           while (connection){
+               if(robotEntity.state == State.ERROR){
+                   commandsQueue.clear()
+               } else if((robotEntity.state == State.WAITING_COMMAND) and (!commandsQueue.isEmpty())){
+                   val comm = commandsQueue.poll()
+                   if( comm != null){
+                       write(comm.trim())
+                   }
+               }
+           }
+       }
     }
 
     fun stopSendCommands(){

@@ -9,7 +9,7 @@ object Delay {
     }
 
     fun little(){
-        customDelay(1L)
+        customDelay(50L)
     }
 
     fun middle(){

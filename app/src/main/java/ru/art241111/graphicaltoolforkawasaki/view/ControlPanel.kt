@@ -33,9 +33,16 @@ class ControlPanel : Fragment() {
 
         binding.connectStatus = viewModel.robot.isConnect()
         setConnectButtonListener()
+        setRunButtonListener()
 
         return binding.root
 
+    }
+
+    private fun setRunButtonListener() {
+        binding.ibRunProgram.setOnClickListener {
+            viewModel.robot.sendCommand(viewModel.programList.value!!)
+        }
     }
 
     private fun setConnectButtonListener() {

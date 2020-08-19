@@ -1,7 +1,11 @@
 package ru.art241111.graphicaltoolforkawasaki.repository
 
+import android.util.Log
+import android.widget.Toast
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 import ru.art241111.graphicaltoolforkawasaki.repository.robotAPI.KawasakiRobot
+import ru.art241111.graphicaltoolforkawasaki.utils.Delay
+import kotlin.concurrent.thread
 
 
 class RepositoryForRobotApi {
@@ -48,5 +52,31 @@ class RepositoryForRobotApi {
 
     fun disconnect(){
         robot.disconnect()
+    }
+
+    fun sendCommand(commands: List<String>){
+        thread {
+            commands.map {
+                val command = it.split("@")
+
+                when(command[0]){
+                    "MOVE" -> {
+                        when(command[1]){
+                            "X" -> moveByX(command[2].toInt())
+                            "Y" -> moveByY(command[2].toInt())
+                            "Z" -> moveByZ(command[2].toInt())
+                            "DX" -> moveByDX(command[2].toInt())
+                            "DY" -> moveByDY(command[2].toInt())
+                            "DZ" -> moveByDZ(command[2].toInt())
+                            else -> print("error")
+                        }
+                    }
+                    else -> print("error")
+                }
+                Delay.customDelay(1000L)
+            }
+
+        }
+
     }
 }
