@@ -1,5 +1,7 @@
 package ru.art241111.graphicaltoolforkawasaki.view
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -27,11 +29,14 @@ import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
  * Use the [ShowProgramFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+private const val APP_PREFERENCES = "Programs"
+private const val APP_PREFERENCES_NAME = "programName"
 class ShowProgramFragment : Fragment(), OnItemClickListener {
     private lateinit var binding: FragmentShowProgramBinding
     private lateinit var viewModel: RobotViewModel
 
     private lateinit var programRecyclerView: ProgramRecyclerViewAdapter
+    private var preferences: SharedPreferences? = null
 
     override fun onItemClick(position: Int) {
         viewModel.programList.value?.removeAt(position)
@@ -55,7 +60,46 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
         // Customization RecycleView: set layoutManager, adapter, data.
         customizationRecycleView()
 
+        getProgramFromSharedPreferences()
+
+
         return binding.root
+    }
+
+    private fun getProgramFromSharedPreferences() {
+        preferences = this.activity
+                ?.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+
+        if(viewModel.programList.value!!.isEmpty()){
+            if(preferences != null){
+                viewModel.programList.value = getFromSharedPreferences(APP_PREFERENCES_NAME, viewModel.programList.value!!)
+            }
+        }
+    }
+
+    private fun getFromSharedPreferences(key:String,
+                                         defaultValue: MutableList<String>): MutableList<String>? {
+        return if(preferences!!.contains(key)) {
+            preferences!!.getStringSet(key, mutableSetOf())?.toMutableList() ?: defaultValue
+
+        } else {
+            updateSharedPreferences(key,defaultValue)
+
+            defaultValue
+        }
+    }
+
+    private fun updateSharedPreferences(preferencesKey: String, newValue: MutableList<String>) {
+        if(preferences != null){
+            val editor: SharedPreferences.Editor = preferences!!.edit()
+            editor.putStringSet(preferencesKey, newValue.toSet())
+            editor.apply()
+        }
+    }
+
+    override fun onDestroyView() {
+        updateSharedPreferences(APP_PREFERENCES_NAME, viewModel.programList.value!!)
+        super.onDestroyView()
     }
 
     private fun customizationRecycleView() {
