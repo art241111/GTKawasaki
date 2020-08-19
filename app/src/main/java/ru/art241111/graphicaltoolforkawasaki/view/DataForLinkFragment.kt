@@ -26,6 +26,7 @@ import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
  * Use the [DataForLinkFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+private const val APP_PREFERENCES = "CharacteristicsOfTheConnection"
 private const val APP_PREFERENCES_IP = "IP"
 private const val APP_PREFERENCES_PORT = "PORT"
 
@@ -63,7 +64,7 @@ class DataForLinkFragment : Fragment() {
 
     private fun getIpAndPortFromSharedPreferences() {
         preferences = this.activity
-                ?.getSharedPreferences("CharacteristicsOfTheConnection", Context.MODE_PRIVATE)
+                ?.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
 
         if(preferences != null){
             ip = getFromSharedPreferences(APP_PREFERENCES_IP, ip)
