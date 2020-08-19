@@ -73,14 +73,6 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
                 viewModel.programList.value = arrayListOf()
 
             showPopup(it)
-
-
-//            else
-//                viewModel.programList.value?.add("Hello")
-//
-//            updateItems()
-
-//            findNavController().navigate(R.id.addPointsFragment)
         }
     }
 
@@ -91,17 +83,13 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
         popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item: MenuItem? ->
 
             when (item!!.itemId) {
-                R.id.moveAction -> {
+                R.id.moveAction ->
                     findNavController().navigate(R.id.addMoveActionFragment)
+                R.id.openGripper ->
+                    viewModel.programList.value?.add(item.title.toString())
+                R.id.closeGripper ->
+                    viewModel.programList.value?.add(item.title.toString())
 
-//                    viewModel.programList.value?.add(item.title.toString())
-                }
-                R.id.header2 -> {
-                    viewModel.programList.value?.add(item.title.toString())
-                }
-                R.id.header3 -> {
-                    viewModel.programList.value?.add(item.title.toString())
-                }
             }
             updateItems()
             true

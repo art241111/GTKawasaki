@@ -70,7 +70,10 @@ class RepositoryForRobotApi {
                             "DZ" -> moveByDZ(command[2].toInt())
                             else -> print("error")
                         }
+
                     }
+                    "Открыть захват" -> Log.d("send", "open gripper")
+                    "Закрыть захват" -> Log.d("send", "close gripper")
                     else -> print("error")
                 }
                 Delay.customDelay(1000L)
