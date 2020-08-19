@@ -5,10 +5,13 @@
         android:id="@+id/moveAction"
         android:title="MOVE" />
     <item
-        android:id="@+id/header2"
-        android:title="H2" />
+        android:id="@+id/closeGripper"
+        android:title="Закрыть захват" />
     <item
-        android:id="@+id/header3"
-        android:title="H3" />
+        android:id="@+id/openGripper"
+        android:title="Открыть захват" />
+    <item
+        android:id="@+id/moveToPointAction"
+        android:title="Перемещение в точку" />
 
 </menu>
