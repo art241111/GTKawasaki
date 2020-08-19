@@ -15,5 +15,6 @@ class RobotViewModel(application: Application)
 
     init {
         programList.value = arrayListOf()
+        pointList.value = arrayListOf()
     }
 }
