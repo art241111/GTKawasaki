@@ -26,6 +26,9 @@ import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
  * Use the [DataForLinkFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+private const val APP_PREFERENCES_IP = "IP"
+private const val APP_PREFERENCES_PORT = "PORT"
+
 class DataForLinkFragment : Fragment() {
     private lateinit var binding: FragmentDataForLinkBinding
     private lateinit var viewModel: RobotViewModel
@@ -34,10 +37,7 @@ class DataForLinkFragment : Fragment() {
     private var preferences: SharedPreferences? = null
 
     private var ip = "192.168.31.52"
-    private val APP_PREFERENCES_IP = "IP"
-
     private var port = "49152"
-    private val APP_PREFERENCES_PORT = "PORT"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
