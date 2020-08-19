@@ -1,5 +1,7 @@
 package ru.art241111.graphicaltoolforkawasaki.view
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,9 +24,13 @@ import androidx.lifecycle.Observer
  * Use the [ShowPointsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+private const val APP_PREFERENCES = "Points"
+private const val APP_PREFERENCES_NAME = "pointsName"
 class ShowPointsFragment : Fragment(), OnItemClickListener {
     private lateinit var binding: FragmentShowPointsBinding
     private lateinit var viewModel: RobotViewModel
+
+    private var preferences: SharedPreferences? = null
 
     private lateinit var pointRecyclerView: PointsRecyclerViewAdapter
 
@@ -50,7 +56,40 @@ class ShowPointsFragment : Fragment(), OnItemClickListener {
         // Customization RecycleView: set layoutManager, adapter, data.
         customizationRecycleView()
 
+        getPointsFromSharedPreferences()
+
         return binding.root
+    }
+
+    private fun getPointsFromSharedPreferences() {
+        preferences = this.activity
+                ?.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+
+        if(viewModel.pointList.value!!.isEmpty()){
+            if(preferences != null){
+                viewModel.pointList.value = getFromSharedPreferences(APP_PREFERENCES_NAME, viewModel.pointList.value!!)
+            }
+        }
+    }
+
+    private fun getFromSharedPreferences(key:String,
+                                         defaultValue: MutableList<String>): MutableList<String>? {
+        return if(preferences!!.contains(key)) {
+            preferences!!.getStringSet(key, mutableSetOf())?.toMutableList() ?: defaultValue
+
+        } else {
+            updateSharedPreferences(key,defaultValue)
+
+            defaultValue
+        }
+    }
+
+    private fun updateSharedPreferences(preferencesKey: String, newValue: MutableList<String>) {
+        if(preferences != null){
+            val editor: SharedPreferences.Editor = preferences!!.edit()
+            editor.putStringSet(preferencesKey, newValue.toSet())
+            editor.apply()
+        }
     }
 
     private fun customizationRecycleView() {
@@ -75,6 +114,10 @@ class ShowPointsFragment : Fragment(), OnItemClickListener {
             })
     }
 
+    override fun onDestroyView() {
+        updateSharedPreferences(APP_PREFERENCES_NAME, viewModel.pointList.value!!)
+        super.onDestroyView()
+    }
 
 
     companion object {
