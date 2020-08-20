@@ -21,7 +21,7 @@ import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.ProgramRecyc
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.helpers.SimpleItemTouchHelperCallback
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentShowProgramBinding
-import ru.art241111.graphicaltoolforkawasaki.view.util.ItemTouchHelperAdapterImp
+import ru.art241111.graphicaltoolforkawasaki.view.util.CustomizationRecyclerView
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
 
 
@@ -37,12 +37,13 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
     private lateinit var binding: FragmentShowProgramBinding
     private lateinit var viewModel: RobotViewModel
 
-    private lateinit var programRecyclerView: ProgramRecyclerViewAdapter
+
     private var preferences: SharedPreferences? = null
+    private lateinit var customizationRecyclerView: CustomizationRecyclerView
 
     override fun onItemClick(position: Int) {
         viewModel.programList.value?.removeAt(position)
-        updateItems()
+        customizationRecyclerView.updateItems()
     }
 
     override fun onCreateView(
@@ -60,7 +61,10 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
         setButtonListener()
 
         // Customization RecycleView: set layoutManager, adapter, data.
-        customizationRecycleView()
+        customizationRecyclerView = CustomizationRecyclerView(binding.rvShowProgram,
+                activity as MainActivity,
+                viewModel.programList,
+        this)
 
         getProgramFromSharedPreferences()
 
@@ -104,21 +108,6 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
         super.onDestroyView()
     }
 
-    private fun customizationRecycleView() {
-        programRecyclerView = ProgramRecyclerViewAdapter(arrayListOf(),
-                this,
-                ItemTouchHelperAdapterImp(viewModel.programList.value!!))
-
-        binding.rvShowProgram.layoutManager = LinearLayoutManager(activity)
-        binding.rvShowProgram.adapter = programRecyclerView
-
-        val callback: ItemTouchHelper.Callback = SimpleItemTouchHelperCallback(programRecyclerView)
-        val touchHelper = ItemTouchHelper(callback)
-        touchHelper.attachToRecyclerView(binding.rvShowProgram)
-
-        updateItems()
-    }
-
     private fun setButtonListener() {
         binding.ibAddProgram.setOnClickListener {
             if(viewModel.programList.value == null)
@@ -144,19 +133,13 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
                 R.id.moveToPointAction ->
                     findNavController().navigate(R.id.addMovingToPointFragment)
             }
-            updateItems()
+            customizationRecyclerView.updateItems()
             true
         }
 
         popup.show()
     }
 
-    private fun updateItems(){
-        viewModel.programList.observe(activity as MainActivity,
-                Observer {
-                    it?.let { programRecyclerView.replaceData(it.toList()) }
-                })
-    }
     companion object {
         /**
          * Use this factory method to create a new instance of
