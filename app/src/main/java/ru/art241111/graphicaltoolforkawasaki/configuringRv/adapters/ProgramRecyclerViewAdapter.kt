@@ -6,8 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.ItemTouchHelperAdapter
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.databinding.RecyclerViewProgramItemBinding
+import ru.art241111.graphicaltoolforkawasaki.repository.commands.CloseGripper
+import ru.art241111.graphicaltoolforkawasaki.repository.commands.OpenGripper
+import ru.art241111.graphicaltoolforkawasaki.repository.commands.RobotCommands
 
-class ProgramRecyclerViewAdapter(private var items: MutableList<String>,
+class ProgramRecyclerViewAdapter(private var items: MutableList<RobotCommands>,
                                  private var itemListener: OnItemClickListener,
                                  private val itemTouchHelperAdapter: ItemTouchHelperAdapter)
     : RecyclerView.Adapter<ProgramRecyclerViewAdapter.ViewHolder>(),
@@ -19,8 +22,13 @@ class ProgramRecyclerViewAdapter(private var items: MutableList<String>,
     class ViewHolder(private var binding: RecyclerViewProgramItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(program: String, listener: OnItemClickListener?) {
-            binding.programName = program.replace("@", " ")
+        fun bind(program: RobotCommands, listener: OnItemClickListener?) {
+
+            binding.programName = program.toString()
+            when (program) {
+                is CloseGripper -> binding.programName = "Закрыть захват"
+                is OpenGripper -> binding.programName = "Открыть захват"
+            }
 
             if (listener != null) {
                 binding.root.setOnClickListener { listener.onItemClick(layoutPosition) }
@@ -44,7 +52,7 @@ class ProgramRecyclerViewAdapter(private var items: MutableList<String>,
     /**
      * Data refresh.
      */
-    fun replaceData(arrayList: List<String>) {
+    fun replaceData(arrayList: List<RobotCommands>) {
         items = arrayList.toMutableList()
         notifyDataSetChanged()
     }

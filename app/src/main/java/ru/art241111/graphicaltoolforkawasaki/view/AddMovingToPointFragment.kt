@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentAddMovingToPointBinding
+import ru.art241111.graphicaltoolforkawasaki.repository.commands.MoveToPoint
+import ru.art241111.graphicaltoolforkawasaki.repository.commands.enums.TypesOfMovementToThePoint
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
 
 /**
@@ -39,8 +41,15 @@ class AddMovingToPointFragment : Fragment() {
 
     private fun setButtonListener() {
         binding.bSaveCommand.setOnClickListener {
-            val typeOfMovement = binding.spChooseTypeOfMovement.selectedItem.toString()
-            viewModel.programList.value?.add("MOVE TO POINT@$typeOfMovement")
+
+            val typeOfMovement =
+                    when(binding.spChooseTypeOfMovement.selectedItem.toString()){
+                        "Линейно" -> TypesOfMovementToThePoint.JMOVE
+                        "По осям" -> TypesOfMovementToThePoint.LMOVE
+                        else -> TypesOfMovementToThePoint.JMOVE
+                    }
+
+            viewModel.programList.value?.add(MoveToPoint(typeOfMovement, listOf()))
 
             findNavController().popBackStack()
         }

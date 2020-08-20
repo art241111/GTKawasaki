@@ -16,6 +16,9 @@ import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentShowProgramBinding
+import ru.art241111.graphicaltoolforkawasaki.repository.commands.CloseGripper
+import ru.art241111.graphicaltoolforkawasaki.repository.commands.OpenGripper
+import ru.art241111.graphicaltoolforkawasaki.repository.commands.RobotCommands
 import ru.art241111.graphicaltoolforkawasaki.view.util.CustomizationRecyclerView
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
 
@@ -84,8 +87,8 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
     }
 
     private fun getFromSharedPreferences(key: String,
-                                         defaultValue: MutableList<String>): MutableList<String>? {
-        return if(preferences!!.contains(key)) {
+                                         defaultValue: MutableList<RobotCommands>): MutableList<RobotCommands>? {
+        if(preferences!!.contains(key)) {
             preferences!!.getStringSet(key, mutableSetOf())?.toMutableList() ?: defaultValue
 
         } else {
@@ -93,12 +96,13 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
 
             defaultValue
         }
+        return defaultValue
     }
 
-    private fun updateSharedPreferences(preferencesKey: String, newValue: MutableList<String>) {
+    private fun updateSharedPreferences(preferencesKey: String, newValue: MutableList<RobotCommands>) {
         if(preferences != null){
             val editor: SharedPreferences.Editor = preferences!!.edit()
-            editor.putStringSet(preferencesKey, newValue.toSet())
+//            editor.putStringSet(preferencesKey, newValue.toSet())
             editor.apply()
         }
     }
@@ -131,9 +135,9 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
                 }
 
                 R.id.openGripper ->
-                    viewModel.programList.value?.add(item.title.toString())
+                    viewModel.programList.value?.add(OpenGripper())
                 R.id.closeGripper ->
-                    viewModel.programList.value?.add(item.title.toString())
+                    viewModel.programList.value?.add(CloseGripper())
                 R.id.moveToPointAction ->
                     findNavController().navigate(R.id.addMovingToPointFragment)
             }

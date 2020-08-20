@@ -9,11 +9,12 @@ import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.It
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.ProgramRecyclerViewAdapter
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.helpers.SimpleItemTouchHelperCallback
+import ru.art241111.graphicaltoolforkawasaki.repository.commands.RobotCommands
 import java.util.*
 
 class CustomizationRecyclerView(recyclerView: RecyclerView,
                                 private val activity: MainActivity,
-                                private val list: MutableLiveData<MutableList<String>>,
+                                private val list: MutableLiveData<MutableList<RobotCommands>>,
                                 onItemClickListener: OnItemClickListener): ItemTouchHelperAdapter {
 
     private var programRecyclerView: ProgramRecyclerViewAdapter

@@ -14,6 +14,8 @@ import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentAddMoveActionBinding
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentShowProgramBinding
+import ru.art241111.graphicaltoolforkawasaki.repository.commands.Move
+import ru.art241111.graphicaltoolforkawasaki.repository.commands.enums.Coordinate
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
 
 /**
@@ -62,9 +64,18 @@ class AddMoveActionFragment : Fragment() {
     private fun setButtonListener() {
         binding.bAddMoveAction.setOnClickListener {
             val value = binding.etTheShiftDistance.text.toString()
-            val coordinate = binding.spinner.selectedItem.toString()
+            val coordinate1 = binding.spinner.selectedItem.toString()
 
-            viewModel.programList.value?.add("MOVE@$coordinate@$value")
+            var coordinate = Coordinate.X
+            when(coordinate1){
+                    "X"-> coordinate = Coordinate.X
+                    "Y"-> coordinate = Coordinate.Y
+                    "Z"-> coordinate = Coordinate.Z
+                    "DX"-> coordinate = Coordinate.DX
+                    "DY"-> coordinate = Coordinate.DY
+                    "DZ"-> coordinate = Coordinate.DZ
+            }
+            viewModel.programList.value?.add(Move(coordinate, value.toInt()))
 
             findNavController().popBackStack()
         }

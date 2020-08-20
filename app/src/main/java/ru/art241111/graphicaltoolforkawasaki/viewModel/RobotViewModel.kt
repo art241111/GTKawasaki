@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import ru.art241111.graphicaltoolforkawasaki.repository.RepositoryForRobotApi
+import ru.art241111.graphicaltoolforkawasaki.repository.commands.RobotCommands
 
 class RobotViewModel(application: Application)
     : AndroidViewModel(application) {
@@ -11,7 +12,7 @@ class RobotViewModel(application: Application)
     var robot: RepositoryForRobotApi = RepositoryForRobotApi()
 
     val pointList = MutableLiveData<MutableList<String>>()
-    val programList = MutableLiveData<MutableList<String>>()
+    val programList = MutableLiveData<MutableList<RobotCommands>>()
 
     init {
         programList.value = arrayListOf()
