@@ -131,8 +131,6 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
             when (item!!.itemId) {
                 R.id.moveAction ->
                     findNavController().navigate(R.id.addMoveActionFragment)
-
-
                 R.id.openGripper ->
                     viewModel.programList.value?.add(OpenGripper())
                 R.id.closeGripper ->
