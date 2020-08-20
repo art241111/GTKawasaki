@@ -1,6 +1,7 @@
 package ru.art241111.graphicaltoolforkawasaki.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -38,7 +39,24 @@ class AddMoveActionFragment : Fragment() {
 
         setButtonListener()
 
+        loadInformation()
+
+
         return binding.root
+    }
+
+    // TODO: Add editing
+    private fun loadInformation() {
+        var position = -1
+        arguments?.let {
+            val key: String? = "position"
+            position = it.getInt(key)
+        }
+        if(position != -2){
+            val command = viewModel.programList.value?.get(position)
+
+        }
+        Log.d("position",position.toString())
     }
 
     private fun setButtonListener() {

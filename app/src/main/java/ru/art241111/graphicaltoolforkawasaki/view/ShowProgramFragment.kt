@@ -10,20 +10,14 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
-import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.ProgramRecyclerViewAdapter
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
-import ru.art241111.graphicaltoolforkawasaki.configuringRv.helpers.SimpleItemTouchHelperCallback
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentShowProgramBinding
 import ru.art241111.graphicaltoolforkawasaki.view.util.CustomizationRecyclerView
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
-
 
 
 /**
@@ -42,8 +36,14 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
     private lateinit var customizationRecyclerView: CustomizationRecyclerView
 
     override fun onItemClick(position: Int) {
-        viewModel.programList.value?.removeAt(position)
-        customizationRecyclerView.updateItems()
+
+//        viewModel.programList.value?.removeAt(position)
+//        customizationRecyclerView.updateItems()
+
+        val bundle = Bundle()
+        bundle.putInt("position", position)
+        findNavController().navigate(R.id.addMoveActionFragment, bundle)
+
     }
 
     override fun onCreateView(
@@ -64,7 +64,7 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
         customizationRecyclerView = CustomizationRecyclerView(binding.rvShowProgram,
                 activity as MainActivity,
                 viewModel.programList,
-        this)
+                this)
 
         getProgramFromSharedPreferences()
 
@@ -124,8 +124,12 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
         popup.setOnMenuItemClickListener { item: MenuItem? ->
 
             when (item!!.itemId) {
-                R.id.moveAction ->
-                    findNavController().navigate(R.id.addMoveActionFragment)
+                R.id.moveAction -> {
+                    val bundle = Bundle()
+                    bundle.putInt("position", -2)
+                    findNavController().navigate(R.id.addMoveActionFragment, bundle)
+                }
+
                 R.id.openGripper ->
                     viewModel.programList.value?.add(item.title.toString())
                 R.id.closeGripper ->
