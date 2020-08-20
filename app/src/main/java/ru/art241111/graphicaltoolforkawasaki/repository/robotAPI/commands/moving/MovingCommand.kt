@@ -10,5 +10,7 @@ enum class MovingCommand(val command: String) {
     MOVE_BY_DZ( "MOVE;BASE;6;"),
 
     CLOSE_GRIPPER( "SERVICE;CLAMP;OFF"),
-    OPEN_GRIPPER( "SERVICE;CLAMP;ON");
+    OPEN_GRIPPER( "SERVICE;CLAMP;ON"),
+
+    MOVE_TO_POINT( "MOVETO;"),
 }

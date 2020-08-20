@@ -3,6 +3,7 @@ package ru.art241111.graphicaltoolforkawasaki.repository
 import android.util.Log
 import ru.art241111.graphicaltoolforkawasaki.repository.enity.*
 import ru.art241111.graphicaltoolforkawasaki.repository.enity.enums.Coordinate
+import ru.art241111.graphicaltoolforkawasaki.repository.enity.expansion.toStringForRobot
 import ru.art241111.graphicaltoolforkawasaki.repository.robotAPI.KawasakiRobot
 import ru.art241111.graphicaltoolforkawasaki.utils.Delay
 import kotlin.concurrent.thread
@@ -57,7 +58,6 @@ class RepositoryForRobotApi {
     fun sendCommand(commands: List<RobotCommands>){
         thread {
             commands.map {
-
                 when(it){
                     is Move ->{
                         when(it.coordinate){
@@ -70,7 +70,7 @@ class RepositoryForRobotApi {
                         }
                     }
                     is MoveToPoint -> {
-                        Log.d("send", "move to point")
+                        robot.moving.moveToPoint("${it.type};${it.coordinate.toStringForRobot()}")
                     }
                     is OpenGripper ->{
                         robot.moving.openGripper()
@@ -79,25 +79,6 @@ class RepositoryForRobotApi {
                         robot.moving.closeGripper()
                     }
                 }
-
-//                when(command[0]){
-//                    "MOVE" -> {
-//                        when(command[1]){
-//                            "X" -> moveByX(command[2].toInt())
-//                            "Y" -> moveByY(command[2].toInt())
-//                            "Z" -> moveByZ(command[2].toInt())
-//                            "DX" -> moveByDX(command[2].toInt())
-//                            "DY" -> moveByDY(command[2].toInt())
-//                            "DZ" -> moveByDZ(command[2].toInt())
-//                            else -> print("error")
-//                        }
-//
-//                    }
-//                    "Открыть захват" -> Log.d("send", "open gripper")
-//                    "Закрыть захват" -> Log.d("send", "close gripper")
-//                    "MOVE TO POINT" -> Log.d("send", "move to point")
-//                    else -> print("error")
-//                }
                 Delay.customDelay(1000L)
             }
 
