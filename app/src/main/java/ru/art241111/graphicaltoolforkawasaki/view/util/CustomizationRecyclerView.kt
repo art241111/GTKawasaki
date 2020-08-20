@@ -9,7 +9,7 @@ import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.It
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.ProgramRecyclerViewAdapter
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.helpers.SimpleItemTouchHelperCallback
-import ru.art241111.graphicaltoolforkawasaki.repository.commands.RobotCommands
+import ru.art241111.graphicaltoolforkawasaki.repository.Enity.RobotCommands
 import java.util.*
 
 class CustomizationRecyclerView(recyclerView: RecyclerView,

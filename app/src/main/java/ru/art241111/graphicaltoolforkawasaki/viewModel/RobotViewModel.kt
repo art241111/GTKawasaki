@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import ru.art241111.graphicaltoolforkawasaki.repository.RepositoryForRobotApi
-import ru.art241111.graphicaltoolforkawasaki.repository.commands.RobotCommands
+import ru.art241111.graphicaltoolforkawasaki.repository.Enity.RobotCommands
 
 class RobotViewModel(application: Application)
     : AndroidViewModel(application) {
