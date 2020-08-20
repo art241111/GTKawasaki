@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
-import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.ItemTouchHelperAdapter
+import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.ItemTouchHelperAdapter
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.ProgramRecyclerViewAdapter
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.helpers.SimpleItemTouchHelperCallback
@@ -14,7 +14,7 @@ import java.util.*
 class CustomizationRecyclerView(recyclerView: RecyclerView,
                                 private val activity: MainActivity,
                                 private val list: MutableLiveData<MutableList<String>>,
-                                onItemClickListener: OnItemClickListener): ItemTouchHelperAdapter{
+                                onItemClickListener: OnItemClickListener): ItemTouchHelperAdapter {
 
     private var programRecyclerView: ProgramRecyclerViewAdapter
             = ProgramRecyclerViewAdapter(arrayListOf(),

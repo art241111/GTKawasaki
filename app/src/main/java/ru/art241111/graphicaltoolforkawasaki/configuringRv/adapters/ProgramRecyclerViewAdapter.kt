@@ -3,9 +3,9 @@ package ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.ItemTouchHelperAdapter
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.databinding.RecyclerViewProgramItemBinding
-import java.util.*
 
 class ProgramRecyclerViewAdapter(private var items: MutableList<String>,
                                  private var itemListener: OnItemClickListener,
