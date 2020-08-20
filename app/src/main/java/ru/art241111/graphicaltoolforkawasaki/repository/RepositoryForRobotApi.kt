@@ -1,6 +1,6 @@
 package ru.art241111.graphicaltoolforkawasaki.repository
 
-import android.util.Log
+
 import ru.art241111.graphicaltoolforkawasaki.repository.enity.*
 import ru.art241111.graphicaltoolforkawasaki.repository.enity.enums.Coordinate
 import ru.art241111.graphicaltoolforkawasaki.repository.enity.expansion.toStringForRobot

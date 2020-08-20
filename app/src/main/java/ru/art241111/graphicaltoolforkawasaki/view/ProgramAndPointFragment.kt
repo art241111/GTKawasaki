@@ -33,22 +33,21 @@ class ProgramAndPointFragment : Fragment() {
     private fun setTabHost() {
         val tabHost = binding.tabHostFromProgram
 
-        if(tabHost != null){
-            tabHost.setup()
 
-            var tabSpec =  tabHost.newTabSpec("tabControlXYZ")
+        tabHost.setup()
 
-            tabSpec.setContent(binding.tabProgramming.id)
-            tabSpec.setIndicator("Программирование")
-            tabHost.addTab(tabSpec)
+        var tabSpec =  tabHost.newTabSpec("tabControlXYZ")
 
-            tabSpec = tabHost.newTabSpec("tabControlDxDyDz")
-            tabSpec.setContent(binding.tabCreatePoints.id)
-            tabSpec.setIndicator("Задание точек")
-            tabHost.addTab(tabSpec)
+        tabSpec.setContent(binding.tabProgramming.id)
+        tabSpec.setIndicator("Программирование")
+        tabHost.addTab(tabSpec)
 
-            tabHost.currentTab = 0
-        }
+        tabSpec = tabHost.newTabSpec("tabControlDxDyDz")
+        tabSpec.setContent(binding.tabCreatePoints.id)
+        tabSpec.setIndicator("Задание точек")
+        tabHost.addTab(tabSpec)
+
+        tabHost.currentTab = 0
     }
 
     companion object {
