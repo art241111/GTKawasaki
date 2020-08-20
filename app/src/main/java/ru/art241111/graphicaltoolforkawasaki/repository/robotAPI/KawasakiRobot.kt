@@ -1,8 +1,8 @@
 package ru.art241111.graphicaltoolforkawasaki.repository.robotAPI
 
+import kawasakiRobots.handlersFromKawasakiRobots.CommandAnalyzerForKawasakiRobots
 import kawasakiRobots.utils.Service
 import ru.art241111.graphicaltoolforkawasaki.repository.robotAPI.commands.moving.Moving
-import ru.art241111.graphicaltoolforkawasaki.repository.robotAPI.link.TelnetConnection
 import kotlin.concurrent.thread
 private const val defaultAddress = "127.0.0.1"
 private const val defaultPort = 9105
@@ -19,6 +19,7 @@ class KawasakiRobot{
 
             if(specifications.client.socket.isConnected){
                 specifications.writer.startSendCommands()
+                specifications.reader.startReading(CommandAnalyzerForKawasakiRobots(specifications))
             }
         }
     }
@@ -36,6 +37,7 @@ class KawasakiRobot{
         if(specifications.client.socket.isConnected){
             specifications.writer.stopSendCommands()
             specifications.client.disconnect()
+            specifications.reader.stopReading()
         }
     }
 }

@@ -11,7 +11,7 @@ import kotlin.concurrent.thread
 
 
 class RepositoryForRobotApi {
-    private var robot = KawasakiRobot()
+    var robot = KawasakiRobot()
 
     fun cleanQueue(){
         robot.service.clearQueue()

@@ -1,6 +1,7 @@
 package ru.art241111.graphicaltoolforkawasaki.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -45,13 +46,14 @@ class AddPointsFragment : Fragment() {
     private fun setClickListeners() {
         binding.bAddPoint.setOnClickListener {
             val name = binding.etPointName.text.toString()
-            val coordinate = "0,0,0,0,0,0"
+            val coordinate = viewModel.robot.robot.specifications.position.toString()
 
             if(name != "" ){
                 if (viewModel.pointList.value == null)
                     viewModel.pointList.value = mutableListOf()
                 viewModel.pointList.value?.add("$name@$coordinate")
 
+                Log.d("Accepted_commands", viewModel.robot.robot.specifications.position.toString())
                 findNavController().popBackStack()
             } else{
                 Toast.makeText(activity,"Вы не ввели значения", Toast.LENGTH_LONG).show()
