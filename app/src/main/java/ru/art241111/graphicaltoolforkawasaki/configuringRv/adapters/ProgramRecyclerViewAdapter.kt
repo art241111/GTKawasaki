@@ -1,13 +1,18 @@
-package ru.art241111.graphicaltoolforkawasaki.adapters
+package ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ru.art241111.graphicaltoolforkawasaki.adapters.protocols.OnItemClickListener
+import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.databinding.RecyclerViewProgramItemBinding
+import java.util.*
 
-class ProgramRecyclerViewAdapter(private var items: List<String>,
-                                 private var itemListener: OnItemClickListener) : RecyclerView.Adapter<ProgramRecyclerViewAdapter.ViewHolder>() {
+class ProgramRecyclerViewAdapter(private var items: MutableList<String>,
+                                 private var itemListener: OnItemClickListener,
+                                 private val itemTouchHelperAdapter: ItemTouchHelperAdapter)
+    : RecyclerView.Adapter<ProgramRecyclerViewAdapter.ViewHolder>(),
+        ItemTouchHelperAdapter {
+
     /**
      * Create items.
      */
@@ -15,7 +20,7 @@ class ProgramRecyclerViewAdapter(private var items: List<String>,
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(program: String, listener: OnItemClickListener?) {
-            binding.programName = program.replace("@"," ")
+            binding.programName = program.replace("@", " ")
 
             if (listener != null) {
                 binding.root.setOnClickListener { listener.onItemClick(layoutPosition) }
@@ -40,7 +45,21 @@ class ProgramRecyclerViewAdapter(private var items: List<String>,
      * Data refresh.
      */
     fun replaceData(arrayList: List<String>) {
-        items = arrayList
+        items = arrayList.toMutableList()
         notifyDataSetChanged()
+    }
+
+    /**
+     * Implements ItemTouchHelper
+     */
+    override fun onItemMove(fromPosition: Int, toPosition: Int): Boolean{
+        notifyItemMoved(fromPosition, toPosition)
+        return itemTouchHelperAdapter.onItemMove(fromPosition, toPosition)
+    }
+
+    override fun onItemDismiss(position: Int) {
+        itemTouchHelperAdapter.onItemDismiss(position)
+        items.removeAt(position)
+        notifyItemRemoved(position)
     }
 }

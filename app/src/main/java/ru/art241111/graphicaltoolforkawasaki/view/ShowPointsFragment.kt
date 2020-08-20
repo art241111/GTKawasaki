@@ -13,8 +13,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
-import ru.art241111.graphicaltoolforkawasaki.adapters.PointsRecyclerViewAdapter
-import ru.art241111.graphicaltoolforkawasaki.adapters.protocols.OnItemClickListener
+import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.PointsRecyclerViewAdapter
+import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentShowPointsBinding
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
 import androidx.lifecycle.Observer

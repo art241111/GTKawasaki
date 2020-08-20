@@ -1,9 +1,9 @@
-package ru.art241111.graphicaltoolforkawasaki.adapters
+package ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ru.art241111.graphicaltoolforkawasaki.adapters.protocols.OnItemClickListener
+import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.databinding.RecyclerViewPointsItemBinding
 
 class PointsRecyclerViewAdapter(private var items: List<String>,

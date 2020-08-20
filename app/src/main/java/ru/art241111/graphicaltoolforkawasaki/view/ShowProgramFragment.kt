@@ -3,26 +3,28 @@ package ru.art241111.graphicaltoolforkawasaki.view
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
-import ru.art241111.graphicaltoolforkawasaki.adapters.PointsRecyclerViewAdapter
-import ru.art241111.graphicaltoolforkawasaki.adapters.ProgramRecyclerViewAdapter
-import ru.art241111.graphicaltoolforkawasaki.adapters.protocols.OnItemClickListener
-import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentShowPointsBinding
+import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.ItemTouchHelperAdapter
+import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.ProgramRecyclerViewAdapter
+import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
+import ru.art241111.graphicaltoolforkawasaki.configuringRv.helpers.SimpleItemTouchHelperCallback
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentShowProgramBinding
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
+import java.util.*
+
 
 /**
  * A simple [Fragment] subclass.
@@ -31,7 +33,7 @@ import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
  */
 private const val APP_PREFERENCES = "Programs"
 private const val APP_PREFERENCES_NAME = "programName"
-class ShowProgramFragment : Fragment(), OnItemClickListener {
+class ShowProgramFragment : Fragment(), OnItemClickListener, ItemTouchHelperAdapter {
     private lateinit var binding: FragmentShowProgramBinding
     private lateinit var viewModel: RobotViewModel
 
@@ -44,15 +46,15 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Create viewModel
         viewModel = ViewModelProvider(activity as MainActivity).get(RobotViewModel::class.java)
 
         // Connect to data binding
         binding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_show_program, container, false)
+                R.layout.fragment_show_program, container, false)
         binding.executePendingBindings()
 
         setButtonListener()
@@ -77,13 +79,13 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
         }
     }
 
-    private fun getFromSharedPreferences(key:String,
+    private fun getFromSharedPreferences(key: String,
                                          defaultValue: MutableList<String>): MutableList<String>? {
         return if(preferences!!.contains(key)) {
             preferences!!.getStringSet(key, mutableSetOf())?.toMutableList() ?: defaultValue
 
         } else {
-            updateSharedPreferences(key,defaultValue)
+            updateSharedPreferences(key, defaultValue)
 
             defaultValue
         }
@@ -103,10 +105,14 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
     }
 
     private fun customizationRecycleView() {
-        programRecyclerView = ProgramRecyclerViewAdapter(arrayListOf(), this)
+        programRecyclerView = ProgramRecyclerViewAdapter(arrayListOf(), this, this)
 
         binding.rvShowProgram.layoutManager = LinearLayoutManager(activity)
         binding.rvShowProgram.adapter = programRecyclerView
+
+        val callback: ItemTouchHelper.Callback = SimpleItemTouchHelperCallback(programRecyclerView)
+        val touchHelper = ItemTouchHelper(callback)
+        touchHelper.attachToRecyclerView(binding.rvShowProgram)
 
         updateItems()
     }
@@ -145,9 +151,9 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
 
     private fun updateItems(){
         viewModel.programList.observe(activity as MainActivity,
-            Observer{
-                it?.let{ programRecyclerView.replaceData(it.toList())}
-            })
+                Observer {
+                    it?.let { programRecyclerView.replaceData(it.toList()) }
+                })
     }
     companion object {
         /**
@@ -159,5 +165,23 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() = ShowProgramFragment().apply {}
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int): Boolean {
+        if (fromPosition < toPosition) {
+            for (i in fromPosition until toPosition) {
+                Collections.swap(viewModel.programList.value, i, i + 1)
+            }
+        } else {
+            for (i in fromPosition downTo toPosition + 1) {
+                Collections.swap(viewModel.programList.value, i, i - 1)
+            }
+        }
+        return true
+    }
+
+    override fun onItemDismiss(position: Int) {
+        viewModel.programList.value?.removeAt(position)
+
     }
 }
