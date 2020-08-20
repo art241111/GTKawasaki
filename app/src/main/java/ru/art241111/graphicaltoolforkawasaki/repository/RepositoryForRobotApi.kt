@@ -73,11 +73,10 @@ class RepositoryForRobotApi {
                         Log.d("send", "move to point")
                     }
                     is OpenGripper ->{
-                        Log.d("send", "open gripper")
+                        robot.moving.openGripper()
                     }
-
                     is CloseGripper ->{
-                        Log.d("send", "close gripper")
+                        robot.moving.closeGripper()
                     }
                 }
 

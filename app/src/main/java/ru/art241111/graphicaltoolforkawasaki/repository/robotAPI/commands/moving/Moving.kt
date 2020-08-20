@@ -20,4 +20,10 @@ class Moving(private val robotEntity: RobotEntity) {
 
     fun moveByDZ(position: Int) =
         robotEntity.writer.sendCommandWithChangeStatus(MovingCommand.MOVE_BY_DZ.command + position)
+
+    fun closeGripper() =
+            robotEntity.writer.sendCommandWithChangeStatus(MovingCommand.CLOSE_GRIPPER.command)
+
+    fun openGripper() =
+            robotEntity.writer.sendCommandWithChangeStatus(MovingCommand.OPEN_GRIPPER.command)
 }
