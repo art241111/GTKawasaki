@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -92,14 +93,21 @@ class AddMovingToPointFragment : Fragment() {
                     }
 
 
-            val robotPosition = viewModel.pointList.value?.get(binding.spChoosePoint.selectedItemPosition)
-            if(position == -1){
-                viewModel.programList.value?.add(MoveToPoint(typeOfMovement, robotPosition!!))
+            val spinnerPosition = binding.spChoosePoint.selectedItemPosition
+            if(spinnerPosition == -1){
+                Toast.makeText(activity as MainActivity,
+                        "Чтобы использовать данную команду - нужно создать точку",
+                        Toast.LENGTH_LONG).show()
             } else{
-                viewModel.programList.value?.set(position, MoveToPoint(typeOfMovement, robotPosition!!))
-            }
+                val robotPosition = viewModel.pointList.value?.get(spinnerPosition)
+                if(position == -1){
+                    viewModel.programList.value?.add(MoveToPoint(typeOfMovement, robotPosition!!))
+                } else{
+                    viewModel.programList.value?.set(position, MoveToPoint(typeOfMovement, robotPosition!!))
+                }
 
-            findNavController().popBackStack()
+                findNavController().popBackStack()
+            }
         }
     }
 

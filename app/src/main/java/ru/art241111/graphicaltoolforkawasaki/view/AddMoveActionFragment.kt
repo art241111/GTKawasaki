@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -82,13 +83,17 @@ class AddMoveActionFragment : Fragment() {
                     "DZ"-> coordinate = Coordinate.DZ
             }
 
-            if(position == -1){
-                viewModel.programList.value?.add(Move(coordinate, value.toInt()))
+            if (value == ""){
+                Toast.makeText(activity, "Введите значение перемещения", Toast.LENGTH_LONG).show()
             } else{
-                viewModel.programList.value?.set(position, Move(coordinate, value.toInt()))
-            }
+                if(position == -1){
+                    viewModel.programList.value?.add(Move(coordinate, value.toInt()))
+                } else{
+                    viewModel.programList.value?.set(position, Move(coordinate, value.toInt()))
+                }
 
-            findNavController().popBackStack()
+                findNavController().popBackStack()
+            }
         }
     }
 
