@@ -16,7 +16,7 @@ import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentShowProgramBinding
-import ru.art241111.graphicaltoolforkawasaki.repository.Enity.*
+import ru.art241111.graphicaltoolforkawasaki.repository.enity.*
 import ru.art241111.graphicaltoolforkawasaki.view.util.CustomizationRecyclerView
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
 

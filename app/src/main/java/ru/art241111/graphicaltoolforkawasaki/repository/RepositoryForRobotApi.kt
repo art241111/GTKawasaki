@@ -1,8 +1,8 @@
 package ru.art241111.graphicaltoolforkawasaki.repository
 
 import android.util.Log
-import ru.art241111.graphicaltoolforkawasaki.repository.Enity.*
-import ru.art241111.graphicaltoolforkawasaki.repository.Enity.enums.Coordinate
+import ru.art241111.graphicaltoolforkawasaki.repository.enity.*
+import ru.art241111.graphicaltoolforkawasaki.repository.enity.enums.Coordinate
 import ru.art241111.graphicaltoolforkawasaki.repository.robotAPI.KawasakiRobot
 import ru.art241111.graphicaltoolforkawasaki.utils.Delay
 import kotlin.concurrent.thread

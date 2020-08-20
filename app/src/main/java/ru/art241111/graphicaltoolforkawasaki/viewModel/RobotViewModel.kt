@@ -3,9 +3,9 @@ package ru.art241111.graphicaltoolforkawasaki.viewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import ru.art241111.graphicaltoolforkawasaki.repository.Enity.Position
+import ru.art241111.graphicaltoolforkawasaki.repository.enity.Position
 import ru.art241111.graphicaltoolforkawasaki.repository.RepositoryForRobotApi
-import ru.art241111.graphicaltoolforkawasaki.repository.Enity.RobotCommands
+import ru.art241111.graphicaltoolforkawasaki.repository.enity.RobotCommands
 
 class RobotViewModel(application: Application)
     : AndroidViewModel(application) {

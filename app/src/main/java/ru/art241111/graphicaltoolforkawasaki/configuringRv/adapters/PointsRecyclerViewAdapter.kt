@@ -1,12 +1,11 @@
 package ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters
 
-import android.icu.text.Transliterator
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.databinding.RecyclerViewPointsItemBinding
-import ru.art241111.graphicaltoolforkawasaki.repository.Enity.Position
+import ru.art241111.graphicaltoolforkawasaki.repository.enity.Position
 
 class PointsRecyclerViewAdapter(private var items: List<Position>,
                                 private var itemListener: OnItemClickListener) : RecyclerView.Adapter<PointsRecyclerViewAdapter.ViewHolder>() {

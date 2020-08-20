@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.ItemTouchHelperAdapter
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.databinding.RecyclerViewProgramItemBinding
-import ru.art241111.graphicaltoolforkawasaki.repository.Enity.CloseGripper
-import ru.art241111.graphicaltoolforkawasaki.repository.Enity.OpenGripper
-import ru.art241111.graphicaltoolforkawasaki.repository.Enity.RobotCommands
+import ru.art241111.graphicaltoolforkawasaki.repository.enity.CloseGripper
+import ru.art241111.graphicaltoolforkawasaki.repository.enity.OpenGripper
+import ru.art241111.graphicaltoolforkawasaki.repository.enity.RobotCommands
 
 class ProgramRecyclerViewAdapter(private var items: MutableList<RobotCommands>,
                                  private var itemListener: OnItemClickListener,

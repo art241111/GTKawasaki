@@ -1,7 +1,7 @@
-package ru.art241111.graphicaltoolforkawasaki.repository.Enity
+package ru.art241111.graphicaltoolforkawasaki.repository.enity
 
-import ru.art241111.graphicaltoolforkawasaki.repository.Enity.enums.Coordinate
-import ru.art241111.graphicaltoolforkawasaki.repository.Enity.enums.TypesOfMovementToThePoint
+import ru.art241111.graphicaltoolforkawasaki.repository.enity.enums.Coordinate
+import ru.art241111.graphicaltoolforkawasaki.repository.enity.enums.TypesOfMovementToThePoint
 
 data class Move(val coordinate: Coordinate, val sizeOfPlant: Int):RobotCommands
 data class MoveToPoint(val type: TypesOfMovementToThePoint, val coordinate: List<Int>):RobotCommands

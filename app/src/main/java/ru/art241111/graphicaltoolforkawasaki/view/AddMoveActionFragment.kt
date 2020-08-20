@@ -11,8 +11,8 @@ import androidx.navigation.fragment.findNavController
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentAddMoveActionBinding
-import ru.art241111.graphicaltoolforkawasaki.repository.Enity.Move
-import ru.art241111.graphicaltoolforkawasaki.repository.Enity.enums.Coordinate
+import ru.art241111.graphicaltoolforkawasaki.repository.enity.Move
+import ru.art241111.graphicaltoolforkawasaki.repository.enity.enums.Coordinate
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
 
 /**
