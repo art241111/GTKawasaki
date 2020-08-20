@@ -28,5 +28,5 @@ class Moving(private val robotEntity: RobotEntity) {
             robotEntity.writer.sendCommandWithChangeStatus(MovingCommand.OPEN_GRIPPER.command)
 
     fun moveToPoint(command: String) =
-            robotEntity.writer.sendCommandWithChangeStatus(MovingCommand.OPEN_GRIPPER.command + command)
+            robotEntity.writer.sendCommandWithChangeStatus(MovingCommand.MOVE_TO_POINT.command + command)
 }

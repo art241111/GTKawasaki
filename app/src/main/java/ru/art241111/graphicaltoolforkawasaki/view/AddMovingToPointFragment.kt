@@ -54,7 +54,7 @@ class AddMovingToPointFragment : Fragment() {
 
         // Настраиваем адаптер
         val adapter: ArrayAdapter<*> = ArrayAdapter(activity as MainActivity,
-                                android.R.layout.simple_spinner_item,viewModel.pointList.value!!)
+                android.R.layout.simple_spinner_item, viewModel.pointList.value!!)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         // Вызываем адаптер
@@ -91,10 +91,12 @@ class AddMovingToPointFragment : Fragment() {
                         else -> TypesOfMovementToThePoint.JMOVE
                     }
 
+
+            val robotPosition = viewModel.pointList.value?.get(binding.spChoosePoint.selectedItemPosition)
             if(position == -1){
-                viewModel.programList.value?.add(MoveToPoint(typeOfMovement, listOf()))
+                viewModel.programList.value?.add(MoveToPoint(typeOfMovement, robotPosition!!))
             } else{
-                viewModel.programList.value?.set(position, MoveToPoint(typeOfMovement, listOf()))
+                viewModel.programList.value?.set(position, MoveToPoint(typeOfMovement, robotPosition!!))
             }
 
             findNavController().popBackStack()
