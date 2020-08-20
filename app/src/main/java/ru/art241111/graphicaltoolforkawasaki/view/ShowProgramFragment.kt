@@ -17,13 +17,13 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
-import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.ItemTouchHelperAdapter
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.ProgramRecyclerViewAdapter
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.helpers.SimpleItemTouchHelperCallback
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentShowProgramBinding
+import ru.art241111.graphicaltoolforkawasaki.view.util.ItemTouchHelperAdapterImp
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
-import java.util.*
+
 
 
 /**
@@ -33,7 +33,7 @@ import java.util.*
  */
 private const val APP_PREFERENCES = "Programs"
 private const val APP_PREFERENCES_NAME = "programName"
-class ShowProgramFragment : Fragment(), OnItemClickListener, ItemTouchHelperAdapter {
+class ShowProgramFragment : Fragment(), OnItemClickListener {
     private lateinit var binding: FragmentShowProgramBinding
     private lateinit var viewModel: RobotViewModel
 
@@ -105,7 +105,9 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, ItemTouchHelperAdap
     }
 
     private fun customizationRecycleView() {
-        programRecyclerView = ProgramRecyclerViewAdapter(arrayListOf(), this, this)
+        programRecyclerView = ProgramRecyclerViewAdapter(arrayListOf(),
+                this,
+                ItemTouchHelperAdapterImp(viewModel.programList.value!!))
 
         binding.rvShowProgram.layoutManager = LinearLayoutManager(activity)
         binding.rvShowProgram.adapter = programRecyclerView
@@ -130,7 +132,7 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, ItemTouchHelperAdap
         val popup = PopupMenu(activity, view)
         popup.inflate(R.menu.management_options_menu)
 
-        popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item: MenuItem? ->
+        popup.setOnMenuItemClickListener { item: MenuItem? ->
 
             when (item!!.itemId) {
                 R.id.moveAction ->
@@ -144,7 +146,7 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, ItemTouchHelperAdap
             }
             updateItems()
             true
-        })
+        }
 
         popup.show()
     }
@@ -165,23 +167,5 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, ItemTouchHelperAdap
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() = ShowProgramFragment().apply {}
-    }
-
-    override fun onItemMove(fromPosition: Int, toPosition: Int): Boolean {
-        if (fromPosition < toPosition) {
-            for (i in fromPosition until toPosition) {
-                Collections.swap(viewModel.programList.value, i, i + 1)
-            }
-        } else {
-            for (i in fromPosition downTo toPosition + 1) {
-                Collections.swap(viewModel.programList.value, i, i - 1)
-            }
-        }
-        return true
-    }
-
-    override fun onItemDismiss(position: Int) {
-        viewModel.programList.value?.removeAt(position)
-
     }
 }
