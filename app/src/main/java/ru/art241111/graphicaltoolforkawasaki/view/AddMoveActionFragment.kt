@@ -27,6 +27,8 @@ class AddMoveActionFragment : Fragment() {
     private lateinit var binding: FragmentAddMoveActionBinding
     private lateinit var viewModel: RobotViewModel
 
+    private var position = -1
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,16 +51,23 @@ class AddMoveActionFragment : Fragment() {
 
     // TODO: Add editing
     private fun loadInformation() {
-        var position = -1
+        position = -1
         arguments?.let {
             val key: String? = "position"
             position = it.getInt(key)
         }
-        if(position != -2){
-            val command = viewModel.programList.value?.get(position)
-
+        if(position != -1){
+            val command = viewModel.programList.value?.get(position) as Move
+            binding.etTheShiftDistance.text?.append(command.sizeOfPlant.toString())
+            binding.spinner.setSelection(when(command.coordinate){
+                Coordinate.X -> 0
+                Coordinate.Y -> 1
+                Coordinate.Z -> 2
+                Coordinate.DX -> 3
+                Coordinate.DY -> 4
+                Coordinate.DZ -> 5
+            })
         }
-        Log.d("position",position.toString())
     }
 
     private fun setButtonListener() {
@@ -75,7 +84,12 @@ class AddMoveActionFragment : Fragment() {
                     "DY"-> coordinate = Coordinate.DY
                     "DZ"-> coordinate = Coordinate.DZ
             }
-            viewModel.programList.value?.add(Move(coordinate, value.toInt()))
+
+            if(position == -1){
+                viewModel.programList.value?.add(Move(coordinate, value.toInt()))
+            } else{
+                viewModel.programList.value?.set(position, Move(coordinate, value.toInt()))
+            }
 
             findNavController().popBackStack()
         }

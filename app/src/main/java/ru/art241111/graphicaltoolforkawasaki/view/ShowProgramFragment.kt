@@ -16,9 +16,7 @@ import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentShowProgramBinding
-import ru.art241111.graphicaltoolforkawasaki.repository.commands.CloseGripper
-import ru.art241111.graphicaltoolforkawasaki.repository.commands.OpenGripper
-import ru.art241111.graphicaltoolforkawasaki.repository.commands.RobotCommands
+import ru.art241111.graphicaltoolforkawasaki.repository.commands.*
 import ru.art241111.graphicaltoolforkawasaki.view.util.CustomizationRecyclerView
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
 
@@ -45,8 +43,11 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
 
         val bundle = Bundle()
         bundle.putInt("position", position)
-        findNavController().navigate(R.id.addMoveActionFragment, bundle)
 
+        when(viewModel.programList.value?.get(position)){
+            is MoveToPoint -> findNavController().navigate(R.id.addMovingToPointFragment, bundle)
+            is Move -> findNavController().navigate(R.id.addMoveActionFragment, bundle)
+        }
     }
 
     override fun onCreateView(
@@ -128,11 +129,9 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
         popup.setOnMenuItemClickListener { item: MenuItem? ->
 
             when (item!!.itemId) {
-                R.id.moveAction -> {
-                    val bundle = Bundle()
-                    bundle.putInt("position", -2)
-                    findNavController().navigate(R.id.addMoveActionFragment, bundle)
-                }
+                R.id.moveAction ->
+                    findNavController().navigate(R.id.addMoveActionFragment)
+
 
                 R.id.openGripper ->
                     viewModel.programList.value?.add(OpenGripper())

@@ -13,8 +13,8 @@
     </string-array>
 
     <string-array name="typeOfMovement">
-        <item>Линейно</item>
         <item>По осям</item>
+        <item>Линейно</item>
     </string-array>
 
 </resources>

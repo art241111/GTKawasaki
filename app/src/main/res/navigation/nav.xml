@@ -59,5 +59,10 @@
         android:id="@+id/addMovingToPointFragment"
         android:name="ru.art241111.graphicaltoolforkawasaki.view.AddMovingToPointFragment"
         android:label="fragment_add_moving_to_point"
-        tools:layout="@layout/fragment_add_moving_to_point" />
+        tools:layout="@layout/fragment_add_moving_to_point" >
+        <argument
+            android:name="position"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
 </navigation>

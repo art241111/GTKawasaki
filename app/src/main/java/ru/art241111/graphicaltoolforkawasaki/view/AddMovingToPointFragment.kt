@@ -1,6 +1,7 @@
 package ru.art241111.graphicaltoolforkawasaki.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentAddMovingToPointBinding
+import ru.art241111.graphicaltoolforkawasaki.repository.commands.Move
 import ru.art241111.graphicaltoolforkawasaki.repository.commands.MoveToPoint
 import ru.art241111.graphicaltoolforkawasaki.repository.commands.enums.TypesOfMovementToThePoint
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
@@ -24,6 +26,8 @@ class AddMovingToPointFragment : Fragment() {
     private lateinit var binding: FragmentAddMovingToPointBinding
     private lateinit var viewModel: RobotViewModel
 
+    private var position = -1
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Create viewModel
@@ -36,7 +40,29 @@ class AddMovingToPointFragment : Fragment() {
 
         setButtonListener()
 
+        loadInformation()
+
         return binding.root
+    }
+
+    // TODO: Add editing
+    private fun loadInformation() {
+        position = -1
+        arguments?.let {
+            val key: String? = "position"
+            position = it.getInt(key)
+        }
+
+        if(position != -1){
+            val command = viewModel.programList.value?.get(position) as MoveToPoint
+            binding.spChooseTypeOfMovement.setSelection(
+                    when(command.type){
+                        TypesOfMovementToThePoint.JMOVE -> 0
+                        TypesOfMovementToThePoint.LMOVE -> 1
+                    }
+            )
+
+        }
     }
 
     private fun setButtonListener() {
@@ -44,12 +70,16 @@ class AddMovingToPointFragment : Fragment() {
 
             val typeOfMovement =
                     when(binding.spChooseTypeOfMovement.selectedItem.toString()){
-                        "Линейно" -> TypesOfMovementToThePoint.JMOVE
-                        "По осям" -> TypesOfMovementToThePoint.LMOVE
+                        "Линейно" -> TypesOfMovementToThePoint.LMOVE
+                        "По осям" -> TypesOfMovementToThePoint.JMOVE
                         else -> TypesOfMovementToThePoint.JMOVE
                     }
 
-            viewModel.programList.value?.add(MoveToPoint(typeOfMovement, listOf()))
+            if(position == -1){
+                viewModel.programList.value?.add(MoveToPoint(typeOfMovement, listOf()))
+            } else{
+                viewModel.programList.value?.set(position, MoveToPoint(typeOfMovement, listOf()))
+            }
 
             findNavController().popBackStack()
         }
