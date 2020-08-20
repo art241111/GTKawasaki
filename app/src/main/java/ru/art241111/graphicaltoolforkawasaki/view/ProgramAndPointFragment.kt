@@ -33,7 +33,6 @@ class ProgramAndPointFragment : Fragment() {
     private fun setTabHost() {
         val tabHost = binding.tabHostFromProgram
 
-
         tabHost.setup()
 
         var tabSpec =  tabHost.newTabSpec("tabControlXYZ")
