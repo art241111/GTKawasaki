@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.ItemTouchHelperAdapter
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.ProgramRecyclerViewAdapter
+import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnDeleteButtonClick
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.helpers.SimpleItemTouchHelperCallback
 import ru.art241111.graphicaltoolforkawasaki.repository.enity.RobotCommands
@@ -15,12 +16,13 @@ import java.util.*
 class CustomizationRecyclerView(recyclerView: RecyclerView,
                                 private val activity: MainActivity,
                                 private val list: MutableLiveData<MutableList<RobotCommands>>,
-                                onItemClickListener: OnItemClickListener): ItemTouchHelperAdapter {
+                                onItemClickListener: OnItemClickListener,
+                                onDeleteButtonClick: OnDeleteButtonClick): ItemTouchHelperAdapter {
 
     private var programRecyclerView: ProgramRecyclerViewAdapter
             = ProgramRecyclerViewAdapter(arrayListOf(),
                                          onItemClickListener,
-                                         this)
+                                         onDeleteButtonClick, this)
 
     init {
         recyclerView.layoutManager = LinearLayoutManager(activity)

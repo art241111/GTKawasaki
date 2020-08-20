@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
+import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnDeleteButtonClick
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentShowProgramBinding
 import ru.art241111.graphicaltoolforkawasaki.repository.enity.*
@@ -28,7 +29,7 @@ import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
  */
 private const val APP_PREFERENCES = "Programs"
 private const val APP_PREFERENCES_NAME = "programName"
-class ShowProgramFragment : Fragment(), OnItemClickListener {
+class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick {
     private lateinit var binding: FragmentShowProgramBinding
     private lateinit var viewModel: RobotViewModel
 
@@ -36,11 +37,12 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
     private var preferences: SharedPreferences? = null
     private lateinit var customizationRecyclerView: CustomizationRecyclerView
 
+    override fun onDeleteButtonClick(position: Int) {
+        viewModel.programList.value?.removeAt(position)
+        customizationRecyclerView.updateItems()
+    }
+
     override fun onItemClick(position: Int) {
-
-//        viewModel.programList.value?.removeAt(position)
-//        customizationRecyclerView.updateItems()
-
         val bundle = Bundle()
         bundle.putInt("position", position)
 
@@ -68,6 +70,7 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
         customizationRecyclerView = CustomizationRecyclerView(binding.rvShowProgram,
                 activity as MainActivity,
                 viewModel.programList,
+                this,
                 this)
 
         getProgramFromSharedPreferences()
@@ -156,4 +159,6 @@ class ShowProgramFragment : Fragment(), OnItemClickListener {
         @JvmStatic
         fun newInstance() = ShowProgramFragment().apply {}
     }
+
+
 }

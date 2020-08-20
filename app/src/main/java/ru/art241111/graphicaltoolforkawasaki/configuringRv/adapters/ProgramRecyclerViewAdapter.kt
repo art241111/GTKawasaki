@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.ItemTouchHelperAdapter
+import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnDeleteButtonClick
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.databinding.RecyclerViewProgramItemBinding
 import ru.art241111.graphicaltoolforkawasaki.repository.enity.CloseGripper
@@ -12,6 +13,7 @@ import ru.art241111.graphicaltoolforkawasaki.repository.enity.RobotCommands
 
 class ProgramRecyclerViewAdapter(private var items: MutableList<RobotCommands>,
                                  private var itemListener: OnItemClickListener,
+                                 private var deleteListener: OnDeleteButtonClick,
                                  private val itemTouchHelperAdapter: ItemTouchHelperAdapter)
     : RecyclerView.Adapter<ProgramRecyclerViewAdapter.ViewHolder>(),
         ItemTouchHelperAdapter {
@@ -22,7 +24,7 @@ class ProgramRecyclerViewAdapter(private var items: MutableList<RobotCommands>,
     class ViewHolder(private var binding: RecyclerViewProgramItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(program: RobotCommands, listener: OnItemClickListener?) {
+        fun bind(program: RobotCommands, listener: OnItemClickListener?, deleteListener:OnDeleteButtonClick) {
 
             binding.programName = program.toString()
             when (program) {
@@ -31,7 +33,13 @@ class ProgramRecyclerViewAdapter(private var items: MutableList<RobotCommands>,
             }
 
             if (listener != null) {
-                binding.root.setOnClickListener { listener.onItemClick(layoutPosition) }
+                binding.root.setOnClickListener {
+                    listener.onItemClick(layoutPosition)
+                }
+
+                binding.ivDeletePoint.setOnClickListener {
+                    deleteListener.onDeleteButtonClick(layoutPosition)
+                }
             }
 
             binding.executePendingBindings()
@@ -45,7 +53,7 @@ class ProgramRecyclerViewAdapter(private var items: MutableList<RobotCommands>,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int)
-            = holder.bind(items[position], itemListener)
+            = holder.bind(items[position], itemListener, deleteListener)
 
     override fun getItemCount(): Int = items.size
 
