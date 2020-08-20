@@ -1,7 +1,6 @@
 package ru.art241111.graphicaltoolforkawasaki.view.util
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,7 +33,7 @@ class CustomizationRecyclerView(recyclerView: RecyclerView,
     }
 
     fun updateItems(){
-        list.observe(activity as MainActivity,
+        list.observe(activity,
                 androidx.lifecycle.Observer {
                     it.let { programRecyclerView.replaceData(it.toList()) }
                 })
