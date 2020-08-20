@@ -2,10 +2,10 @@ package kawasakiRobots.commands.moving
 
 
 enum class MovingCommand(val command: String) {
-    MOVE_BY_X( "SHIFT;X;"),
-    MOVE_BY_Y( "SHIFT;Y;"),
-    MOVE_BY_Z( "SHIFT;Z;"),
-    MOVE_BY_DX( "SHIFT;DX;"),
-    MOVE_BY_DY( "SHIFT;DY;"),
-    MOVE_BY_DZ( "SHIFT;DZ;");
+    MOVE_BY_X( "MOVE;BASE;1;"),
+    MOVE_BY_Y( "MOVE;BASE;2;"),
+    MOVE_BY_Z( "MOVE;BASE;3;"),
+    MOVE_BY_DX( "MOVE;BASE;4;"),
+    MOVE_BY_DY( "MOVE;BASE;5;"),
+    MOVE_BY_DZ( "MOVE;BASE;6;");
 }
