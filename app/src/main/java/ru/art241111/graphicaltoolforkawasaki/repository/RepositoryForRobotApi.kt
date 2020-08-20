@@ -3,7 +3,8 @@ package ru.art241111.graphicaltoolforkawasaki.repository
 import android.util.Log
 import android.widget.Toast
 import io.reactivex.rxjava3.subjects.BehaviorSubject
-import ru.art241111.graphicaltoolforkawasaki.repository.commands.RobotCommands
+import ru.art241111.graphicaltoolforkawasaki.repository.commands.*
+import ru.art241111.graphicaltoolforkawasaki.repository.commands.enums.Coordinate
 import ru.art241111.graphicaltoolforkawasaki.repository.robotAPI.KawasakiRobot
 import ru.art241111.graphicaltoolforkawasaki.utils.Delay
 import kotlin.concurrent.thread
@@ -56,10 +57,32 @@ class RepositoryForRobotApi {
     }
 
     fun sendCommand(commands: List<RobotCommands>){
-//        thread {
-//            commands.map {
-//                val command = it.split("@")
-//
+        thread {
+            commands.map {
+
+                when(it){
+                    is Move ->{
+                        when(it.coordinate){
+                            Coordinate.X -> moveByX(it.sizeOfPlant)
+                            Coordinate.Y -> moveByY(it.sizeOfPlant)
+                            Coordinate.Z -> moveByZ(it.sizeOfPlant)
+                            Coordinate.DX -> moveByDX(it.sizeOfPlant)
+                            Coordinate.DY -> moveByDY(it.sizeOfPlant)
+                            Coordinate.DZ -> moveByDZ(it.sizeOfPlant)
+                        }
+                    }
+                    is MoveToPoint -> {
+                        Log.d("send", "move to point")
+                    }
+                    is OpenGripper ->{
+                        Log.d("send", "open gripper")
+                    }
+
+                    is CloseGripper ->{
+                        Log.d("send", "close gripper")
+                    }
+                }
+
 //                when(command[0]){
 //                    "MOVE" -> {
 //                        when(command[1]){
@@ -78,10 +101,10 @@ class RepositoryForRobotApi {
 //                    "MOVE TO POINT" -> Log.d("send", "move to point")
 //                    else -> print("error")
 //                }
-//                Delay.customDelay(1000L)
-//            }
-//
-//        }
+                Delay.customDelay(1000L)
+            }
+
+        }
 
     }
 }
