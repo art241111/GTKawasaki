@@ -1,12 +1,14 @@
 package ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters
 
+import android.icu.text.Transliterator
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.databinding.RecyclerViewPointsItemBinding
+import ru.art241111.graphicaltoolforkawasaki.repository.Enity.Position
 
-class PointsRecyclerViewAdapter(private var items: List<String>,
+class PointsRecyclerViewAdapter(private var items: List<Position>,
                                 private var itemListener: OnItemClickListener) : RecyclerView.Adapter<PointsRecyclerViewAdapter.ViewHolder>() {
     /**
      * Create items.
@@ -14,9 +16,9 @@ class PointsRecyclerViewAdapter(private var items: List<String>,
     class ViewHolder(private var binding: RecyclerViewPointsItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(point: String, listener: OnItemClickListener?) {
-            binding.pointName = point.substringBefore("@")
-            binding.pointCoordinate = point.substringAfter("@")
+        fun bind(point: Position, listener: OnItemClickListener?) {
+            binding.pointName = point.name
+            binding.pointCoordinate = point.position.toString()
 
             if (listener != null) {
                 binding.root.setOnClickListener { listener.onItemClick(layoutPosition) }
@@ -40,7 +42,7 @@ class PointsRecyclerViewAdapter(private var items: List<String>,
     /**
      * Data refresh.
      */
-    fun replaceData(arrayList: List<String>) {
+    fun replaceData(arrayList: List<Position>) {
         items = arrayList
         notifyDataSetChanged()
     }

@@ -67,7 +67,7 @@ class ShowPointsFragment : Fragment(), OnItemClickListener {
 
         if(viewModel.pointList.value!!.isEmpty()){
             if(preferences != null){
-                viewModel.pointList.value = getFromSharedPreferences(APP_PREFERENCES_NAME, viewModel.pointList.value!!)
+//                viewModel.pointList.value = getFromSharedPreferences(APP_PREFERENCES_NAME, viewModel.pointList.value!!)
             }
         }
     }
@@ -115,7 +115,7 @@ class ShowPointsFragment : Fragment(), OnItemClickListener {
     }
 
     override fun onDestroyView() {
-        updateSharedPreferences(APP_PREFERENCES_NAME, viewModel.pointList.value!!)
+//        updateSharedPreferences(APP_PREFERENCES_NAME, viewModel.pointList.value!!)
         super.onDestroyView()
     }
 
