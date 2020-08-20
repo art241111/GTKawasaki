@@ -18,6 +18,9 @@ import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.On
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentShowPointsBinding
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
 import androidx.lifecycle.Observer
+import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnDeleteButtonClick
+import ru.art241111.graphicaltoolforkawasaki.repository.enity.Move
+import ru.art241111.graphicaltoolforkawasaki.repository.enity.MoveToPoint
 
 /**
  * A simple [Fragment] subclass.
@@ -26,7 +29,7 @@ import androidx.lifecycle.Observer
  */
 private const val APP_PREFERENCES = "Points"
 private const val APP_PREFERENCES_NAME = "pointsName"
-class ShowPointsFragment : Fragment(), OnItemClickListener {
+class ShowPointsFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick {
     private lateinit var binding: FragmentShowPointsBinding
     private lateinit var viewModel: RobotViewModel
 
@@ -35,9 +38,17 @@ class ShowPointsFragment : Fragment(), OnItemClickListener {
     private lateinit var pointRecyclerView: PointsRecyclerViewAdapter
 
     override fun onItemClick(position: Int) {
+        val bundle = Bundle()
+        bundle.putInt("position", position)
+
+        findNavController().navigate(R.id.addPointsFragment, bundle)
+    }
+
+    override fun onDeleteButtonClick(position: Int) {
         viewModel.pointList.value?.removeAt(position)
         updateItems()
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -93,7 +104,7 @@ class ShowPointsFragment : Fragment(), OnItemClickListener {
     }
 
     private fun customizationRecycleView() {
-        pointRecyclerView = PointsRecyclerViewAdapter(arrayListOf(), this)
+        pointRecyclerView = PointsRecyclerViewAdapter(arrayListOf(), this, this)
 
         binding.rvShowPoints.layoutManager = LinearLayoutManager(activity)
         binding.rvShowPoints.adapter = pointRecyclerView
@@ -130,6 +141,8 @@ class ShowPointsFragment : Fragment(), OnItemClickListener {
         @JvmStatic
         fun newInstance() = ShowPointsFragment().apply {}
     }
+
+
 
 
 }

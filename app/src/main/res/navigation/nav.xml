@@ -23,7 +23,12 @@
         android:id="@+id/addPointsFragment"
         android:name="ru.art241111.graphicaltoolforkawasaki.view.AddPointsFragment"
         android:label="fragment_add_points"
-        tools:layout="@layout/fragment_add_points" />
+        tools:layout="@layout/fragment_add_points" >
+        <argument
+            android:name="position"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
     <fragment
         android:id="@+id/showPointsFragment"
         android:name="ru.art241111.graphicaltoolforkawasaki.view.ShowPointsFragment"

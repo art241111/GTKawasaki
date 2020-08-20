@@ -24,6 +24,8 @@ class AddPointsFragment : Fragment() {
     private lateinit var binding: FragmentAddPointsBinding
     private lateinit var viewModel: RobotViewModel
 
+    private var position = -1
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,7 +41,22 @@ class AddPointsFragment : Fragment() {
         // Create buttonPressedListener and set it
         setClickListeners()
 
+        loadInformation()
+
         return binding.root
+    }
+
+    private fun loadInformation() {
+        position = -1
+
+        arguments?.let {
+            val key: String? = "position"
+            position = it.getInt(key)
+        }
+
+        if(position != -1){
+            binding.etPointName.text?.append((viewModel.pointList.value?.get(position)?.name))
+        }
     }
 
     private fun setClickListeners() {
@@ -47,11 +64,12 @@ class AddPointsFragment : Fragment() {
             val name = binding.etPointName.text.toString()
             val coordinate = viewModel.robot.robot.specifications.position
 
-
             if(name != "" ){
-                if (viewModel.pointList.value == null)
-                    viewModel.pointList.value = mutableListOf()
-                viewModel.pointList.value?.add(Position(name,coordinate))
+                if (position == -1){
+                    viewModel.pointList.value?.add(Position(name,coordinate))
+                } else{
+                    viewModel.pointList.value?.set(position, Position(name,coordinate))
+                }
 
                 findNavController().popBackStack()
             } else{
