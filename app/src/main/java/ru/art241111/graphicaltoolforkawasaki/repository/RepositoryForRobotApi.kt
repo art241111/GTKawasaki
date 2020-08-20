@@ -56,33 +56,37 @@ class RepositoryForRobotApi {
         robot.disconnect()
     }
 
+    private var isProgramRun = false
     fun sendCommand(commands: List<RobotCommands>){
         thread {
-            commands.map {
-                when(it){
-                    is Move ->{
-                        when(it.coordinate){
-                            Coordinate.X -> moveByX(it.sizeOfPlant)
-                            Coordinate.Y -> moveByY(it.sizeOfPlant)
-                            Coordinate.Z -> moveByZ(it.sizeOfPlant)
-                            Coordinate.DX -> moveByDX(it.sizeOfPlant)
-                            Coordinate.DY -> moveByDY(it.sizeOfPlant)
-                            Coordinate.DZ -> moveByDZ(it.sizeOfPlant)
+            if(!isProgramRun){
+                isProgramRun = true
+                commands.map {
+                    when(it){
+                        is Move ->{
+                            when(it.coordinate){
+                                Coordinate.X -> moveByX(it.sizeOfPlant)
+                                Coordinate.Y -> moveByY(it.sizeOfPlant)
+                                Coordinate.Z -> moveByZ(it.sizeOfPlant)
+                                Coordinate.DX -> moveByDX(it.sizeOfPlant)
+                                Coordinate.DY -> moveByDY(it.sizeOfPlant)
+                                Coordinate.DZ -> moveByDZ(it.sizeOfPlant)
+                            }
+                        }
+                        is MoveToPoint -> {
+                            robot.moving.moveToPoint("${it.type};${it.coordinate.position.toStringForRobot()}")
+                        }
+                        is OpenGripper ->{
+                            robot.moving.openGripper()
+                        }
+                        is CloseGripper ->{
+                            robot.moving.closeGripper()
                         }
                     }
-                    is MoveToPoint -> {
-                        robot.moving.moveToPoint("${it.type};${it.coordinate.position.toStringForRobot()}")
-                    }
-                    is OpenGripper ->{
-                        robot.moving.openGripper()
-                    }
-                    is CloseGripper ->{
-                        robot.moving.closeGripper()
-                    }
+                    Delay.customDelay(1000L)
                 }
-                Delay.customDelay(1000L)
+                isProgramRun = false
             }
-
         }
 
     }
