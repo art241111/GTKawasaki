@@ -13,11 +13,24 @@ import ru.art241111.graphicaltoolforkawasaki.configuringRv.helpers.SimpleItemTou
 import ru.art241111.graphicaltoolforkawasaki.repository.enity.RobotCommands
 import java.util.*
 
-class CustomizationRecyclerView(recyclerView: RecyclerView,
-                                private val activity: MainActivity,
-                                private val list: MutableLiveData<MutableList<RobotCommands>>,
-                                onItemClickListener: OnItemClickListener,
-                                onDeleteButtonClick: OnDeleteButtonClick): ItemTouchHelperAdapter {
+/**
+ * Customization command recycler view:
+ * create adapters, layout managers,
+ * customization dag and swipe.
+ *
+ * @param recyclerView - recycler view for configuration
+ * @param activity - to get context
+ * @param list - data to upload
+ * @param onItemClickListener - action when clicking on a cell in recycler view
+ * @param onDeleteButtonClick - action when clicking on a delete button
+ *
+ * @author Artem Gerasimov
+ */
+class CustomizationCommandRecyclerView(recyclerView: RecyclerView,
+                                       private val activity: MainActivity,
+                                       private val list: MutableLiveData<MutableList<RobotCommands>>,
+                                       onItemClickListener: OnItemClickListener,
+                                       onDeleteButtonClick: OnDeleteButtonClick): ItemTouchHelperAdapter {
 
     private var programRecyclerView: ProgramRecyclerViewAdapter
             = ProgramRecyclerViewAdapter(arrayListOf(),
@@ -35,6 +48,9 @@ class CustomizationRecyclerView(recyclerView: RecyclerView,
         updateItems()
     }
 
+    /**
+     * Method for updating fields in the recycler view
+     */
     fun updateItems(){
         list.observe(activity,
                 androidx.lifecycle.Observer {
@@ -42,6 +58,11 @@ class CustomizationRecyclerView(recyclerView: RecyclerView,
                 })
     }
 
+    /**
+     * Action on drag - moving an item
+     * @param fromPosition - starting element position
+     * @param toPosition - new element position
+     */
     override fun onItemMove(fromPosition: Int, toPosition: Int): Boolean {
         if (fromPosition < toPosition) {
             for (i in fromPosition until toPosition) {
@@ -55,8 +76,11 @@ class CustomizationRecyclerView(recyclerView: RecyclerView,
         return true
     }
 
+    /**
+     * Action to swipe - delete the item
+     * @param position - position of the file to delete
+     */
     override fun onItemDismiss(position: Int) {
         list.value?.removeAt(position)
     }
-
 }

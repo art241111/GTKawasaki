@@ -18,7 +18,7 @@ import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.On
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentShowProgramBinding
 import ru.art241111.graphicaltoolforkawasaki.repository.enity.*
-import ru.art241111.graphicaltoolforkawasaki.view.util.CustomizationRecyclerView
+import ru.art241111.graphicaltoolforkawasaki.view.util.CustomizationCommandRecyclerView
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
 
 
@@ -35,11 +35,11 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
 
 
     private var preferences: SharedPreferences? = null
-    private lateinit var customizationRecyclerView: CustomizationRecyclerView
+    private lateinit var customizationCommandRecyclerView: CustomizationCommandRecyclerView
 
     override fun onDeleteButtonClick(position: Int) {
         viewModel.programList.value?.removeAt(position)
-        customizationRecyclerView.updateItems()
+        customizationCommandRecyclerView.updateItems()
     }
 
     override fun onItemClick(position: Int) {
@@ -67,7 +67,7 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
         setButtonListener()
 
         // Customization RecycleView: set layoutManager, adapter, data.
-        customizationRecyclerView = CustomizationRecyclerView(binding.rvShowProgram,
+        customizationCommandRecyclerView = CustomizationCommandRecyclerView(binding.rvShowProgram,
                 activity as MainActivity,
                 viewModel.programList,
                 this,
@@ -141,7 +141,7 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
                 R.id.moveToPointAction ->
                     findNavController().navigate(R.id.addMovingToPointFragment)
             }
-            customizationRecyclerView.updateItems()
+            customizationCommandRecyclerView.updateItems()
             true
         }
 
