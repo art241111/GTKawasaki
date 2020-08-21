@@ -1,4 +1,4 @@
-package ru.art241111.graphicaltoolforkawasaki.view
+package ru.art241111.graphicaltoolforkawasaki.view.programAndPoint
 
 import android.content.Context
 import android.content.SharedPreferences

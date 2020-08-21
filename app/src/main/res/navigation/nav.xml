@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/dataForLinkFragment"
-        android:name="ru.art241111.graphicaltoolforkawasaki.view.DataForLinkFragment"
+        android:name="ru.art241111.graphicaltoolforkawasaki.view.linkFragment.DataForLinkFragment"
         android:label="fragment_data_for_link"
         tools:layout="@layout/fragment_data_for_link" />
     <fragment
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/addPointsFragment"
-        android:name="ru.art241111.graphicaltoolforkawasaki.view.AddPointsFragment"
+        android:name="ru.art241111.graphicaltoolforkawasaki.view.addElements.AddPointsFragment"
         android:label="fragment_add_points"
         tools:layout="@layout/fragment_add_points" >
         <argument
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/showPointsFragment"
-        android:name="ru.art241111.graphicaltoolforkawasaki.view.ShowPointsFragment"
+        android:name="ru.art241111.graphicaltoolforkawasaki.view.programAndPoint.ShowPointsFragment"
         android:label="fragment_show_points"
         tools:layout="@layout/fragment_show_points" >
         <action
@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/showProgramFragment"
-        android:name="ru.art241111.graphicaltoolforkawasaki.view.ShowProgramFragment"
+        android:name="ru.art241111.graphicaltoolforkawasaki.view.programAndPoint.ShowProgramFragment"
         android:label="fragment_show_program"
         tools:layout="@layout/fragment_show_program" >
         <action
@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/addMoveActionFragment"
-        android:name="ru.art241111.graphicaltoolforkawasaki.view.AddMoveActionFragment"
+        android:name="ru.art241111.graphicaltoolforkawasaki.view.addElements.AddMoveActionFragment"
         android:label="fragment_add_move_action"
         tools:layout="@layout/fragment_add_move_action" >
         <argument
@@ -62,7 +62,7 @@
     </fragment>
     <fragment
         android:id="@+id/addMovingToPointFragment"
-        android:name="ru.art241111.graphicaltoolforkawasaki.view.AddMovingToPointFragment"
+        android:name="ru.art241111.graphicaltoolforkawasaki.view.addElements.AddMovingToPointFragment"
         android:label="fragment_add_moving_to_point"
         tools:layout="@layout/fragment_add_moving_to_point" >
         <argument

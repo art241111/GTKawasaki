@@ -1,4 +1,4 @@
-package ru.art241111.graphicaltoolforkawasaki.view
+package ru.art241111.graphicaltoolforkawasaki.view.controlElements
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentControlPanelBinding
-import ru.art241111.graphicaltoolforkawasaki.repository.RepositoryForRobotApi
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
 
 

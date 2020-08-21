@@ -1,4 +1,4 @@
-package ru.art241111.graphicaltoolforkawasaki.view
+package ru.art241111.graphicaltoolforkawasaki.view.programAndPoint
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -19,8 +19,6 @@ import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentShowPointsBindi
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
 import androidx.lifecycle.Observer
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnDeleteButtonClick
-import ru.art241111.graphicaltoolforkawasaki.repository.enity.Move
-import ru.art241111.graphicaltoolforkawasaki.repository.enity.MoveToPoint
 
 /**
  * A simple [Fragment] subclass.

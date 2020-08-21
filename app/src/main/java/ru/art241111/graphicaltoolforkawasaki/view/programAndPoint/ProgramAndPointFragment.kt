@@ -1,4 +1,4 @@
-package ru.art241111.graphicaltoolforkawasaki.view
+package ru.art241111.graphicaltoolforkawasaki.view.programAndPoint
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import ru.art241111.graphicaltoolforkawasaki.R
-import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentArrowControlsBinding
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentProgramAndPointBinding
 
 /**

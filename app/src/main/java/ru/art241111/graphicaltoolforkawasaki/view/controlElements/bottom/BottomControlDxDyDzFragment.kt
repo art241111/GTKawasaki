@@ -1,4 +1,4 @@
-package ru.art241111.graphicaltoolforkawasaki.view
+package ru.art241111.graphicaltoolforkawasaki.view.controlElements.bottom
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

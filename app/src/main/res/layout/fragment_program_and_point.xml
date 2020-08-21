@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.ProgramAndPointFragment">
+    tools:context=".view.programAndPoint.ProgramAndPointFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -45,7 +45,7 @@
 
                             <androidx.fragment.app.FragmentContainerView
                                 android:id="@+id/fragmentContainerView10"
-                                android:name="ru.art241111.graphicaltoolforkawasaki.view.ShowProgramFragment"
+                                android:name="ru.art241111.graphicaltoolforkawasaki.view.programAndPoint.ShowProgramFragment"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 tools:layout="@layout/fragment_show_program" />
@@ -64,7 +64,7 @@
 
                             <androidx.fragment.app.FragmentContainerView
                                 android:id="@+id/fragmentContainerView2"
-                                android:name="ru.art241111.graphicaltoolforkawasaki.view.ShowPointsFragment"
+                                android:name="ru.art241111.graphicaltoolforkawasaki.view.programAndPoint.ShowPointsFragment"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"

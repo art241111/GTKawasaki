@@ -8,7 +8,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fc_control_panel"
-        android:name="ru.art241111.graphicaltoolforkawasaki.view.ControlPanel"
+        android:name="ru.art241111.graphicaltoolforkawasaki.view.controlElements.ControlPanel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,7 +18,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView9"
-        android:name="ru.art241111.graphicaltoolforkawasaki.view.ProgramAndPointFragment"
+        android:name="ru.art241111.graphicaltoolforkawasaki.view.programAndPoint.ProgramAndPointFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/fc_control_panel"

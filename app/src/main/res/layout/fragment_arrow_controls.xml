@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.ArrowControlsFragment">
+    tools:context=".view.controlElements.ArrowControlsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -44,7 +44,7 @@
 
                             <androidx.fragment.app.FragmentContainerView
                                 android:id="@+id/fragmentContainerView"
-                                android:name="ru.art241111.graphicaltoolforkawasaki.view.ArrowControlsFragmentXYZ"
+                                android:name="ru.art241111.graphicaltoolforkawasaki.view.controlElements.arrow.ArrowControlsFragmentXYZ"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -52,7 +52,7 @@
 
                             <androidx.fragment.app.FragmentContainerView
                                 android:id="@+id/fragmentContainerView3"
-                                android:name="ru.art241111.graphicaltoolforkawasaki.view.BottomControlXYZFragment"
+                                android:name="ru.art241111.graphicaltoolforkawasaki.view.controlElements.bottom.BottomControlXYZFragment"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -73,7 +73,7 @@
 
                             <androidx.fragment.app.FragmentContainerView
                                 android:id="@+id/fragmentContainerView2"
-                                android:name="ru.art241111.graphicaltoolforkawasaki.view.ArrowControlsDxDyDzFragment"
+                                android:name="ru.art241111.graphicaltoolforkawasaki.view.controlElements.arrow.ArrowControlsDxDyDzFragment"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -81,7 +81,7 @@
 
                             <androidx.fragment.app.FragmentContainerView
                                 android:id="@+id/fragmentContainerView4"
-                                android:name="ru.art241111.graphicaltoolforkawasaki.view.BottomControlDxDyDzFragment"
+                                android:name="ru.art241111.graphicaltoolforkawasaki.view.controlElements.bottom.BottomControlDxDyDzFragment"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"

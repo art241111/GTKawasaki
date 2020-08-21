@@ -1,10 +1,9 @@
-package ru.art241111.graphicaltoolforkawasaki.view
+package ru.art241111.graphicaltoolforkawasaki.view.controlElements
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TabHost
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import ru.art241111.graphicaltoolforkawasaki.R

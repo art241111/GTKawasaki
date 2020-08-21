@@ -1,4 +1,4 @@
-package ru.art241111.graphicaltoolforkawasaki.view
+package ru.art241111.graphicaltoolforkawasaki.view.addElements
 
 import android.os.Bundle
 import android.view.LayoutInflater
