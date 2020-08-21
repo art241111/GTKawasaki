@@ -1,5 +1,10 @@
 package ru.art241111.graphicaltoolforkawasaki.view.util
 
+/**
+ * Options for the robot's movement direction
+ *
+ * @author Artem Gerasimov
+ */
 enum class Buttons {
     // Main coordinates
     UpZ,
