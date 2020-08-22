@@ -1,30 +1,34 @@
 package ru.art241111.graphicaltoolforkawasaki.view.util
 
-import android.annotation.SuppressLint
 import android.view.MotionEvent
 import android.view.View
 import ru.art241111.graphicaltoolforkawasaki.repository.RepositoryForRobotApi
 import ru.art241111.graphicaltoolforkawasaki.utils.Delay
 import kotlin.concurrent.thread
 
-class WhenButtonPressed(private val robot: RepositoryForRobotApi) {
-    private var press = false
+/**
+ * Tracking class button hold.
+ *
+ * @author Artem Gerasimov
+ */
+class WhenButtonHold(private val robot: RepositoryForRobotApi) {
+    private var isPress = false
 
-    @SuppressLint("ClickableViewAccessibility")
-    fun onTouchListener(view: View, button: Buttons, coefficient: AmountOfMovement){
-        view.setOnTouchListener(View.OnTouchListener { _, event ->
-            when(event.action){
+    fun onTouchListener(view: View , button: Buttons, coefficient: AmountOfMovement){
+        view.setOnTouchListener { v, motionEvent ->
+            when(motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    press = true
-                    arrowPressed(button,determiningTheCoefficient(coefficient))
+                    v.performClick()
+                    isPress = true
+                    arrowPressed(button, determiningTheCoefficient(coefficient))
                 }
-                MotionEvent.ACTION_UP ->{
+                MotionEvent.ACTION_UP -> {
                     robot.cleanQueue()
-                    press = false
+                    isPress = false
                 }
             }
-            return@OnTouchListener false
-        })
+            false
+        }
     }
 
     private fun determiningTheCoefficient(coefficient: AmountOfMovement):Int =
@@ -36,7 +40,7 @@ class WhenButtonPressed(private val robot: RepositoryForRobotApi) {
     private fun arrowPressed(button:Buttons, coefficient: Int){
         thread {
             robot.cleanQueue()
-            while (press){
+            while (isPress){
                 when(button){
                     Buttons.UpZ -> robot.moveByZ(coefficient)
                     Buttons.DownZ -> robot.moveByZ(-coefficient)
@@ -53,7 +57,7 @@ class WhenButtonPressed(private val robot: RepositoryForRobotApi) {
                     Buttons.DownDY -> robot.moveByDY(-coefficient)
                 }
 
-                Delay.customDelay(100L)
+                Delay.customDelay(500L)
             }
         }
     }

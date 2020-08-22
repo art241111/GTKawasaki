@@ -13,7 +13,7 @@ import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentArrowControlsXy
 import ru.art241111.graphicaltoolforkawasaki.repository.RepositoryForRobotApi
 import ru.art241111.graphicaltoolforkawasaki.view.util.AmountOfMovement
 import ru.art241111.graphicaltoolforkawasaki.view.util.Buttons
-import ru.art241111.graphicaltoolforkawasaki.view.util.WhenButtonPressed
+import ru.art241111.graphicaltoolforkawasaki.view.util.WhenButtonHold
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
 
 /**
@@ -48,7 +48,7 @@ class ArrowControlsFragmentXYZ : Fragment() {
     }
 
     private fun setClickListeners() {
-        val whenButtonPressed = WhenButtonPressed(repositoryForRobotApi)
+        val whenButtonPressed = WhenButtonHold(repositoryForRobotApi)
 
         // Move by Z
         whenButtonPressed.onTouchListener(binding.ibUpZ, Buttons.UpZ,AmountOfMovement.FAST)
