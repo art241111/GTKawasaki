@@ -36,13 +36,13 @@ class ArrowControlsFragment : Fragment() {
         if(tabHost != null){
             tabHost.setup()
 
-            var tabSpec =  tabHost.newTabSpec("tabControlXYZ")
+            var tabSpec =  tabHost.newTabSpec("tab1")
 
             tabSpec.setContent(binding.tabControlXYZ!!.id)
             tabSpec.setIndicator("Перемещение по x,y,z")
             tabHost.addTab(tabSpec)
 
-            tabSpec = tabHost.newTabSpec("tabControlDxDyDz")
+            tabSpec = tabHost.newTabSpec("tab2")
             tabSpec.setContent(binding.tabControlDxDyDz!!.id)
             tabSpec.setIndicator("Перемещение по dx,dy,dz")
             tabHost.addTab(tabSpec)
@@ -56,11 +56,8 @@ class ArrowControlsFragment : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
          * @return A new instance of fragment FragmentArrowControls.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() = ArrowControlsFragment().apply {}
     }
