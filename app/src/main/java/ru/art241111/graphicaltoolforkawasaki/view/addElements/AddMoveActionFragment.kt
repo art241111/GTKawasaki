@@ -87,9 +87,9 @@ class AddMoveActionFragment : Fragment() {
                 Toast.makeText(activity, "Введите значение перемещения", Toast.LENGTH_LONG).show()
             } else{
                 if(position == -1){
-                    viewModel.programList.value?.add(Move(coordinate, value.toInt()))
+                    viewModel.programList.value?.add(Move(coordinate, value.toFloat()))
                 } else{
-                    viewModel.programList.value?.set(position, Move(coordinate, value.toInt()))
+                    viewModel.programList.value?.set(position, Move(coordinate, value.toFloat()))
                 }
 
                 findNavController().popBackStack()

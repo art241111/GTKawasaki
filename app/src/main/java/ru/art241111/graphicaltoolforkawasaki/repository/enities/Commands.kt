@@ -5,7 +5,8 @@ import ru.art241111.graphicaltoolforkawasaki.repository.enities.enums.TypesOfMov
 
 interface RobotCommands
 
-data class Move(val coordinate: Coordinate, val sizeOfPlant: Int):RobotCommands
+// TODO: Check Float!!!
+data class Move(val coordinate: Coordinate, val sizeOfPlant: Float):RobotCommands
 data class MoveToPoint(val type: TypesOfMovementToThePoint,val coordinate: Position):RobotCommands
 class OpenGripper :RobotCommands
 class CloseGripper:RobotCommands
