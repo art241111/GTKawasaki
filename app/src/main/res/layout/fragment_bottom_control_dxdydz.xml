@@ -43,8 +43,10 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
 
+            android:selectAllOnFocus="false"
+            android:singleLine="true"
             android:text="10"
             android:textAlignment="center"
             app:layout_constraintStart_toEndOf="@+id/fl_x_down"
@@ -113,7 +115,9 @@
             android:layout_marginTop="8dp"
             android:ems="10"
 
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
+            android:selectAllOnFocus="false"
+            android:singleLine="true"
             android:text="10"
             android:textAlignment="center"
             app:layout_constraintStart_toEndOf="@+id/fl_y_down"
@@ -181,7 +185,9 @@
             android:layout_marginBottom="16dp"
 
             android:ems="10"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
+            android:selectAllOnFocus="false"
+            android:singleLine="true"
             android:text="10"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"

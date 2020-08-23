@@ -19,7 +19,8 @@ class SendCommandsUtils(private val robotApi: RepositoryForRobotApi) {
 
     private fun sendCommand(command: RobotCommands){
         when(command){
-            is Move -> move(command.coordinate, command.sizeOfPlant)
+            //TODO: TOINT!!!
+            is Move -> move(command.coordinate, command.sizeOfPlant.toInt())
             is MoveToPoint -> robotApi.moveToPoint(command.type.toString(), command.coordinate.position)
             is OpenGripper -> robotApi.openGripper()
             is CloseGripper -> robotApi.closeGripper()

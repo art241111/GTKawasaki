@@ -20,35 +20,50 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_ip"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/et_ip_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:hint="Ip адресс"
-            android:text="@{default_ip}"
-            android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_connect"
-            android:singleLine="true"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/tv_connect">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_port"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_ip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ip адресс"
+                android:inputType="number|numberDecimal"
+                android:digits="0123456789."
+                android:singleLine="true"
+                android:text="@{default_ip}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/et_port_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:hint="Порт"
-            android:inputType="text"
-            android:text="@{default_port}"
-            app:layout_constraintEnd_toEndOf="@+id/et_ip"
-            app:layout_constraintStart_toStartOf="@+id/et_ip"
-            app:layout_constraintTop_toBottomOf="@+id/et_ip"
-            android:singleLine="true"
-            />
+            app:layout_constraintEnd_toEndOf="@+id/et_ip_container"
+            app:layout_constraintStart_toStartOf="@+id/et_ip_container"
+            app:layout_constraintTop_toBottomOf="@+id/et_ip_container">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_port"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="Порт"
+                android:inputType="number"
+                android:singleLine="true"
+
+                android:text="@{default_port}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/b_connect"
@@ -59,7 +74,7 @@
             app:cornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_port" />
+            app:layout_constraintTop_toBottomOf="@+id/et_port_container" />
 
         <TextView
             android:id="@+id/tv_connect"
