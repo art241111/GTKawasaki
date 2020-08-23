@@ -1,14 +1,11 @@
 package ru.art241111.graphicaltoolforkawasaki.repository
 
-
-import android.util.Log
 import ru.art241111.graphicaltoolforkawasaki.repository.enity.*
 import ru.art241111.graphicaltoolforkawasaki.repository.enity.enums.Coordinate
 import ru.art241111.graphicaltoolforkawasaki.repository.enity.expansion.toStringForRobot
 import ru.art241111.graphicaltoolforkawasaki.repository.robotAPI.KawasakiRobot
 import ru.art241111.graphicaltoolforkawasaki.utils.Delay
 import kotlin.concurrent.thread
-
 
 class RepositoryForRobotApi {
     var robot = KawasakiRobot()
@@ -56,6 +53,13 @@ class RepositoryForRobotApi {
         robot.disconnect()
     }
 
+    fun moveToPoint(typeOfMovement: String, position: MutableList<Float>) =
+        robot.moving.moveToPoint(typeOfMovement = typeOfMovement,
+                                 position = position.toStringForRobot())
+
+    fun openGripper() = robot.moving.openGripper()
+    fun closeGripper() = robot.moving.closeGripper()
+
     private var isProgramRun = false
     fun sendCommand(commands: List<RobotCommands>){
         thread {
@@ -73,15 +77,9 @@ class RepositoryForRobotApi {
                                 Coordinate.DZ -> moveByDZ(it.sizeOfPlant)
                             }
                         }
-                        is MoveToPoint -> {
-                            robot.moving.moveToPoint("${it.type};${it.coordinate.position.toStringForRobot()}")
-                        }
-                        is OpenGripper ->{
-                            robot.moving.openGripper()
-                        }
-                        is CloseGripper ->{
-                            robot.moving.closeGripper()
-                        }
+                        is MoveToPoint -> moveToPoint(it.type.toString(), it.coordinate.position)
+                        is OpenGripper -> openGripper()
+                        is CloseGripper -> closeGripper()
                     }
                     Delay.customDelay(1000L)
                 }
