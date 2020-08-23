@@ -88,7 +88,7 @@ class RepositoryForRobotApi {
      */
     fun moveToPoint(typeOfMovement: String, position: MutableList<Float>) =
         robot.moving.moveToPoint(typeOfMovement = typeOfMovement,
-                                 position = position.toStringForRobot())
+                                 position = position.joinToString(";"))
 
     /**
      * Open the robot's grip
