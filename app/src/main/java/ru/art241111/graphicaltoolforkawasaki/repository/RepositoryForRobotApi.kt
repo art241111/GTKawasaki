@@ -1,13 +1,12 @@
 package ru.art241111.graphicaltoolforkawasaki.repository
 
 import ru.art241111.graphicaltoolforkawasaki.repository.enities.*
-import ru.art241111.graphicaltoolforkawasaki.repository.enities.enums.Coordinate
 import ru.art241111.graphicaltoolforkawasaki.repository.enities.expansion.toStringForRobot
 import ru.art241111.graphicaltoolforkawasaki.repository.robotAPI.KawasakiRobot
-import ru.art241111.graphicaltoolforkawasaki.utils.Delay
 import kotlin.concurrent.thread
 
 class RepositoryForRobotApi {
+    private val sendCommandsUtils = SendCommandsUtils(this)
     var robot = KawasakiRobot()
 
     fun cleanQueue(){
@@ -60,32 +59,9 @@ class RepositoryForRobotApi {
     fun openGripper() = robot.moving.openGripper()
     fun closeGripper() = robot.moving.closeGripper()
 
-    private var isProgramRun = false
     fun sendCommand(commands: List<RobotCommands>){
         thread {
-            if(!isProgramRun){
-                isProgramRun = true
-                commands.map {
-                    when(it){
-                        is Move ->{
-                            when(it.coordinate){
-                                Coordinate.X -> moveByX(it.sizeOfPlant)
-                                Coordinate.Y -> moveByY(it.sizeOfPlant)
-                                Coordinate.Z -> moveByZ(it.sizeOfPlant)
-                                Coordinate.DX -> moveByDX(it.sizeOfPlant)
-                                Coordinate.DY -> moveByDY(it.sizeOfPlant)
-                                Coordinate.DZ -> moveByDZ(it.sizeOfPlant)
-                            }
-                        }
-                        is MoveToPoint -> moveToPoint(it.type.toString(), it.coordinate.position)
-                        is OpenGripper -> openGripper()
-                        is CloseGripper -> closeGripper()
-                    }
-                    Delay.customDelay(1000L)
-                }
-                isProgramRun = false
-            }
+           sendCommandsUtils.sendCommands(commands)
         }
-
     }
 }
