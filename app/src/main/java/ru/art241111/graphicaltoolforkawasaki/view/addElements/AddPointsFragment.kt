@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentAddPointsBinding
-import ru.art241111.graphicaltoolforkawasaki.repository.enity.Position
+import ru.art241111.graphicaltoolforkawasaki.repository.enities.Position
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
 
 /**

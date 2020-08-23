@@ -10,7 +10,7 @@ import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.ProgramRecyc
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnDeleteButtonClick
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.helpers.SimpleItemTouchHelperCallback
-import ru.art241111.graphicaltoolforkawasaki.repository.enity.RobotCommands
+import ru.art241111.graphicaltoolforkawasaki.repository.enities.RobotCommands
 import java.util.*
 
 /**

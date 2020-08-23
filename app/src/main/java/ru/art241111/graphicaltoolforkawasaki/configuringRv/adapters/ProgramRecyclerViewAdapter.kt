@@ -7,9 +7,9 @@ import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.It
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnDeleteButtonClick
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.databinding.RecyclerViewProgramItemBinding
-import ru.art241111.graphicaltoolforkawasaki.repository.enity.CloseGripper
-import ru.art241111.graphicaltoolforkawasaki.repository.enity.OpenGripper
-import ru.art241111.graphicaltoolforkawasaki.repository.enity.RobotCommands
+import ru.art241111.graphicaltoolforkawasaki.repository.enities.CloseGripper
+import ru.art241111.graphicaltoolforkawasaki.repository.enities.OpenGripper
+import ru.art241111.graphicaltoolforkawasaki.repository.enities.RobotCommands
 
 class ProgramRecyclerViewAdapter(private var items: MutableList<RobotCommands>,
                                  private var itemListener: OnItemClickListener,

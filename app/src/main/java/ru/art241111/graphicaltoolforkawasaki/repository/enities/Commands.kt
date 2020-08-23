@@ -1,7 +1,7 @@
-package ru.art241111.graphicaltoolforkawasaki.repository.enity
+package ru.art241111.graphicaltoolforkawasaki.repository.enities
 
-import ru.art241111.graphicaltoolforkawasaki.repository.enity.enums.Coordinate
-import ru.art241111.graphicaltoolforkawasaki.repository.enity.enums.TypesOfMovementToThePoint
+import ru.art241111.graphicaltoolforkawasaki.repository.enities.enums.Coordinate
+import ru.art241111.graphicaltoolforkawasaki.repository.enities.enums.TypesOfMovementToThePoint
 
 interface RobotCommands
 

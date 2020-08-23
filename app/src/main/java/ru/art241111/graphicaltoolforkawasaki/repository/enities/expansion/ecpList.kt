@@ -1,4 +1,4 @@
-package ru.art241111.graphicaltoolforkawasaki.repository.enity.expansion
+package ru.art241111.graphicaltoolforkawasaki.repository.enities.expansion
 
 fun List<Float>.toStringForRobot():String{
     var returnString = ""

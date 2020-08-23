@@ -14,8 +14,8 @@ import androidx.navigation.fragment.findNavController
 import ru.art241111.graphicaltoolforkawasaki.MainActivity
 import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentAddMovingToPointBinding
-import ru.art241111.graphicaltoolforkawasaki.repository.enity.MoveToPoint
-import ru.art241111.graphicaltoolforkawasaki.repository.enity.enums.TypesOfMovementToThePoint
+import ru.art241111.graphicaltoolforkawasaki.repository.enities.MoveToPoint
+import ru.art241111.graphicaltoolforkawasaki.repository.enities.enums.TypesOfMovementToThePoint
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
 
 

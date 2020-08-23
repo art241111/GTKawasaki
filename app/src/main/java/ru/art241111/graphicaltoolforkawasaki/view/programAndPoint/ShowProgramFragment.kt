@@ -17,7 +17,7 @@ import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnDeleteButtonClick
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentShowProgramBinding
-import ru.art241111.graphicaltoolforkawasaki.repository.enity.*
+import ru.art241111.graphicaltoolforkawasaki.repository.enities.*
 import ru.art241111.graphicaltoolforkawasaki.view.util.CustomizationCommandRecyclerView
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
 

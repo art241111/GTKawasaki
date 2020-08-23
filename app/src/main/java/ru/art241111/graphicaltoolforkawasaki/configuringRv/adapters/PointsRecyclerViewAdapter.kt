@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnDeleteButtonClick
 import ru.art241111.graphicaltoolforkawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.graphicaltoolforkawasaki.databinding.RecyclerViewPointsItemBinding
-import ru.art241111.graphicaltoolforkawasaki.repository.enity.Position
+import ru.art241111.graphicaltoolforkawasaki.repository.enities.Position
 
 class PointsRecyclerViewAdapter(private var items: List<Position>,
                                 private var itemListener: OnItemClickListener,
