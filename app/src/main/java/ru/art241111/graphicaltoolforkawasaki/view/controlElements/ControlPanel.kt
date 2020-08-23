@@ -40,7 +40,7 @@ class ControlPanel : Fragment() {
 
     private fun setRunButtonListener() {
         binding.ibRunProgram.setOnClickListener {
-            viewModel.robot.sendCommand(viewModel.programList.value!!)
+            viewModel.robot.sendCommands(viewModel.programList.value!!)
         }
     }
 
