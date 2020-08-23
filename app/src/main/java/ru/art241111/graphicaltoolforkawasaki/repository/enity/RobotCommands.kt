@@ -1,3 +1,0 @@
-package ru.art241111.graphicaltoolforkawasaki.repository.enity
-
-interface RobotCommands
