@@ -1,5 +1,6 @@
 package ru.art241111.graphicaltoolforkawasaki.repository
 
+import android.util.Log
 import ru.art241111.graphicaltoolforkawasaki.repository.enities.*
 import ru.art241111.graphicaltoolforkawasaki.repository.enities.enums.Coordinate
 import ru.art241111.graphicaltoolforkawasaki.utils.Delay
@@ -21,12 +22,19 @@ class SendCommandsUtils(private val robotApi: RepositoryForRobotApi) {
         when(command){
             //TODO: TOINT!!!
             is Move -> move(command.coordinate, command.sizeOfPlant.toInt())
-            is MoveToPoint -> robotApi.moveToPoint(command.type.toString(), command.coordinate.position)
+            is MoveToPoint -> moveToPoint(command.type.toString(), command.coordinate.position)
             is OpenGripper -> robotApi.openGripper()
             is CloseGripper -> robotApi.closeGripper()
         }
     }
 
+    private fun moveToPoint(type:String, positions: MutableList<Float>){
+        if(positions.isNotEmpty()){
+            robotApi.moveToPoint(type, positions)
+        } else{
+            Log.e("MoveToPoint", "Не введены координаты")
+        }
+    }
     private fun move(coordinate: Coordinate, sizeOfPlant:Int){
         when(coordinate){
             Coordinate.X -> robotApi.moveByX(sizeOfPlant)
