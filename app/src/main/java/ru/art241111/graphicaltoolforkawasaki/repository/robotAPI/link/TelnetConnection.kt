@@ -10,18 +10,26 @@ class TelnetConnection{
     var socket: Socket = Socket()
     private set
 
+    /**
+     * Create TCP link with robot
+     */
     fun createTCPLink(server: String, port: Int){
         createSocket(server, port)
     }
 
-    fun createTelnetLink(
-        server: String,
-        port: Int,
-        user: String){
+    /**
+     * Create Telnet link with robot
+     */
+    fun createTelnetLink(server: String,
+                         port: Int,
+                         user: String){
         createSocket(server, port)
         authorization(user)
     }
 
+    /**
+     * Disconnect from robot
+     */
     fun disconnect() {
         try {
             socket.close()
@@ -32,10 +40,8 @@ class TelnetConnection{
         }
     }
 
-    private fun createSocket(
-        server: String,
-        port: Int
-    ){
+    private fun createSocket(server: String,
+                             port: Int){
         try {
             socket= Socket(server, port)
         } catch (e: UnknownHostException){
