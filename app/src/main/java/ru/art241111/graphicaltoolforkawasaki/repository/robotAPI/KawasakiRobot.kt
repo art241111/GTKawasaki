@@ -1,6 +1,6 @@
 package ru.art241111.graphicaltoolforkawasaki.repository.robotAPI
 
-import kawasakiRobots.handlersFromKawasakiRobots.CommandAnalyzerForKawasakiRobots
+import ru.art241111.graphicaltoolforkawasaki.repository.robotAPI.handlersFromKawasakiRobots.CommandAnalyzerForKawasakiRobots
 import kawasakiRobots.utils.Service
 import ru.art241111.graphicaltoolforkawasaki.repository.robotAPI.commands.moving.Moving
 import kotlin.concurrent.thread
