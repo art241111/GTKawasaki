@@ -16,46 +16,67 @@ class RemoteWriter(private val robotEntity: RobotEntity) {
     private lateinit var socket: Socket
     private lateinit var out: PrintStream
 
+    /**
+     * Send commands that are important to expect a response from
+     */
     fun sendCommandWithChangeStatus(command:String): Boolean{
         Log.d("Send","Command with change status: $command")
         return commandsQueue.add(command)
     }
 
+    /**
+     * Send commands that are not important to expect a response from
+     */
     fun sendCommand(command:String): Boolean{
         Log.d("Send","Command: $command")
         return commandsQueue.add(command)
     }
 
+    /**
+     * Clear command queue
+     */
     fun cleanQueue(){
         commandsQueue.clear()
     }
-   fun startSendCommands(){
-       val  client = robotEntity.client
-       socket = client.socket
-       out = PrintStream(socket.getOutputStream())
 
-       connection = socket.isConnected
-
-       thread {
-           while (connection){
-               if(robotEntity.state == State.ERROR){
-                   commandsQueue.clear()
-               } else if((robotEntity.state == State.WAITING_COMMAND) and (!commandsQueue.isEmpty())){
-                   val comm = commandsQueue.poll()
-                   if( comm != null){
-                       write(comm.trim())
-                   }
-               }
-           }
-       }
-    }
-
+    /**
+     * Stop sending commands
+     */
     fun stopSendCommands(){
         sendCommand("q")
         Delay.middle()
         connection = false
     }
 
+    /**
+     * The method tracks the queue and sends command from it
+     */
+    fun startSendCommands(){
+       socket = robotEntity.client.socket
+       out = PrintStream(socket.getOutputStream())
+       connection = socket.isConnected
+
+       thread {
+           startTrackTheQueueAndSendCommands()
+       }
+    }
+
+    private fun startTrackTheQueueAndSendCommands(){
+        while (connection){
+            if(robotEntity.state == State.ERROR){
+                cleanQueue()
+            } else if((robotEntity.state == State.WAITING_COMMAND) and (!commandsQueue.isEmpty())){
+                val comm = commandsQueue.poll()
+                if( comm != null){
+                    write(comm.trim())
+                }
+            }
+        }
+    }
+
+    /**
+     * Sends commands to the robot
+     */
     private fun write(message: String): Boolean {
         if(socket.isConnected){
             try {
