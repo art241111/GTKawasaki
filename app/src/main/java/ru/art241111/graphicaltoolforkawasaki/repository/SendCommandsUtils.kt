@@ -10,7 +10,8 @@ class SendCommandsUtils(private val robotApi: RepositoryForRobotApi) {
     fun sendCommands(commands: List<RobotCommands>){
         if(!isProgramRun){
             isProgramRun = true
-            commands.map {
+
+            commands.forEach{
                 sendCommand(it)
                 Delay.customDelay(1000L)
             }
