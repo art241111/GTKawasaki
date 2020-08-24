@@ -15,7 +15,5 @@ class RobotEntity {
     val errors: Queue<String> = LinkedList<String>()
     var state: State = State.WAITING_COMMAND
 
-
-
     var position: MutableList<Float> = mutableListOf()
 }
