@@ -4,7 +4,7 @@
     <string name="change_command">Change command</string>
     <string name="create_command">Create command</string>
 
-    <string-array name="coordinateOptions">
+    <string-array name="coordinateOptions" translatable="false">
         <item>X</item>
         <item>Y</item>
         <item>Z</item>

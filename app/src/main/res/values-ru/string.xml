@@ -3,15 +3,6 @@
     <string name="change_command">Изменить комманду</string>
     <string name="create_command">Создать комманду</string>
 
-    <string-array name="coordinateOptions">
-        <item>X</item>
-        <item>Y</item>
-        <item>Z</item>
-        <item>DX</item>
-        <item>DY</item>
-        <item>DZ</item>
-    </string-array>
-
     <string-array name="typeOfMovement">
         <item>По осям</item>
         <item>Линейно</item>
