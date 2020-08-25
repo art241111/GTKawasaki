@@ -16,8 +16,8 @@ import ru.art241111.graphicaltoolforkawasaki.R
 import ru.art241111.graphicaltoolforkawasaki.databinding.FragmentAddMovingToPointBinding
 import ru.art241111.graphicaltoolforkawasaki.repository.enities.MoveToPoint
 import ru.art241111.graphicaltoolforkawasaki.repository.enities.enums.TypesOfMovementToThePoint
+import ru.art241111.graphicaltoolforkawasaki.utils.setSelection
 import ru.art241111.graphicaltoolforkawasaki.viewModel.RobotViewModel
-
 
 /**
  * A simple [Fragment] subclass.
@@ -28,7 +28,20 @@ class AddMovingToPointFragment : Fragment() {
     private lateinit var binding: FragmentAddMovingToPointBinding
     private lateinit var viewModel: RobotViewModel
 
+    // Edit flag. If equal to -1, then new created
     private var position = -1
+
+    /**
+     * Get position value
+     */
+    override fun onCreate(savedInstanceState: Bundle?) {
+        arguments?.let {
+            val key: String? = "position"
+            position = it.getInt(key)
+        }
+
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -42,18 +55,20 @@ class AddMovingToPointFragment : Fragment() {
                 R.layout.fragment_add_moving_to_point, container, false)
         binding.executePendingBindings()
 
-        setButtonListener()
-        setSpinner()
+        setAddButtonListener()
+        passingAnArrayToTheChoosePointSpinner()
+
+        //Verification a new position is created or an old one is edit
         loadInformation()
 
         return binding.root
     }
 
-    private fun setSpinner() {
+    private fun passingAnArrayToTheChoosePointSpinner() {
         // Получаем экземпляр элемента Spinner
         val spinner: Spinner = binding.spChoosePoint
 
-        // Настраиваем адаптер
+        // Настраиваем адаптер и добавляем массив точек
         val adapter: ArrayAdapter<*> = ArrayAdapter(activity as MainActivity,
                 android.R.layout.simple_spinner_item, viewModel.pointList.value!!)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -62,37 +77,51 @@ class AddMovingToPointFragment : Fragment() {
         spinner.adapter = adapter
     }
 
-    // TODO: Add editing
+    /**
+     * Verification a new position is created
+     * or an old one is edit
+     */
     private fun loadInformation() {
-        position = -1
-        arguments?.let {
-            val key: String? = "position"
-            position = it.getInt(key)
-        }
-
         if(position != -1){
             val command = viewModel.programList.value?.get(position) as MoveToPoint
+
+            changeTextAtAddButton()
+            setChoosePointSpinner(command)
+            setChooseTypeOfMovementSpinner(command)
+        }
+    }
+        private fun changeTextAtAddButton(){
+            binding.bSaveCommand.text = resources.getText(R.string.change_command)
+        }
+
+        private fun setChooseTypeOfMovementSpinner(command: MoveToPoint){
             binding.spChooseTypeOfMovement.setSelection(
                     when (command.type) {
                         TypesOfMovementToThePoint.JMOVE -> 0
                         TypesOfMovementToThePoint.LMOVE -> 1
                     }
             )
+        }
 
+        private fun setChoosePointSpinner(command: MoveToPoint){
+            binding.spChoosePoint.setSelection(command.coordinate.name)
+        }
+
+    private fun setAddButtonListener() {
+        binding.bSaveCommand.setOnClickListener {
+            createPoint(getTypeOfMoment())
         }
     }
-
-    private fun setButtonListener() {
-        binding.bSaveCommand.setOnClickListener {
-
-            val typeOfMovement =
-                    when(binding.spChooseTypeOfMovement.selectedItem.toString()){
-                        "Линейно" -> TypesOfMovementToThePoint.LMOVE
-                        "По осям" -> TypesOfMovementToThePoint.JMOVE
-                        else -> TypesOfMovementToThePoint.JMOVE
+        private fun getTypeOfMoment(): TypesOfMovementToThePoint{
+            val optionsTypesOfMovement = resources.getStringArray(R.array.typeOfMovement)
+            return when(binding.spChooseTypeOfMovement.selectedItem.toString()){
+                        optionsTypesOfMovement[0] -> TypesOfMovementToThePoint.JMOVE
+                        optionsTypesOfMovement[1] -> TypesOfMovementToThePoint.LMOVE
+                        else -> TypesOfMovementToThePoint.LMOVE
                     }
+        }
 
-
+        private fun createPoint(typeOfMovement: TypesOfMovementToThePoint){
             val spinnerPosition = binding.spChoosePoint.selectedItemPosition
             if(spinnerPosition == -1){
                 Toast.makeText(activity as MainActivity,
@@ -109,8 +138,6 @@ class AddMovingToPointFragment : Fragment() {
                 findNavController().popBackStack()
             }
         }
-    }
-
     companion object {
         /**
          * Use this factory method to create a new instance of
