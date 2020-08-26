@@ -25,7 +25,17 @@ class AddMoveActionFragment : Fragment() {
     private lateinit var binding: FragmentAddMoveActionBinding
     private lateinit var viewModel: RobotViewModel
 
+    // Edit flag. If equal to -1, then new created
     private var position = -1
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        arguments?.let {
+            val key: String? = "position"
+            position = it.getInt(key)
+        }
+
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,63 +49,69 @@ class AddMoveActionFragment : Fragment() {
             R.layout.fragment_add_move_action, container, false)
         binding.executePendingBindings()
 
-        setButtonListener()
+        setAddCommandButtonListener()
 
         loadInformation()
-
 
         return binding.root
     }
 
-    // TODO: Add editing
     private fun loadInformation() {
-        position = -1
-        arguments?.let {
-            val key: String? = "position"
-            position = it.getInt(key)
-        }
         if(position != -1){
             val command = viewModel.programList.value?.get(position) as Move
+
             binding.etTheShiftDistance.text?.append(command.sizeOfPlant.toString())
-            binding.spinner.setSelection(when(command.coordinate){
-                Coordinate.X -> 0
-                Coordinate.Y -> 1
-                Coordinate.Z -> 2
-                Coordinate.DX -> 3
-                Coordinate.DY -> 4
-                Coordinate.DZ -> 5
-            })
+
+            binding.bAddMoveAction.text = resources.getText(R.string.change_command)
+
+            setCoordinateSpinner(command.coordinate)
         }
     }
 
-    private fun setButtonListener() {
+    private fun setCoordinateSpinner(coordinate: Coordinate){
+        binding.spCoordinate.setSelection(when(coordinate){
+            Coordinate.X -> 0
+            Coordinate.Y -> 1
+            Coordinate.Z -> 2
+            Coordinate.DX -> 3
+            Coordinate.DY -> 4
+            Coordinate.DZ -> 5
+        })
+    }
+
+    private fun setAddCommandButtonListener() {
         binding.bAddMoveAction.setOnClickListener {
             val value = binding.etTheShiftDistance.text.toString()
-            val coordinate1 = binding.spinner.selectedItem.toString()
 
-            var coordinate = Coordinate.X
-            when(coordinate1){
-                    "X"-> coordinate = Coordinate.X
-                    "Y"-> coordinate = Coordinate.Y
-                    "Z"-> coordinate = Coordinate.Z
-                    "DX"-> coordinate = Coordinate.DX
-                    "DY"-> coordinate = Coordinate.DY
-                    "DZ"-> coordinate = Coordinate.DZ
-            }
+            val coordinate = getCoordinate()
 
             if (value == ""){
                 Toast.makeText(activity, "Введите значение перемещения", Toast.LENGTH_LONG).show()
             } else{
-                if(position == -1){
-                    viewModel.programList.value?.add(Move(coordinate, value.toFloat()))
-                } else{
-                    viewModel.programList.value?.set(position, Move(coordinate, value.toFloat()))
-                }
-
+                addOrChangeValue(Move(coordinate, value.toFloat()))
                 findNavController().popBackStack()
             }
         }
     }
+
+        private fun getCoordinate(): Coordinate =
+                when(binding.spCoordinate.selectedItem.toString()){
+                    "X"-> Coordinate.X
+                    "Y"-> Coordinate.Y
+                    "Z"-> Coordinate.Z
+                    "DX"-> Coordinate.DX
+                    "DY"-> Coordinate.DY
+                    "DZ"-> Coordinate.DZ
+                    else -> Coordinate.X
+                }
+
+        private fun addOrChangeValue(move: Move){
+            if(position == -1){
+                viewModel.programList.value?.add(move)
+            } else{
+                viewModel.programList.value?.set(position, move)
+            }
+        }
 
     companion object {
         /**
