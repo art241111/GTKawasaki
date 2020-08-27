@@ -109,7 +109,7 @@ class AddMovingToPointFragment : Fragment() {
 
     private fun setAddButtonListener() {
         binding.bSaveCommand.setOnClickListener {
-            createPoint(getTypeOfMoment())
+            createMovingToPointCommand(getTypeOfMoment())
         }
     }
         private fun getTypeOfMoment(): TypesOfMovementToThePoint{
@@ -121,7 +121,7 @@ class AddMovingToPointFragment : Fragment() {
                     }
         }
 
-        private fun createPoint(typeOfMovement: TypesOfMovementToThePoint){
+        private fun createMovingToPointCommand(typeOfMovement: TypesOfMovementToThePoint){
             val spinnerPosition = binding.spChoosePoint.selectedItemPosition
             if(spinnerPosition == -1){
                 Toast.makeText(activity as MainActivity,
