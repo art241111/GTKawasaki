@@ -24,7 +24,20 @@ class AddPointsFragment : Fragment() {
     private lateinit var binding: FragmentAddPointsBinding
     private lateinit var viewModel: RobotViewModel
 
+    // Edit flag. If equal to -1, then new created
     private var position = -1
+
+    /**
+     * Get position value
+     */
+    override fun onCreate(savedInstanceState: Bundle?) {
+        arguments?.let {
+            val key: String? = "position"
+            position = it.getInt(key)
+        }
+
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,13 +60,6 @@ class AddPointsFragment : Fragment() {
     }
 
     private fun loadInformation() {
-        position = -1
-
-        arguments?.let {
-            val key: String? = "position"
-            position = it.getInt(key)
-        }
-
         if(position != -1){
             binding.etPointName.text?.append((viewModel.pointList.value?.get(position)?.name))
         }
