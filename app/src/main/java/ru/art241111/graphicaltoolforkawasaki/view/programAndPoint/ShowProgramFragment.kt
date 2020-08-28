@@ -33,7 +33,6 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
     private lateinit var binding: FragmentShowProgramBinding
     private lateinit var viewModel: RobotViewModel
 
-
     private var preferences: SharedPreferences? = null
     private lateinit var customizationCommandRecyclerView: CustomizationCommandRecyclerView
 
@@ -52,10 +51,8 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
         }
     }
 
-    override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         // Create viewModel
         viewModel = ViewModelProvider(activity as MainActivity).get(RobotViewModel::class.java)
 
@@ -75,52 +72,27 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
 
         getProgramFromSharedPreferences()
 
-
         return binding.root
     }
 
     private fun getProgramFromSharedPreferences() {
-        preferences = this.activity
-                ?.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
-
-        if(viewModel.programList.value!!.isEmpty()){
-            if(preferences != null){
-                viewModel.programList.value = getFromSharedPreferences(APP_PREFERENCES_NAME, viewModel.programList.value!!)
-            }
-        }
-    }
-
-    private fun getFromSharedPreferences(key: String,
-                                         defaultValue: MutableList<RobotCommands>): MutableList<RobotCommands>? {
-        if(preferences!!.contains(key)) {
-            preferences!!.getStringSet(key, mutableSetOf())?.toMutableList() ?: defaultValue
-
-        } else {
-            updateSharedPreferences(key, defaultValue)
-
-            defaultValue
-        }
-        return defaultValue
-    }
-
-    private fun updateSharedPreferences(preferencesKey: String, newValue: MutableList<RobotCommands>) {
-        if(preferences != null){
-            val editor: SharedPreferences.Editor = preferences!!.edit()
-//            editor.putStringSet(preferencesKey, newValue.toSet())
-            editor.apply()
-        }
+//        preferences = this.activity
+//                ?.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+//
+//        if(viewModel.programList.value!!.isEmpty()){
+//            if(preferences != null){
+//                viewModel.programList.value = getFromSharedPreferences(APP_PREFERENCES_NAME, viewModel.programList.value!!)
+//            }
+//        }
     }
 
     override fun onDestroyView() {
-        updateSharedPreferences(APP_PREFERENCES_NAME, viewModel.programList.value!!)
+//        updateSharedPreferences(APP_PREFERENCES_NAME, viewModel.programList.value!!)
         super.onDestroyView()
     }
 
     private fun setButtonListener() {
         binding.ibAddProgram.setOnClickListener {
-            if(viewModel.programList.value == null)
-                viewModel.programList.value = arrayListOf()
-
             showPopup(it)
         }
     }
@@ -144,7 +116,6 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
             customizationCommandRecyclerView.updateItems()
             true
         }
-
         popup.show()
     }
 
@@ -155,7 +126,6 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
          *
          * @return A new instance of fragment ShowProgramFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() = ShowProgramFragment().apply {}
     }
