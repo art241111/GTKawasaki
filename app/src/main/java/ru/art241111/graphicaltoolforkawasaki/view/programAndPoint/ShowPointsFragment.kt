@@ -47,11 +47,9 @@ class ShowPointsFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick 
         updateItems()
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        savedInstanceState: Bundle?): View? {
         // Create viewModel
         viewModel = ViewModelProvider(activity as MainActivity).get(RobotViewModel::class.java)
 
@@ -60,7 +58,7 @@ class ShowPointsFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick 
             R.layout.fragment_show_points, container, false)
         binding.executePendingBindings()
 
-        setButtonListener()
+        setAddPointButtonListener()
 
         // Customization RecycleView: set layoutManager, adapter, data.
         customizationRecycleView()
@@ -81,26 +79,6 @@ class ShowPointsFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick 
         }
     }
 
-    private fun getFromSharedPreferences(key:String,
-                                         defaultValue: MutableList<String>): MutableList<String>? {
-        return if(preferences!!.contains(key)) {
-            preferences!!.getStringSet(key, mutableSetOf())?.toMutableList() ?: defaultValue
-
-        } else {
-            updateSharedPreferences(key,defaultValue)
-
-            defaultValue
-        }
-    }
-
-    private fun updateSharedPreferences(preferencesKey: String, newValue: MutableList<String>) {
-        if(preferences != null){
-            val editor: SharedPreferences.Editor = preferences!!.edit()
-            editor.putStringSet(preferencesKey, newValue.toSet())
-            editor.apply()
-        }
-    }
-
     private fun customizationRecycleView() {
         pointRecyclerView = PointsRecyclerViewAdapter(arrayListOf(), this, this)
 
@@ -110,7 +88,7 @@ class ShowPointsFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick 
         updateItems()
     }
 
-    private fun setButtonListener() {
+    private fun setAddPointButtonListener() {
         binding.ibAddNewPoint.setOnClickListener {
             findNavController().navigate(R.id.addPointsFragment)
         }
@@ -127,7 +105,6 @@ class ShowPointsFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick 
 //        updateSharedPreferences(APP_PREFERENCES_NAME, viewModel.pointList.value!!)
         super.onDestroyView()
     }
-
 
     companion object {
         /**
