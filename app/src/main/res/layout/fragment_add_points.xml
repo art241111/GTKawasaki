@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="Добавление новой точки"
+            android:text="@string/add_new_point"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
                 android:id="@+id/et_point_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Название точки"
+                android:hint="@string/point_name"
                 android:selectAllOnFocus="true"
                 android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="Добавить точку"
+            android:text="@string/add_point"
             app:cornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
@@ -54,7 +54,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView7"
-            android:name="ru.art241111.graphicaltoolforkawasaki.view.controlElements.ArrowControlsFragment"
+            android:name="ru.art241111.gt_kawasaki.view.controlElements.ArrowControlsFragment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +65,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView8"
-            android:name="ru.art241111.graphicaltoolforkawasaki.view.controlElements.ControlPanel"
+            android:name="ru.art241111.gt_kawasaki.view.controlElements.ControlPanel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"

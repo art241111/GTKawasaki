@@ -45,7 +45,7 @@
 
                             <androidx.fragment.app.FragmentContainerView
                                 android:id="@+id/fragmentContainerView10"
-                                android:name="ru.art241111.graphicaltoolforkawasaki.view.programAndPoint.ShowProgramFragment"
+                                android:name="ru.art241111.gt_kawasaki.view.programAndPoint.ShowProgramFragment"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 tools:layout="@layout/fragment_show_program" />
@@ -64,7 +64,7 @@
 
                             <androidx.fragment.app.FragmentContainerView
                                 android:id="@+id/fragmentContainerView2"
-                                android:name="ru.art241111.graphicaltoolforkawasaki.view.programAndPoint.ShowPointsFragment"
+                                android:name="ru.art241111.gt_kawasaki.view.programAndPoint.ShowPointsFragment"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"

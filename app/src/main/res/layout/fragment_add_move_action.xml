@@ -6,8 +6,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/textView4"
@@ -15,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
-            android:text="Введите расстояние, на которое нужно переместиться"
+            android:text="@string/enter_distance_to_move"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sp_coordinate" />
 
@@ -24,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Создание MOVE"
+            android:text="@string/creating_move_command"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +56,7 @@
                 android:id="@+id/et_the_shift_distance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Перемещение"
+                android:hint="@string/distance_to_be_moved"
                 android:inputType="number|numberDecimal"
                 android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -68,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
-            android:text="Выберите направления перемещения:"
+            android:text="@string/select_the_direction_to_move"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_move" />
 
@@ -77,11 +76,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Создать действие"
+            android:text="@string/create_command"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

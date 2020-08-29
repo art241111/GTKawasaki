@@ -1,8 +1,35 @@
 <resources>
     <string name="app_name" translatable="false">GT Kawasaki</string>
 
+    // Text for create command button
     <string name="change_command">Change command</string>
     <string name="create_command">Create command</string>
+
+    // Move command
+    <string name="enter_distance_to_move">Enter the distance to move</string>
+    <string name="creating_move_command">Creating the MOVE command</string>
+    <string name="distance_to_be_moved">The distance to be moved</string>
+
+    // Move to point command
+    <string name="select_the_direction_to_move">Select the direction to move</string>
+    <string name="select_type_of_movement">Select type of movement</string>
+    <string name="choose_point_to_move_to">Choose point to move to</string>
+    <string name="moving_to_the_point">Moving to the point</string>
+
+    // Create new point
+    <string name="add_new_point">Add new point</string>
+    <string name="point_name">Point name</string>
+    <string name="add_point">Add point</string>
+
+    // Control panel
+    <string name="connection">Connection</string>
+    <string name="run">Run</string>
+
+    // Create connection
+    <string name="ip_address">Ip address</string>
+    <string name="port">Port</string>
+    <string name="connect_to_the_robot">Connect to the robot</string>
+    <string name="connection_to_the_robot">Connection to the robot</string>
 
     <string-array name="coordinateOptions" translatable="false">
         <item>X</item>

@@ -7,12 +7,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView"
-            android:name="ru.art241111.graphicaltoolforkawasaki.view.ArrowControlsFragmentXYZ"
+            android:name="ru.art241111.gt_kawasaki.view.ArrowControlsFragmentXYZ"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
@@ -23,7 +22,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView2"
-            android:name="ru.art241111.graphicaltoolforkawasaki.view.ArrowControlsDxDyDzFragment"
+            android:name="ru.art241111.gt_kawasaki.view.ArrowControlsDxDyDzFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -34,7 +33,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView5"
-            android:name="ru.art241111.graphicaltoolforkawasaki.view.BottomControlXYZFragment"
+            android:name="ru.art241111.gt_kawasaki.view.BottomControlXYZFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -45,7 +44,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView6"
-            android:name="ru.art241111.graphicaltoolforkawasaki.view.BottomControlDxDyDzFragment"
+            android:name="ru.art241111.gt_kawasaki.view.BottomControlDxDyDzFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -53,5 +52,4 @@
             app:layout_constraintTop_toTopOf="@+id/fragmentContainerView5"
             tools:layout="@layout/fragment_bottom_control_dxdydz" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

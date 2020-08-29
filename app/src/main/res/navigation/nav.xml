@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/dataForLinkFragment"
-        android:name="ru.art241111.graphicaltoolforkawasaki.view.linkFragment.DataForLinkFragment"
+        android:name="ru.art241111.gt_kawasaki.view.linkFragment.DataForLinkFragment"
         android:label="fragment_data_for_link"
         tools:layout="@layout/fragment_data_for_link" />
     <fragment
         android:id="@+id/mainScreenFragment"
-        android:name="ru.art241111.graphicaltoolforkawasaki.view.MainScreenFragment"
+        android:name="ru.art241111.gt_kawasaki.view.MainScreenFragment"
         android:label="fragment_main_screen"
         tools:layout="@layout/fragment_main_screen" >
         <action
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/addPointsFragment"
-        android:name="ru.art241111.graphicaltoolforkawasaki.view.addElements.AddPointsFragment"
+        android:name="ru.art241111.gt_kawasaki.view.addElements.AddPointsFragment"
         android:label="fragment_add_points"
         tools:layout="@layout/fragment_add_points" >
         <argument
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/showPointsFragment"
-        android:name="ru.art241111.graphicaltoolforkawasaki.view.programAndPoint.ShowPointsFragment"
+        android:name="ru.art241111.gt_kawasaki.view.programAndPoint.ShowPointsFragment"
         android:label="fragment_show_points"
         tools:layout="@layout/fragment_show_points" >
         <action
@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/showProgramFragment"
-        android:name="ru.art241111.graphicaltoolforkawasaki.view.programAndPoint.ShowProgramFragment"
+        android:name="ru.art241111.gt_kawasaki.view.programAndPoint.ShowProgramFragment"
         android:label="fragment_show_program"
         tools:layout="@layout/fragment_show_program" >
         <action
@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/addMoveActionFragment"
-        android:name="ru.art241111.graphicaltoolforkawasaki.view.addElements.AddMoveActionFragment"
+        android:name="ru.art241111.gt_kawasaki.view.addElements.AddMoveActionFragment"
         android:label="fragment_add_move_action"
         tools:layout="@layout/fragment_add_move_action" >
         <argument
@@ -62,12 +62,24 @@
     </fragment>
     <fragment
         android:id="@+id/addMovingToPointFragment"
-        android:name="ru.art241111.graphicaltoolforkawasaki.view.addElements.AddMovingToPointFragment"
+        android:name="ru.art241111.gt_kawasaki.view.addElements.AddMovingToPointFragment"
         android:label="fragment_add_moving_to_point"
         tools:layout="@layout/fragment_add_moving_to_point" >
         <argument
             android:name="position"
             app:argType="integer"
             android:defaultValue="-1" />
+    </fragment>
+    <fragment
+        android:id="@+id/programAndPointFragment"
+        android:name="ru.art241111.gt_kawasaki.view.programAndPoint.ProgramAndPointFragment"
+        android:label="fragment_program_and_point"
+        tools:layout="@layout/fragment_program_and_point" >
+        <action
+            android:id="@+id/action_programAndPointFragment_to_showProgramFragment"
+            app:destination="@id/showProgramFragment" />
+        <action
+            android:id="@+id/action_programAndPointFragment_to_showPointsFragment"
+            app:destination="@id/showPointsFragment" />
     </fragment>
 </navigation>

@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    // Text for create command button
     <string name="change_command">Изменить комманду</string>
     <string name="create_command">Создать комманду</string>
+
+    // Move command
+    <string name="enter_distance_to_move">Введите расстояние, на которое нужно переместиться</string>
+    <string name="creating_move_command">Создание команды MOVE</string>
+    <string name="distance_to_be_moved">Расстояния для перемещения</string>
+
+    // Move to point command
+    <string name="select_the_direction_to_move">Выберите направления перемещения:</string>
+    <string name="select_type_of_movement">Выберите тип движения</string>
+    <string name="choose_point_to_move_to">Выберите точку для перемещения</string>
+    <string name="moving_to_the_point">Перемещение в точку</string>
+
+    // Create new point
+    <string name="add_new_point">Добавление новой точки</string>
+    <string name="point_name">Название точки</string>
+    <string name="add_point">Добавить точку</string>
+
+    // Control panel
+    <string name="connection">Подключение</string>
+    <string name="run">Старт</string>
+
+    // Create connection
+    <string name="ip_address">Ip адресс</string>
+    <string name="port">Порт</string>
+    <string name="connect_to_the_robot">Подключиться к роботу</string>
+    <string name="connection_to_the_robot">Подключение к роботу</string>
 
     <string-array name="typeOfMovement">
         <item>По осям</item>
