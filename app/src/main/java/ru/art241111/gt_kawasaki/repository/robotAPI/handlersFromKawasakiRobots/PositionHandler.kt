@@ -6,19 +6,29 @@ import java.lang.Exception
 /**
  * Class that tracks changes in position
  */
-class PositionHandler(private val robotEntity: RobotEntity) {
-    fun listener(command: String){
+class PositionHandler(): Handler {
+    val pointCommandCame:MutableList<MethodWorkWhenCommandReceived> = mutableListOf()
+
+    override fun listener(command: String, robotEntity: RobotEntity){
         if (command.substringBefore(";").trim() == "POINT"){
-            val position: MutableList<Float> = mutableListOf()
             val positions = command.substringAfter(";")
 
-            positions.split(";").map {
-                try {
-                    position.add(it.trim().toFloat())
-                } catch (e: Exception){
-                }
+            robotEntity.position = getFlatArrayFromString(positions)
+
+            pointCommandCame.forEach {
+                it.runMethodWhenHandlerWork()
             }
-            robotEntity.position = position
         }
+    }
+
+    private fun getFlatArrayFromString(position: String):MutableList<Float>{
+        val returnPosition: MutableList<Float> = mutableListOf()
+        position.split(";").forEach {
+            try {
+                returnPosition.add(it.trim().toFloat())
+            } catch (e: Exception){
+            }
+        }
+        return returnPosition
     }
 }

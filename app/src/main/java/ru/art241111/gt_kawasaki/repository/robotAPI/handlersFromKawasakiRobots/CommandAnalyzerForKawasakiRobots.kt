@@ -7,8 +7,11 @@ class CommandAnalyzerForKawasakiRobots(private var robotEntity: RobotEntity): An
     /**
      * Class that tracks incoming commands
      */
-    override fun commandAnalysis(command: String){
+    override fun commandAnalysis(command: String, handlers: List<Handler>){
         // Position processing
-        PositionHandler(robotEntity).listener(command)
+        handlers.forEach {
+            it.listener(command = command,
+                        robotEntity = robotEntity)
+        }
     }
 }

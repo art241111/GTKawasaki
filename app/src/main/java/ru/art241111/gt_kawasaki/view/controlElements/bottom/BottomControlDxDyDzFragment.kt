@@ -1,6 +1,7 @@
 package ru.art241111.gt_kawasaki.view.controlElements.bottom
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import ru.art241111.gt_kawasaki.MainActivity
 import ru.art241111.gt_kawasaki.R
 import ru.art241111.gt_kawasaki.databinding.FragmentBottomControlDxdydzBinding
 import ru.art241111.gt_kawasaki.repository.RepositoryForRobotApi
+import ru.art241111.gt_kawasaki.repository.robotAPI.handlersFromKawasakiRobots.MethodWorkWhenCommandReceived
 import ru.art241111.gt_kawasaki.view.util.AmountOfMovement
 import ru.art241111.gt_kawasaki.view.util.Buttons
 import ru.art241111.gt_kawasaki.view.util.WhenButtonHold
@@ -21,7 +23,7 @@ import ru.art241111.gt_kawasaki.viewModel.RobotViewModel
  * Use the [BottomControlDxDyDzFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class BottomControlDxDyDzFragment : Fragment() {
+class BottomControlDxDyDzFragment : Fragment(), MethodWorkWhenCommandReceived {
     private lateinit var binding: FragmentBottomControlDxdydzBinding
     private lateinit var viewModel: RobotViewModel
 
@@ -42,7 +44,21 @@ class BottomControlDxDyDzFragment : Fragment() {
         // Create buttonPressedListener and set it
         setClickListeners()
 
+        setUpdateMethod()
+        
         return binding.root
+    }
+
+    private fun setUpdateMethod() {
+        viewModel.robot.addMethodAtPointHandler(this)
+    }
+
+    /**
+     * Метод срабатывает, когда приходят новые координаты
+     */
+    override fun runMethodWhenHandlerWork() {
+        Log.d("new_coordinate", "bottomControlXYZFragment - new value")
+        TODO("Not yet implemented")
     }
 
     private fun setClickListeners() {

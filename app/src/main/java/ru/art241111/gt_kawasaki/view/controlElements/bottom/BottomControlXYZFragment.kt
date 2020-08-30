@@ -1,6 +1,7 @@
 package ru.art241111.gt_kawasaki.view.controlElements.bottom
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import ru.art241111.gt_kawasaki.MainActivity
 import ru.art241111.gt_kawasaki.R
 import ru.art241111.gt_kawasaki.databinding.FragmentBottomControlXyzBinding
 import ru.art241111.gt_kawasaki.repository.RepositoryForRobotApi
+import ru.art241111.gt_kawasaki.repository.robotAPI.handlersFromKawasakiRobots.MethodWorkWhenCommandReceived
 import ru.art241111.gt_kawasaki.view.util.AmountOfMovement
 import ru.art241111.gt_kawasaki.view.util.Buttons
 import ru.art241111.gt_kawasaki.view.util.WhenButtonHold
@@ -21,13 +23,15 @@ import ru.art241111.gt_kawasaki.viewModel.RobotViewModel
  * Use the [BottomControlXYZFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class BottomControlXYZFragment : Fragment() {
+class BottomControlXYZFragment : Fragment(), MethodWorkWhenCommandReceived {
     private lateinit var binding: FragmentBottomControlXyzBinding
     private lateinit var viewModel: RobotViewModel
 
     private lateinit var repositoryForRobotApi: RepositoryForRobotApi
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         // Create viewModel
         viewModel = ViewModelProvider(activity as MainActivity).get(RobotViewModel::class.java)
 
@@ -41,7 +45,21 @@ class BottomControlXYZFragment : Fragment() {
         // Create buttonPressedListener and set it
         setClickListeners()
 
+        setUpdateMethod()
+
         return binding.root
+    }
+
+    private fun setUpdateMethod() {
+        viewModel.robot.addMethodAtPointHandler(this)
+    }
+
+    /**
+     * Метод срабатывает, когда приходят новые координаты
+     */
+    override fun runMethodWhenHandlerWork() {
+        Log.d("new_coordinate", "bottomControlXYZFragment - new value")
+        TODO("Not yet implemented")
     }
 
     private fun setClickListeners() {

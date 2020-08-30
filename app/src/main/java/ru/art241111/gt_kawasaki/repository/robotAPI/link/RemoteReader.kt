@@ -2,6 +2,7 @@ package ru.art241111.gt_kawasaki.repository.robotAPI.link
 
 import link.protocols.Analyzer
 import ru.art241111.gt_kawasaki.repository.robotAPI.RobotEntity
+import ru.art241111.gt_kawasaki.repository.robotAPI.handlersFromKawasakiRobots.PositionHandler
 import java.util.*
 import kotlin.concurrent.thread
 
@@ -27,10 +28,12 @@ class RemoteReader(private val robotEntity: RobotEntity) {
         connection = false
     }
 
+    val positionHandler = PositionHandler()
     private fun startTrackingInputString(analyzer: Analyzer, reader: Scanner){
         while (connection){
             try {
-                analyzer.commandAnalysis(reader.nextLine().trim())
+                analyzer.commandAnalysis(command = reader.nextLine().trim(),
+                                         handlers = listOf(positionHandler))
             }catch (e: NoSuchElementException) {
                 // TODO: Migrate to log
                 println("Problem with reading")

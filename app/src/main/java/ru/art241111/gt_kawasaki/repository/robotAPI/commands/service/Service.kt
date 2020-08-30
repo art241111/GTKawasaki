@@ -3,6 +3,7 @@ package kawasakiRobots.utils
 import kawasakiRobots.commands.service.ServiceCommand.*
 import link.State
 import ru.art241111.gt_kawasaki.repository.robotAPI.RobotEntity
+import ru.art241111.gt_kawasaki.repository.robotAPI.handlersFromKawasakiRobots.MethodWorkWhenCommandReceived
 
 class Service(private var robotEntity: RobotEntity) {
     /**
@@ -40,4 +41,15 @@ class Service(private var robotEntity: RobotEntity) {
      */
     fun updateInfoAboutPosition() = robotEntity.writer
             .sendCommand(ROBOT_POSITION.command)
+
+    /**
+     * TODO: Rename method
+     */
+    fun addMethodToPositionHandler(method: MethodWorkWhenCommandReceived){
+        robotEntity.reader.positionHandler.pointCommandCame.add(method)
+    }
+
+    fun removeMethodToPositionHandler(method: MethodWorkWhenCommandReceived){
+        robotEntity.reader.positionHandler.pointCommandCame.remove(method)
+    }
 }

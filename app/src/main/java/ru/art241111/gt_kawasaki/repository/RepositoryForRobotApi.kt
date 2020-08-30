@@ -2,6 +2,7 @@ package ru.art241111.gt_kawasaki.repository
 
 import ru.art241111.gt_kawasaki.repository.enities.*
 import ru.art241111.gt_kawasaki.repository.robotAPI.KawasakiRobot
+import ru.art241111.gt_kawasaki.repository.robotAPI.handlersFromKawasakiRobots.MethodWorkWhenCommandReceived
 import kotlin.concurrent.thread
 
 class RepositoryForRobotApi {
@@ -106,5 +107,13 @@ class RepositoryForRobotApi {
         thread {
            sendCommandsUtils.sendCommands(commands)
         }
+    }
+
+    fun addMethodAtPointHandler(method: MethodWorkWhenCommandReceived){
+        robot.service.addMethodToPositionHandler(method)
+    }
+
+    fun removeMethodAtPointHandler(method: MethodWorkWhenCommandReceived){
+        robot.service.removeMethodToPositionHandler(method)
     }
 }
