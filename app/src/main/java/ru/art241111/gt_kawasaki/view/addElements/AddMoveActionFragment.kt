@@ -87,7 +87,7 @@ class AddMoveActionFragment : Fragment() {
             val coordinate = getCoordinate()
 
             if (value == ""){
-                Toast.makeText(activity, "Введите значение перемещения", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, R.string.enter_distance_to_move, Toast.LENGTH_LONG).show()
             } else{
                 addOrChangeValue(Move(coordinate, value.toFloat()))
                 hideKeyboard()

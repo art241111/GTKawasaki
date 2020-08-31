@@ -70,7 +70,7 @@ class DataForLinkFragment : Fragment() {
                 hideKeyboard()
                 findNavController().popBackStack()
             } else{
-                Toast.makeText(activity as MainActivity, "Подключение не удалось", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity as MainActivity, R.string.connection_is_failed, Toast.LENGTH_LONG).show()
             }
         }
     }

@@ -81,7 +81,7 @@ class AddPointsFragment : Fragment() {
                 hideKeyboard()
                 findNavController().popBackStack()
             } else{
-                Toast.makeText(activity,"Вы не ввели значения", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity,R.string.do_not_enter_value, Toast.LENGTH_LONG).show()
             }
         }
     }

@@ -126,7 +126,7 @@ class AddMovingToPointFragment : Fragment() {
             val spinnerPosition = binding.spChoosePoint.selectedItemPosition
             if(spinnerPosition == -1){
                 Toast.makeText(activity as MainActivity,
-                        "Чтобы использовать данную команду - нужно создать точку",
+                        R.string.create_point_if_you_want_use_move_to_point,
                         Toast.LENGTH_LONG).show()
             } else{
                 val robotPosition = viewModel.pointList.value?.get(spinnerPosition)
