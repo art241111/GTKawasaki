@@ -118,11 +118,6 @@ class ShowPointsFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick 
             })
     }
 
-    override fun onDestroyView() {
-//        updateSharedPreferences(APP_PREFERENCES_NAME, viewModel.pointList.value!!)
-        super.onDestroyView()
-    }
-
     companion object {
         /**
          * Use this factory method to create a new instance of
