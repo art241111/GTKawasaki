@@ -3,15 +3,14 @@
 
     <item
         android:id="@+id/moveAction"
-        android:title="MOVE" />
+        android:title="@string/command_move" />
     <item
         android:id="@+id/closeGripper"
-        android:title="Закрыть захват" />
+        android:title="@string/command_gripper_close" />
     <item
         android:id="@+id/openGripper"
-        android:title="Открыть захват" />
+        android:title="@string/command_gripper_open" />
     <item
         android:id="@+id/moveToPointAction"
-        android:title="Перемещение в точку" />
-
+        android:title="@string/command_move_to_point" />
 </menu>
