@@ -50,6 +50,11 @@
     // Position text
     <string name="point_coordinate">Coordinates of the point:</string>
 
+    // Programming and point tab host
+    <string name="programming_tab">Programming</string>
+    <string name="create_points_tab">Creating points</string>
+
+    // Coordinate type
     <string-array name="coordinateOptions" translatable="false">
         <item>X</item>
         <item>Y</item>
@@ -59,6 +64,7 @@
         <item>DZ</item>
     </string-array>
 
+    // Type of movement
     <string-array name="typeOfMovement">
         <item>On axes</item>
         <item>Linearly</item>

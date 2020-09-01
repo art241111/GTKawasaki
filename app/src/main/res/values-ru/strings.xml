@@ -45,8 +45,14 @@
     // Position text
     <string name="point_coordinate">Координаты точки: </string>
 
+    // Programming and point tab host
+    <string name="programming_tab">Программирование</string>
+    <string name="create_points_tab">Создание точек</string>
+
     // Any
     <string name="do_not_enter_value">Вы не ввели значение</string>
+
+    // Type of movement
     <string-array name="typeOfMovement">
         <item>По осям</item>
         <item>Линейно</item>

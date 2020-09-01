@@ -53,12 +53,12 @@ class ProgramAndPointFragment : Fragment() {
 
         var tabSpec =  tabHost.newTabSpec("tabProgramming")
         tabSpec.setContent(binding.tabProgramming.id)
-        tabSpec.setIndicator("Программирование")
+        tabSpec.setIndicator(resources.getText(R.string.programming_tab))
         tabHost.addTab(tabSpec)
 
         tabSpec = tabHost.newTabSpec("tabCreatePoints")
         tabSpec.setContent(binding.tabCreatePoints.id)
-        tabSpec.setIndicator("Задание точек")
+        tabSpec.setIndicator(resources.getText(R.string.create_points_tab))
         tabHost.addTab(tabSpec)
 
         tabHost.currentTab = tabHostPosition
