@@ -55,15 +55,22 @@ class DataForLinkFragment : Fragment() {
     private fun loadIpAndPortFromSharedPreferences() {
         preferences = SharedPreferencesHelperForString(activity as MainActivity,
                                                                       APP_PREFERENCES)
-        binding.defaultIp = preferences.load(APP_PREFERENCES_IP)
-        binding.defaultPort = preferences.load(APP_PREFERENCES_PORT)
+        val ipFromSP = preferences.load(APP_PREFERENCES_IP)
+        if(ipFromSP == ""){
+            binding.defaultIp = ip
+        } else binding.defaultIp = ipFromSP
+
+
+        val portFromSP = preferences.load(APP_PREFERENCES_PORT)
+        if(portFromSP == ""){
+            binding.defaultPort  = port
+        } else binding.defaultPort  = portFromSP
     }
 
     private fun setButtonListener() {
         binding.bConnect.setOnClickListener {
             ip = preferences.update(ip, binding.etIp.text.toString(), APP_PREFERENCES_IP)
             port = preferences.update(port, binding.etPort.text.toString(), APP_PREFERENCES_PORT)
-
             clearFocus()
 
             if(viewModel.createConnection(ip, port.toInt())){
