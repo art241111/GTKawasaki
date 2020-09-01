@@ -8,3 +8,15 @@ enum class Coordinate {
     DY,
     DZ
 }
+
+fun String.getCoordinate(): Coordinate{
+    return when(this){
+        "X" -> Coordinate.X
+        "Y" -> Coordinate.Y
+        "Z" -> Coordinate.Z
+        "DX" -> Coordinate.DX
+        "DY" -> Coordinate.DY
+        "DZ" -> Coordinate.DZ
+        else -> Coordinate.X
+    }
+}

@@ -3,6 +3,7 @@ package ru.art241111.gt_kawasaki.utils.sharedPreferences
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import ru.art241111.gt_kawasaki.utils.sharedPreferences.protocols.LoadFromSharedPreferences
 import ru.art241111.gt_kawasaki.utils.sharedPreferences.protocols.SaveSharedPreferences
 import ru.art241111.gt_kawasaki.utils.sharedPreferences.protocols.UpdateSharedPreferences
@@ -21,6 +22,7 @@ class SharedPreferencesHelperForString( activity: Activity, sharedPreferences: S
     }
 
     fun save(preferencesKey: String, newValue: String) {
+        Log.d("debugCommands", newValue)
         val editor: SharedPreferences.Editor = preferences.edit()
         editor.putString(preferencesKey, newValue)
         editor.apply()

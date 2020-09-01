@@ -21,4 +21,6 @@ class SharedPreferencesHelperForJSON(activity: Activity, sharedPreferences: Stri
 
     fun load(preferencesKey: String): JSONArray =
         JSONArray(preferences.getString(preferencesKey, ""))
+
+
 }

@@ -52,4 +52,6 @@ dependencies {
     // RxJava3
     implementation "io.reactivex.rxjava3:rxjava:3.0.5"
 
+    // Gson
+    implementation 'com.google.code.gson:gson:2.8.5'
 }

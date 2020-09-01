@@ -17,6 +17,8 @@ import ru.art241111.gt_kawasaki.configuringRv.adapters.protocols.OnDeleteButtonC
 import ru.art241111.gt_kawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.gt_kawasaki.databinding.FragmentShowProgramBinding
 import ru.art241111.gt_kawasaki.repository.enities.*
+import ru.art241111.gt_kawasaki.utils.JsonHelper
+import ru.art241111.gt_kawasaki.utils.sharedPreferences.SharedPreferencesHelperForString
 import ru.art241111.gt_kawasaki.view.util.CustomizationCommandRecyclerView
 import ru.art241111.gt_kawasaki.viewModel.RobotViewModel
 
@@ -32,7 +34,9 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
     private lateinit var binding: FragmentShowProgramBinding
     private lateinit var viewModel: RobotViewModel
 
-    private var preferences: SharedPreferences? = null
+    private lateinit var preferences: SharedPreferencesHelperForString
+    private val jsonHelper = JsonHelper()
+
     private lateinit var customizationCommandRecyclerView: CustomizationCommandRecyclerView
 
     override fun onDeleteButtonClick(position: Int) {
@@ -75,18 +79,19 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
     }
 
     private fun getProgramFromSharedPreferences() {
-//        preferences = this.activity
-//                ?.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
-//
-//        if(viewModel.programList.value!!.isEmpty()){
-//            if(preferences != null){
-//                viewModel.programList.value = getFromSharedPreferences(APP_PREFERENCES_NAME, viewModel.programList.value!!)
-//            }
-//        }
+
+        if(viewModel.programList.value!!.isEmpty()){
+            preferences = SharedPreferencesHelperForString(activity as MainActivity,"COMMAND")
+
+            val oldCommands = jsonHelper.jsonArrayToRobotCommands(preferences.load("Command9"))
+            viewModel.programList.value?.addAll(oldCommands)
+        } else{
+            preferences.save("Command9",jsonHelper.robotCommandsArrayToJsonString(viewModel.programList.value!!))
+        }
     }
 
     override fun onDestroyView() {
-//        updateSharedPreferences(APP_PREFERENCES_NAME, viewModel.programList.value!!)
+        preferences.save("Command9",jsonHelper.robotCommandsArrayToJsonString(viewModel.programList.value!!))
         super.onDestroyView()
     }
 
