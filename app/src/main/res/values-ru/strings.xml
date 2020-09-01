@@ -31,7 +31,16 @@
     <string name="port">Порт</string>
     <string name="connect_to_the_robot">Подключиться к роботу</string>
     <string name="connection_to_the_robot">Подключение к роботу</string>
-    <string name="connection_is_failed">"Подключение не удалось"</string>
+    <string name="connection_is_failed">Подключение не удалось</string>
+
+    // Commands text
+    <string name="command_gripper_open">Открыть захват</string>
+    <string name="command_gripper_close">Закрыть захват</string>
+    <string name="command_move">Перемещение по оси</string>
+    <string name="command_move_value">на</string>
+    <string name="command_move_to_point">Перемещение в точку </string>
+    <string name="command_move_to_point_with_coordinate">с координатами.</string>
+    <string name="command_move_to_point_type">Тип движения: </string>
 
     // Any
     <string name="do_not_enter_value">Вы не ввели значение</string>

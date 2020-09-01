@@ -1,6 +1,5 @@
 package ru.art241111.gt_kawasaki.view.programAndPoint
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -19,7 +18,6 @@ import ru.art241111.gt_kawasaki.databinding.FragmentShowProgramBinding
 import ru.art241111.gt_kawasaki.repository.enities.*
 import ru.art241111.gt_kawasaki.utils.JsonHelper
 import ru.art241111.gt_kawasaki.utils.sharedPreferences.SharedPreferencesHelperForString
-import ru.art241111.gt_kawasaki.view.util.CustomizationCommandRecyclerView
 import ru.art241111.gt_kawasaki.viewModel.RobotViewModel
 
 
@@ -72,7 +70,7 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
                 activity as MainActivity,
                 viewModel.programList,
                 this,
-                this)
+                this, resources)
 
         getProgramFromSharedPreferences()
 

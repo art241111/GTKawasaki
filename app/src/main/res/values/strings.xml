@@ -36,7 +36,16 @@
     <string name="connection_is_failed">Connection is failed</string>
 
     // Any
-    <string name="do_not_enter_value">Вы не ввели значение</string>
+    <string name="do_not_enter_value">You did not enter a value</string>
+
+    // Commands text
+    <string name="command_gripper_open">To open the gripper</string>
+    <string name="command_gripper_close">To close the gripper</string>
+    <string name="command_move">Moving along the axis</string>
+    <string name="command_move_value">on</string>
+    <string name="command_move_to_point">Moving to a point</string>
+    <string name="command_move_to_point_with_coordinate">with coordinates</string>
+    <string name="command_move_to_point_type">Type of movement:</string>
 
     <string-array name="coordinateOptions" translatable="false">
         <item>X</item>

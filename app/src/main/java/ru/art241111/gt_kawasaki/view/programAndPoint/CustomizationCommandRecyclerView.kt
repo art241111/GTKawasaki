@@ -1,5 +1,6 @@
-package ru.art241111.gt_kawasaki.view.util
+package ru.art241111.gt_kawasaki.view.programAndPoint
 
+import android.content.res.Resources
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,12 +31,13 @@ class CustomizationCommandRecyclerView(recyclerView: RecyclerView,
                                        private val activity: MainActivity,
                                        private val list: MutableLiveData<MutableList<RobotCommands>>,
                                        onItemClickListener: OnItemClickListener,
-                                       onDeleteButtonClick: OnDeleteButtonClick): ItemTouchHelperAdapter {
+                                       onDeleteButtonClick: OnDeleteButtonClick,
+                                       private val resources: Resources): ItemTouchHelperAdapter {
 
     private var programRecyclerView: ProgramRecyclerViewAdapter
             = ProgramRecyclerViewAdapter(arrayListOf(),
                                          onItemClickListener,
-                                         onDeleteButtonClick, this)
+                                         onDeleteButtonClick, this, resources)
 
     init {
         recyclerView.layoutManager = LinearLayoutManager(activity)
