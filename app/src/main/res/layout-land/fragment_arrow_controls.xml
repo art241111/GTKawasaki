@@ -11,7 +11,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView"
-            android:name="ru.art241111.gt_kawasaki.view.ArrowControlsFragmentXYZ"
+            android:name="ru.art241111.gt_kawasaki.view.controlElements.arrow.ArrowControlsFragmentXYZ"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
@@ -22,7 +22,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView2"
-            android:name="ru.art241111.gt_kawasaki.view.ArrowControlsDxDyDzFragment"
+            android:name="ru.art241111.gt_kawasaki.view.controlElements.arrow.ArrowControlsDxDyDzFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -33,7 +33,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView5"
-            android:name="ru.art241111.gt_kawasaki.view.BottomControlXYZFragment"
+            android:name="ru.art241111.gt_kawasaki.view.controlElements.bottom.BottomControlXYZFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -44,7 +44,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView6"
-            android:name="ru.art241111.gt_kawasaki.view.BottomControlDxDyDzFragment"
+            android:name="ru.art241111.gt_kawasaki.view.controlElements.bottom.BottomControlDxDyDzFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
