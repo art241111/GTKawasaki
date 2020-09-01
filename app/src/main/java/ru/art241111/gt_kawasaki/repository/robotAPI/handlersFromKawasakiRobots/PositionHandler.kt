@@ -27,7 +27,7 @@ class PositionHandler(): Handler {
         val returnPosition: MutableList<Float> = mutableListOf()
         position.split(";").forEach {
             try {
-                returnPosition.add(it.trim().format("%.3f").toFloat())
+                returnPosition.add(String.format("%.2f",it.trim().toFloat()).toFloat())
             } catch (e: Exception){
             }
         }
