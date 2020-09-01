@@ -54,6 +54,10 @@
     <string name="programming_tab">Programming</string>
     <string name="create_points_tab">Creating points</string>
 
+    // Control fragment
+    <string name="moving_xyz_tab">Move by x, y, z</string>
+    <string name="moving_dxdydz_tab">Move by dx,dy,dz</string>
+
     // Coordinate type
     <string-array name="coordinateOptions" translatable="false">
         <item>X</item>

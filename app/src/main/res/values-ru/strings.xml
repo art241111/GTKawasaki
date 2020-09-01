@@ -49,6 +49,11 @@
     <string name="programming_tab">Программирование</string>
     <string name="create_points_tab">Создание точек</string>
 
+    // Control fragment
+    <string name="moving_xyz_tab">Перемещение по x,y,z</string>
+    <string name="moving_dxdydz_tab">Перемещение по dx,dy,dz</string>
+
+
     // Any
     <string name="do_not_enter_value">Вы не ввели значение</string>
 

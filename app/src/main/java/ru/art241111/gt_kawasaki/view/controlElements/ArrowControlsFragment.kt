@@ -39,12 +39,12 @@ class ArrowControlsFragment : Fragment() {
             var tabSpec =  tabHost.newTabSpec("tab1")
 
             tabSpec.setContent(binding.tabControlXYZ!!.id)
-            tabSpec.setIndicator("Перемещение по x,y,z")
+            tabSpec.setIndicator(resources.getText(R.string.moving_xyz_tab))
             tabHost.addTab(tabSpec)
 
             tabSpec = tabHost.newTabSpec("tab2")
             tabSpec.setContent(binding.tabControlDxDyDz!!.id)
-            tabSpec.setIndicator("Перемещение по dx,dy,dz")
+            tabSpec.setIndicator(resources.getText(R.string.moving_dxdydz_tab))
             tabHost.addTab(tabSpec)
 
             tabHost.currentTab = 0
