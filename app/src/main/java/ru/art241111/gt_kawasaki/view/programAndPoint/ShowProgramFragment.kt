@@ -79,14 +79,15 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
     }
 
     private fun getProgramFromSharedPreferences() {
+        preferences = SharedPreferencesHelperForString(activity as MainActivity,"COMMAND")
+        val oldCommands = jsonHelper.jsonArrayToRobotCommands(preferences.load("Command9"))
 
         if(viewModel.programList.value!!.isEmpty()){
-            preferences = SharedPreferencesHelperForString(activity as MainActivity,"COMMAND")
-
-            val oldCommands = jsonHelper.jsonArrayToRobotCommands(preferences.load("Command9"))
             viewModel.programList.value?.addAll(oldCommands)
         } else{
-            preferences.save("Command9",jsonHelper.robotCommandsArrayToJsonString(viewModel.programList.value!!))
+            if(oldCommands.size != viewModel.programList.value!!.size){
+                preferences.save("Command9",jsonHelper.robotCommandsArrayToJsonString(viewModel.programList.value!!))
+            }
         }
     }
 
