@@ -6,7 +6,6 @@ import android.widget.Spinner
 fun Spinner.setSelection(itemName: String){
     var position = 0
     for(i in 0 until this.count){
-        val name = this.getItemAtPosition(i)
         if(this.getItemAtPosition(i).toString() == itemName) {
             position = i
         }
