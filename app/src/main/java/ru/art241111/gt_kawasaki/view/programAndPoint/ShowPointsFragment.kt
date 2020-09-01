@@ -97,7 +97,7 @@ class ShowPointsFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick 
     }
 
     private fun customizationRecycleView() {
-        pointRecyclerView = PointsRecyclerViewAdapter(arrayListOf(), this, this)
+        pointRecyclerView = PointsRecyclerViewAdapter(arrayListOf(), this, this, resources)
 
         binding.rvShowPoints.layoutManager = LinearLayoutManager(activity)
         binding.rvShowPoints.adapter = pointRecyclerView

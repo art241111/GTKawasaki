@@ -42,6 +42,9 @@
     <string name="command_move_to_point_with_coordinate">с координатами.</string>
     <string name="command_move_to_point_type">Тип движения: </string>
 
+    // Position text
+    <string name="point_coordinate">Координаты точки: </string>
+
     // Any
     <string name="do_not_enter_value">Вы не ввели значение</string>
     <string-array name="typeOfMovement">

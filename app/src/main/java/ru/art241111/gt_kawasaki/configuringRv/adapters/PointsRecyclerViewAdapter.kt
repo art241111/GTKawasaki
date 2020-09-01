@@ -1,8 +1,10 @@
 package ru.art241111.gt_kawasaki.configuringRv.adapters
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import ru.art241111.gt_kawasaki.R
 import ru.art241111.gt_kawasaki.configuringRv.adapters.protocols.OnDeleteButtonClick
 import ru.art241111.gt_kawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.gt_kawasaki.databinding.RecyclerViewPointsItemBinding
@@ -10,16 +12,19 @@ import ru.art241111.gt_kawasaki.repository.enities.Position
 
 class PointsRecyclerViewAdapter(private var items: List<Position>,
                                 private var itemListener: OnItemClickListener,
-                                private var deleteListener: OnDeleteButtonClick) : RecyclerView.Adapter<PointsRecyclerViewAdapter.ViewHolder>() {
+                                private var deleteListener: OnDeleteButtonClick,
+                                private val resources: Resources) : RecyclerView.Adapter<PointsRecyclerViewAdapter.ViewHolder>() {
     /**
      * Create items.
      */
     class ViewHolder(private var binding: RecyclerViewPointsItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(point: Position, listener: OnItemClickListener?,deleteListener:OnDeleteButtonClick) {
-            binding.pointName = point.name
-            binding.pointCoordinate = point.position.toString()
+        fun bind(point: Position, listener: OnItemClickListener?,
+                 deleteListener:OnDeleteButtonClick, resources: Resources) {
+
+            binding.pointName = "${resources.getText(R.string.point_name)}: ${point.name}"
+            binding.pointCoordinate = "${resources.getText(R.string.point_coordinate)} ${point.position}"
 
             if (listener != null) {
                 binding.root.setOnClickListener{
@@ -42,7 +47,7 @@ class PointsRecyclerViewAdapter(private var items: List<Position>,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int)
-            = holder.bind(items[position], itemListener, deleteListener)
+            = holder.bind(items[position], itemListener, deleteListener, resources)
 
     override fun getItemCount(): Int = items.size
 

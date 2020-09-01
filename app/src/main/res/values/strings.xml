@@ -47,6 +47,9 @@
     <string name="command_move_to_point_with_coordinate">with coordinates</string>
     <string name="command_move_to_point_type">Type of movement:</string>
 
+    // Position text
+    <string name="point_coordinate">Coordinates of the point:</string>
+
     <string-array name="coordinateOptions" translatable="false">
         <item>X</item>
         <item>Y</item>
