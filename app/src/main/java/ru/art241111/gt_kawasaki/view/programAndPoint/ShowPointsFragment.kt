@@ -19,6 +19,10 @@ import ru.art241111.gt_kawasaki.databinding.FragmentShowPointsBinding
 import ru.art241111.gt_kawasaki.viewModel.RobotViewModel
 import androidx.lifecycle.Observer
 import ru.art241111.gt_kawasaki.configuringRv.adapters.protocols.OnDeleteButtonClick
+import ru.art241111.gt_kawasaki.repository.enities.Position
+import ru.art241111.gt_kawasaki.repository.enities.RobotCommands
+import ru.art241111.gt_kawasaki.utils.JsonHelper
+import ru.art241111.gt_kawasaki.utils.sharedPreferences.SharedPreferencesHelperForString
 
 /**
  * A simple [Fragment] subclass.
@@ -31,7 +35,9 @@ class ShowPointsFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick 
     private lateinit var binding: FragmentShowPointsBinding
     private lateinit var viewModel: RobotViewModel
 
-    private var preferences: SharedPreferences? = null
+    private lateinit var preferences: SharedPreferencesHelperForString
+    private val jsonHelper = JsonHelper()
+    private var oldCommands = mutableListOf<Position>()
 
     private lateinit var pointRecyclerView: PointsRecyclerViewAdapter
 
@@ -69,13 +75,24 @@ class ShowPointsFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick 
     }
 
     private fun getPointsFromSharedPreferences() {
-        preferences = this.activity
-                ?.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+        preferences = SharedPreferencesHelperForString(activity as MainActivity,APP_PREFERENCES)
+        val oldCommands = jsonHelper.jsonArrayToPosition(preferences.load(APP_PREFERENCES_NAME))
 
         if(viewModel.pointList.value!!.isEmpty()){
-            if(preferences != null){
-//                viewModel.pointList.value = getFromSharedPreferences(APP_PREFERENCES_NAME, viewModel.pointList.value!!)
-            }
+            viewModel.pointList.value?.addAll(oldCommands)
+        } else{
+            updateValueAtSharedPreferences()
+        }
+    }
+
+    override fun onStop() {
+        updateValueAtSharedPreferences()
+        super.onStop()
+    }
+
+    private fun updateValueAtSharedPreferences(){
+        if(oldCommands.size != viewModel.pointList.value!!.size){
+            preferences.save(APP_PREFERENCES_NAME,jsonHelper.positionArrayToJsonString(viewModel.pointList.value!!))
         }
     }
 

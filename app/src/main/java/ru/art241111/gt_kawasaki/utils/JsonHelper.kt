@@ -12,9 +12,6 @@ import ru.art241111.gt_kawasaki.repository.enities.enums.getTypeOfMovementToTheP
 class JsonHelper {
     fun robotCommandsArrayToJsonString(commands: List<RobotCommands>):  String = commands.joinToString(separator = ";")
 
-    fun positionArrayToJsonString(positions: List<Position>):  String =
-        Gson().toJson(positions)
-
     // TODO: Implementation json library and do this class
     fun jsonArrayToRobotCommands(commands: String): MutableList<RobotCommands>{
 
@@ -65,7 +62,18 @@ class JsonHelper {
     }
 
     fun jsonArrayToPosition(position: String): List<Position>{
-//        GsonBuilder() gson. commands.getJSONArray(0)
-        return listOf()
+// Converting json to array.
+        var point: MutableList<Position>? = Gson().fromJson(position,
+            object : TypeToken<MutableList<Position>>() {}.type)
+
+        // Processing a null array.
+        if (point == null){
+            point = mutableListOf()
+        }
+
+        return point
     }
+
+    fun positionArrayToJsonString(positions: List<Position>):  String =
+        Gson().toJson(positions)
 }
