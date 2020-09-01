@@ -36,6 +36,7 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
 
     private lateinit var preferences: SharedPreferencesHelperForString
     private val jsonHelper = JsonHelper()
+    private var oldCommands = mutableListOf<RobotCommands>()
 
     private lateinit var customizationCommandRecyclerView: CustomizationCommandRecyclerView
 
@@ -79,21 +80,25 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
     }
 
     private fun getProgramFromSharedPreferences() {
-        preferences = SharedPreferencesHelperForString(activity as MainActivity,"COMMAND")
-        val oldCommands = jsonHelper.jsonArrayToRobotCommands(preferences.load("Command9"))
+        preferences = SharedPreferencesHelperForString(activity as MainActivity,APP_PREFERENCES)
+        oldCommands = jsonHelper.jsonArrayToRobotCommands(preferences.load(APP_PREFERENCES_NAME))
 
         if(viewModel.programList.value!!.isEmpty()){
             viewModel.programList.value?.addAll(oldCommands)
         } else{
-            if(oldCommands.size != viewModel.programList.value!!.size){
-                preferences.save("Command9",jsonHelper.robotCommandsArrayToJsonString(viewModel.programList.value!!))
-            }
+            updateValueAtSharedPreferences()
         }
     }
 
     override fun onDestroyView() {
-        preferences.save("Command9",jsonHelper.robotCommandsArrayToJsonString(viewModel.programList.value!!))
+        updateValueAtSharedPreferences()
         super.onDestroyView()
+    }
+
+    private fun updateValueAtSharedPreferences(){
+        if(oldCommands.size != viewModel.programList.value!!.size){
+            preferences.save(APP_PREFERENCES_NAME,jsonHelper.robotCommandsArrayToJsonString(viewModel.programList.value!!))
+        }
     }
 
     private fun setButtonListener() {
