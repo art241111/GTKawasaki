@@ -81,19 +81,15 @@ class ShowPointsFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick 
         if(viewModel.pointList.value!!.isEmpty()){
             viewModel.pointList.value?.addAll(oldCommands)
         } else{
-            updateValueAtSharedPreferences()
+            if(oldCommands.size != viewModel.pointList.value!!.size){
+                preferences.save(APP_PREFERENCES_NAME,jsonHelper.positionArrayToJsonString(viewModel.pointList.value!!))
+            }
         }
     }
 
     override fun onStop() {
-        updateValueAtSharedPreferences()
+        preferences.save(APP_PREFERENCES_NAME,jsonHelper.positionArrayToJsonString(viewModel.pointList.value!!))
         super.onStop()
-    }
-
-    private fun updateValueAtSharedPreferences(){
-        if(oldCommands.size != viewModel.pointList.value!!.size){
-            preferences.save(APP_PREFERENCES_NAME,jsonHelper.positionArrayToJsonString(viewModel.pointList.value!!))
-        }
     }
 
     private fun customizationRecycleView() {

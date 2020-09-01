@@ -84,19 +84,15 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
         if(viewModel.programList.value!!.isEmpty()){
             viewModel.programList.value?.addAll(oldCommands)
         } else{
-            updateValueAtSharedPreferences()
+            if(oldCommands.size != viewModel.programList.value!!.size){
+                preferences.save(APP_PREFERENCES_NAME,jsonHelper.robotCommandsArrayToJsonString(viewModel.programList.value!!))
+            }
         }
     }
 
     override fun onStop() {
-        updateValueAtSharedPreferences()
+        preferences.save(APP_PREFERENCES_NAME,jsonHelper.robotCommandsArrayToJsonString(viewModel.programList.value!!))
         super.onStop()
-    }
-
-    private fun updateValueAtSharedPreferences(){
-        if(oldCommands.size != viewModel.programList.value!!.size){
-            preferences.save(APP_PREFERENCES_NAME,jsonHelper.robotCommandsArrayToJsonString(viewModel.programList.value!!))
-        }
     }
 
     private fun setButtonListener() {
