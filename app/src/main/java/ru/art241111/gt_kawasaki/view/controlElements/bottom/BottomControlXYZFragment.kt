@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.android.synthetic.main.fragment_bottom_control_xyz.*
 import ru.art241111.gt_kawasaki.MainActivity
 import ru.art241111.gt_kawasaki.R
 import ru.art241111.gt_kawasaki.databinding.FragmentBottomControlXyzBinding
@@ -60,11 +61,11 @@ class BottomControlXYZFragment : Fragment(), MethodWorkWhenCommandReceived {
     override fun runMethodWhenHandlerWork() {
         Log.d("new_coordinate", "bottomControlXYZFragment - new value")
 
-        (activity as MainActivity).runOnUiThread(Runnable {
-            binding.etXCoordinate.setText(viewModel.robot.robot.specifications.position[0].toString())
-            binding.etYCoordinate.setText(viewModel.robot.robot.specifications.position[1].toString())
-            binding.etZCoordinate.setText(viewModel.robot.robot.specifications.position[2].toString())
-        })
+       (activity as MainActivity).runOnUiThread {
+           binding.etXCoordinate.setText(viewModel.robot.robot.specifications.position[0].toString())
+           binding.etYCoordinate.setText(viewModel.robot.robot.specifications.position[1].toString())
+           binding.etZCoordinate.setText(viewModel.robot.robot.specifications.position[2].toString())
+       }
 
     }
 

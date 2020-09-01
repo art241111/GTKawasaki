@@ -12,9 +12,8 @@ class PositionHandler(): Handler {
 
     override fun listener(command: String, robotEntity: RobotEntity){
         if (command.substringBefore(";").trim() == "POINT"){
-            val positions = command.substringAfter(";")
+            val positions = command.substringAfter(";").substringBeforeLast(";")
 
-            Log.d("position_debug", positions)
             robotEntity.position = getFlatArrayFromString(positions)
 
             pointCommandCame.forEach {
@@ -23,14 +22,11 @@ class PositionHandler(): Handler {
         }
     }
 
-    private fun getFlatArrayFromString(position: String):MutableList<Float>{
-        val returnPosition: MutableList<Float> = mutableListOf()
-        position.split(";").forEach {
-            try {
-                returnPosition.add(String.format("%.2f",it.trim().toFloat()).toFloat())
-            } catch (e: Exception){
-            }
-        }
-        return returnPosition
-    }
+    private fun getFlatArrayFromString(position: String):MutableList<Float>
+            = position.split(";")
+                       .map{value ->
+                           String.format("%.2f",value.trim().toFloat())
+                               .replace(",",".")
+                               .toFloat()
+                       } as MutableList<Float>
 }

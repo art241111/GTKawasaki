@@ -62,11 +62,11 @@ class BottomControlDxDyDzFragment : Fragment(), MethodWorkWhenCommandReceived {
     override fun runMethodWhenHandlerWork() {
         Log.d("new_coordinate", "bottomControlDXDYDZFragment - new value")
 
-        (activity as MainActivity).runOnUiThread(Runnable {
+        (activity as MainActivity).runOnUiThread {
             binding.etXCoordinate.setText(viewModel.robot.robot.specifications.position[3].toString())
             binding.etYCoordinate.setText(viewModel.robot.robot.specifications.position[4].toString())
             binding.etZCoordinate.setText(viewModel.robot.robot.specifications.position[5].toString())
-        })
+        }
 
     }
 
