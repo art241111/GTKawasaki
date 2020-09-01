@@ -32,15 +32,12 @@ class ProgramRecyclerViewAdapter(private var items: MutableList<RobotCommands>,
             when (program) {
                 is CloseGripper -> binding.programName = resources.getText(R.string.command_gripper_close) as String
                 is OpenGripper -> binding.programName = resources.getText(R.string.command_gripper_open) as String
-                is Move -> binding.programName = "${resources.getText(R.string.command_move) as String} " +
-                        "${program.coordinate} " +
-                        "${resources.getText(R.string.command_move_value) as String} " +
-                        "${program.sizeOfPlant}"
-                is MoveToPoint -> binding.programName = "${resources.getText(R.string.command_move_to_point) as String} " +
-                        "${program.coordinate.name} ${resources.getText(R.string.command_move_to_point_with_coordinate) as String}" +
-                        "${program.coordinate.position}  \n"+
-                        "${resources.getText(R.string.command_move_to_point_type) as String} " +
-                        "${program.type}"
+                is Move -> binding.programName =
+                    "${resources.getText(R.string.command_move) as String} ${program.coordinate} " +
+                        "${resources.getText(R.string.command_move_value) as String} ${program.sizeOfPlant}"
+                is MoveToPoint -> binding.programName =
+                    "${resources.getText(R.string.command_move_to_point) as String}: ${program.coordinate.name} \n"+
+                            "${resources.getText(R.string.command_move_to_point_type) as String} ${program.type}"
             }
 
             if (listener != null) {
