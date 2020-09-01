@@ -90,9 +90,9 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
         }
     }
 
-    override fun onDestroyView() {
+    override fun onStop() {
         updateValueAtSharedPreferences()
-        super.onDestroyView()
+        super.onStop()
     }
 
     private fun updateValueAtSharedPreferences(){
