@@ -6,7 +6,8 @@ import ru.art241111.gt_kawasaki.repository.robotAPI.handlersFromKawasakiRobots.P
 import java.util.*
 import kotlin.concurrent.thread
 
-class RemoteReader(private val robotEntity: RobotEntity) {
+class RemoteReader(private val robotEntity: RobotEntity,
+                   val positionHandler: PositionHandler = PositionHandler()) {
     private var connection = false
 
     /**
@@ -28,7 +29,7 @@ class RemoteReader(private val robotEntity: RobotEntity) {
         connection = false
     }
 
-    val positionHandler = PositionHandler()
+
     private fun startTrackingInputString(analyzer: Analyzer, reader: Scanner){
         while (connection){
             try {

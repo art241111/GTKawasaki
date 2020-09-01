@@ -21,6 +21,13 @@ class RepositoryForRobotApi {
     }
 
     /**
+     * Disconnecting connection with the robot
+     */
+    fun disconnect(){
+        robot.disconnect()
+    }
+
+    /**
      * Cleaning the command queue
      */
     fun cleanQueue(){
@@ -75,12 +82,6 @@ class RepositoryForRobotApi {
     fun moveByDZ(position: Int) =
         robot.moving.moveByDZ(position)
 
-    /**
-     * Disconnecting connection with the robot
-     */
-    fun disconnect(){
-        robot.disconnect()
-    }
 
     /**
      * Move to the desired point

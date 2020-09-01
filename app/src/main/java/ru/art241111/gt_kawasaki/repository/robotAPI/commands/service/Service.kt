@@ -46,10 +46,10 @@ class Service(private var robotEntity: RobotEntity) {
      * TODO: Rename method
      */
     fun addMethodToPositionHandler(method: MethodWorkWhenCommandReceived){
-        robotEntity.reader.positionHandler.pointCommandCame.add(method)
+        robotEntity.positionHandler.pointCommandCame.add(method)
     }
 
     fun removeMethodToPositionHandler(method: MethodWorkWhenCommandReceived){
-        robotEntity.reader.positionHandler.pointCommandCame.remove(method)
+        robotEntity.positionHandler.pointCommandCame.remove(method)
     }
 }

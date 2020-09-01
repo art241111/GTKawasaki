@@ -1,5 +1,6 @@
 package ru.art241111.gt_kawasaki.repository.robotAPI.handlersFromKawasakiRobots
 
+import android.util.Log
 import ru.art241111.gt_kawasaki.repository.robotAPI.RobotEntity
 import java.lang.Exception
 
@@ -13,6 +14,7 @@ class PositionHandler(): Handler {
         if (command.substringBefore(";").trim() == "POINT"){
             val positions = command.substringAfter(";")
 
+            Log.d("position_debug", positions)
             robotEntity.position = getFlatArrayFromString(positions)
 
             pointCommandCame.forEach {
@@ -25,7 +27,7 @@ class PositionHandler(): Handler {
         val returnPosition: MutableList<Float> = mutableListOf()
         position.split(";").forEach {
             try {
-                returnPosition.add(it.trim().toFloat())
+                returnPosition.add(it.trim().format("%.3f").toFloat())
             } catch (e: Exception){
             }
         }

@@ -59,7 +59,18 @@ class BottomControlXYZFragment : Fragment(), MethodWorkWhenCommandReceived {
      */
     override fun runMethodWhenHandlerWork() {
         Log.d("new_coordinate", "bottomControlXYZFragment - new value")
-        TODO("Not yet implemented")
+
+        (activity as MainActivity).runOnUiThread(Runnable {
+            binding.etXCoordinate.setText(viewModel.robot.robot.specifications.position[0].toString())
+            binding.etYCoordinate.setText(viewModel.robot.robot.specifications.position[1].toString())
+            binding.etZCoordinate.setText(viewModel.robot.robot.specifications.position[2].toString())
+        })
+
+    }
+
+    override fun onStop() {
+        viewModel.robot.removeMethodAtPointHandler(this)
+        super.onStop()
     }
 
     private fun setClickListeners() {
