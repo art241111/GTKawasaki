@@ -56,8 +56,9 @@
                 android:id="@+id/et_the_shift_distance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:digits="-0123456789."
                 android:hint="@string/distance_to_be_moved"
-                android:inputType="number|numberDecimal"
+                android:inputType="number"
                 android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
