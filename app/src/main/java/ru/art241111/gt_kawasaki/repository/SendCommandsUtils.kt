@@ -3,6 +3,7 @@ package ru.art241111.gt_kawasaki.repository
 import android.util.Log
 import ru.art241111.gt_kawasaki.repository.enities.*
 import ru.art241111.gt_kawasaki.repository.enities.enums.Coordinate
+import ru.art241111.gt_kawasaki.repository.enities.enums.TypesOfMovementToThePoint
 import ru.art241111.gt_kawasaki.utils.Delay
 
 class SendCommandsUtils(private val robotApi: RepositoryForRobotApi) {
@@ -23,13 +24,13 @@ class SendCommandsUtils(private val robotApi: RepositoryForRobotApi) {
         when(command){
             //TODO: TOINT!!!
             is Move -> move(command.coordinate, command.sizeOfPlant.toInt())
-            is MoveToPoint -> moveToPoint(command.type.toString(), command.coordinate.position)
+            is MoveToPoint -> moveToPoint(command.type, command.coordinate.position)
             is OpenGripper -> robotApi.openGripper()
             is CloseGripper -> robotApi.closeGripper()
         }
     }
 
-    private fun moveToPoint(type:String, positions: MutableList<Float>){
+    private fun moveToPoint(type:TypesOfMovementToThePoint, positions: MutableList<Float>){
         if(positions.isNotEmpty()){
             robotApi.moveToPoint(type, positions)
         } else{

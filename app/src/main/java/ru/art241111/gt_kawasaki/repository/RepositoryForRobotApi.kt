@@ -1,6 +1,7 @@
 package ru.art241111.gt_kawasaki.repository
 
 import ru.art241111.gt_kawasaki.repository.enities.*
+import ru.art241111.gt_kawasaki.repository.enities.enums.TypesOfMovementToThePoint
 import ru.art241111.gt_kawasaki.repository.robotAPI.KawasakiRobot
 import ru.art241111.gt_kawasaki.repository.robotAPI.handlersFromKawasakiRobots.MethodWorkWhenCommandReceived
 import kotlin.concurrent.thread
@@ -87,8 +88,8 @@ class RepositoryForRobotApi {
      * Move to the desired point
      * @param position - the distance to be moved.
      */
-    fun moveToPoint(typeOfMovement: String, position: MutableList<Float>) =
-        robot.moving.moveToPoint(typeOfMovement = typeOfMovement,
+    fun moveToPoint(typeOfMovement: TypesOfMovementToThePoint, position: MutableList<Float>) =
+        robot.moving.moveToPoint(typeOfMovement = typeOfMovement.toString(),
                                  position = position.joinToString(";"))
 
     /**
