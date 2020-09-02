@@ -20,7 +20,7 @@ class RemoteWriter(private val robotEntity: RobotEntity) {
      * Send commands that are important to expect a response from
      */
     fun sendCommandWithChangeStatus(command:String): Boolean{
-        Log.d("Send","Command with change status: $command")
+        Log.d("send","Command with change status: $command")
         return commandsQueue.add(command)
     }
 
@@ -28,7 +28,7 @@ class RemoteWriter(private val robotEntity: RobotEntity) {
      * Send commands that are not important to expect a response from
      */
     fun sendCommand(command:String): Boolean{
-        Log.d("Send","Command: $command")
+        Log.d("send","Command: $command")
         return commandsQueue.add(command)
     }
 
@@ -70,6 +70,7 @@ class RemoteWriter(private val robotEntity: RobotEntity) {
                 if( comm != null){
                     write(comm.trim())
                 }
+                Delay.little()
             }
         }
     }
