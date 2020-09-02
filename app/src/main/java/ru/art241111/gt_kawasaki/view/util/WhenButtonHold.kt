@@ -1,5 +1,6 @@
 package ru.art241111.gt_kawasaki.view.util
 
+import android.annotation.SuppressLint
 import android.view.MotionEvent
 import android.view.View
 import ru.art241111.gt_kawasaki.repository.RepositoryForRobotApi
@@ -57,7 +58,7 @@ class WhenButtonHold(private val robot: RepositoryForRobotApi) {
                     Buttons.DownDY -> robot.moveByDY(-coefficient)
                 }
 
-                Delay.customDelay(500L)
+                Delay.customDelay(50L)
             }
         }
     }
