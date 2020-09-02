@@ -70,7 +70,6 @@ class RemoteWriter(private val robotEntity: RobotEntity) {
                 if( comm != null){
                     write(comm.trim())
                 }
-                Delay.little()
             }
         }
     }
