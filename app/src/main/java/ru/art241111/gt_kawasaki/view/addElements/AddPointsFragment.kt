@@ -13,6 +13,7 @@ import ru.art241111.gt_kawasaki.MainActivity
 import ru.art241111.gt_kawasaki.R
 import ru.art241111.gt_kawasaki.databinding.FragmentAddPointsBinding
 import ru.art241111.gt_kawasaki.repository.enities.Position
+import ru.art241111.gt_kawasaki.repository.enities.enums.TypesOfMovementToThePoint
 import ru.art241111.gt_kawasaki.utils.hideKeyboard
 import ru.art241111.gt_kawasaki.viewModel.RobotViewModel
 
@@ -62,7 +63,12 @@ class AddPointsFragment : Fragment() {
 
     private fun loadInformation() {
         if(position != -1){
-            binding.etPointName.text?.append((viewModel.pointList.value?.get(position)?.name))
+            val position = viewModel.pointList.value?.get(position)
+
+            if(position != null){
+                binding.etPointName.text?.append(position.name)
+                viewModel.robot.moveToPoint(TypesOfMovementToThePoint.LMOVE, position.position)
+            }
         }
     }
 
