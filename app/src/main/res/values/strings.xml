@@ -24,6 +24,11 @@
     <string name="point_name">Point name</string>
     <string name="add_point">Add point</string>
 
+    //Change pont
+    <string name="change_point_header">Changing a point</string>
+    <string name="change_point">To change the point</string>
+
+
     // Control panel
     <string name="connection">Connection</string>
     <string name="run">Run</string>

@@ -69,6 +69,9 @@ class AddPointsFragment : Fragment() {
                 binding.etPointName.text?.append(position.name)
                 viewModel.robot.moveToPoint(TypesOfMovementToThePoint.LMOVE, position.position)
             }
+
+            binding.bAddPoint.text = resources.getText(R.string.change_point)
+            binding.textView.text = resources.getText(R.string.change_point_header)
         }
     }
 

@@ -22,6 +22,10 @@
     <string name="point_name">Название точки</string>
     <string name="add_point">Добавить точку</string>
 
+    //Change point
+    <string name="change_point_header">Изменение точки</string>
+    <string name="change_point">Изменить точку</string>
+
     // Control panel
     <string name="connection">Подключение</string>
     <string name="run">Старт</string>
@@ -52,7 +56,6 @@
     // Control fragment
     <string name="moving_xyz_tab">Перемещение по x,y,z</string>
     <string name="moving_dxdydz_tab">Перемещение по dx,dy,dz</string>
-
 
     // Any
     <string name="do_not_enter_value">Вы не ввели значение</string>
