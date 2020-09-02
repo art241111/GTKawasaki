@@ -69,9 +69,14 @@ class AddMovingToPointFragment : Fragment() {
         // Получаем экземпляр элемента Spinner
         val spinner: Spinner = binding.spChoosePoint
 
+        val pointName = mutableListOf<String>()
+        viewModel.pointList.value!!.forEach{
+            pointName.add(it.name)
+        }
+
         // Настраиваем адаптер и добавляем массив точек
         val adapter: ArrayAdapter<*> = ArrayAdapter(activity as MainActivity,
-                android.R.layout.simple_spinner_item, viewModel.pointList.value!!)
+                android.R.layout.simple_spinner_item,pointName)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         // Вызываем адаптер
