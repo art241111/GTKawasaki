@@ -16,9 +16,6 @@ class JsonHelper {
     fun jsonArrayToRobotCommands(commands: String): MutableList<RobotCommands>{
 
         val command = commands.split(";")
-        Log.d("debugCommands", commands)
-        Log.d("debugCommands", command.toString())
-
         val returnCommands = mutableListOf<RobotCommands>()
 
         command.forEach {

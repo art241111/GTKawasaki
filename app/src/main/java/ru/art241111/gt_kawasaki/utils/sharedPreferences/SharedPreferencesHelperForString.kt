@@ -22,7 +22,6 @@ class SharedPreferencesHelperForString( activity: Activity, sharedPreferences: S
     }
 
     fun save(preferencesKey: String, newValue: String) {
-        Log.d("debugCommands", newValue)
         val editor: SharedPreferences.Editor = preferences.edit()
         editor.putString(preferencesKey, newValue)
         editor.apply()
