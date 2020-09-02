@@ -59,8 +59,6 @@ class BottomControlXYZFragment : Fragment(), MethodWorkWhenCommandReceived {
      * Метод срабатывает, когда приходят новые координаты
      */
     override fun runMethodWhenHandlerWork() {
-        Log.d("new_coordinate", "bottomControlXYZFragment - new value")
-
        (activity as MainActivity).runOnUiThread {
            binding.etXCoordinate.setText(viewModel.robot.robot.specifications.position[0].toString())
            binding.etYCoordinate.setText(viewModel.robot.robot.specifications.position[1].toString())

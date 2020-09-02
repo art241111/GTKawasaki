@@ -60,8 +60,6 @@ class BottomControlDxDyDzFragment : Fragment(), MethodWorkWhenCommandReceived {
      * Метод срабатывает, когда приходят новые координаты
      */
     override fun runMethodWhenHandlerWork() {
-        Log.d("new_coordinate", "bottomControlDXDYDZFragment - new value")
-
         (activity as MainActivity).runOnUiThread {
             binding.etXCoordinate.setText(viewModel.robot.robot.specifications.position[3].toString())
             binding.etYCoordinate.setText(viewModel.robot.robot.specifications.position[4].toString())
