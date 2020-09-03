@@ -1,3 +1,3 @@
 package ru.art241111.gt_kawasaki.repository.enities
 
-data class Position(var name: String, var position: MutableList<Float>)
+data class Position(var name: String, var position: MutableList<Double>)

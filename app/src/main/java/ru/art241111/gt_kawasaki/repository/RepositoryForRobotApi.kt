@@ -88,7 +88,7 @@ class RepositoryForRobotApi {
      * Move to the desired point
      * @param position - the distance to be moved.
      */
-    fun moveToPoint(typeOfMovement: TypesOfMovementToThePoint, position: MutableList<Float>) =
+    fun moveToPoint(typeOfMovement: TypesOfMovementToThePoint, position: MutableList<Double>) =
         robot.moving.moveToPoint(typeOfMovement = typeOfMovement.toString(),
                                  position = position.joinToString(";"))
 

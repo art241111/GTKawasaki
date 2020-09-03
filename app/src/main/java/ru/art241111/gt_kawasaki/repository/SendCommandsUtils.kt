@@ -30,7 +30,7 @@ class SendCommandsUtils(private val robotApi: RepositoryForRobotApi) {
         }
     }
 
-    private fun moveToPoint(type:TypesOfMovementToThePoint, positions: MutableList<Float>){
+    private fun moveToPoint(type:TypesOfMovementToThePoint, positions: MutableList<Double>){
         if(positions.isNotEmpty()){
             robotApi.moveToPoint(type, positions)
         } else{

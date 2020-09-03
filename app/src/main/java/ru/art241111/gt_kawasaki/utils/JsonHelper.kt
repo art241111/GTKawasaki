@@ -49,12 +49,12 @@ class JsonHelper {
         return Position(name, parsePositionForMutable(position))
     }
 
-    private fun parsePositionForMutable(position: String): MutableList<Float>{
+    private fun parsePositionForMutable(position: String): MutableList<Double>{
         val pos = position.substringAfter("[").substringBefore("]")
         return if(pos.isEmpty()){
             mutableListOf()
         } else{
-            pos.split(",").map { it.toFloat()} as MutableList<Float>
+            pos.split(",").map { it.toDouble()} as MutableList<Double>
         }
     }
 

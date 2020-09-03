@@ -22,11 +22,11 @@ class PositionHandler(): Handler {
         }
     }
 
-    private fun getFlatArrayFromString(position: String):MutableList<Float>
+    private fun getFlatArrayFromString(position: String):MutableList<Double>
             = position.split(";")
                        .map{value ->
-                           String.format("%.2f",value.trim().toFloat())
+                           String.format("%.2f",value.trim().toDouble())
                                .replace(",",".")
-                               .toFloat()
-                       } as MutableList<Float>
+                               .toDouble()
+                       } as MutableList<Double>
 }
