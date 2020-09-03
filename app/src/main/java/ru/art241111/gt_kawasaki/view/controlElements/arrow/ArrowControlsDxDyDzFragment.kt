@@ -45,7 +45,7 @@ class ArrowControlsDxDyDzFragment : Fragment() {
     }
 
     private fun setClickListeners() {
-        val whenButtonPressed = WhenButtonHold(repositoryForRobotApi)
+        val whenButtonPressed = WhenButtonHold(viewModel)
 
         // Move by Z
         whenButtonPressed.onTouchListener(binding.ibUpZ, Buttons.UpDZ, AmountOfMovement.FAST)

@@ -73,7 +73,7 @@ class BottomControlXYZFragment : Fragment(), MethodWorkWhenCommandReceived {
     }
 
     private fun setClickListeners() {
-        val whenButtonPressed = WhenButtonHold(repositoryForRobotApi)
+        val whenButtonPressed = WhenButtonHold(viewModel)
 
         // Move by Z
         whenButtonPressed.onTouchListener(binding.buttonZUp, Buttons.UpZ, AmountOfMovement.SLOW)
