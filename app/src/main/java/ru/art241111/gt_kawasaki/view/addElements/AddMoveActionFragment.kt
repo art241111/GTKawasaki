@@ -51,10 +51,18 @@ class AddMoveActionFragment : Fragment() {
         binding.executePendingBindings()
 
         setAddCommandButtonListener()
+        setClickListenerOnCancelButton()
 
         loadInformation()
 
         return binding.root
+    }
+
+    private fun setClickListenerOnCancelButton() {
+        binding.bCancel.setOnClickListener {
+            hideKeyboard()
+            findNavController().popBackStack()
+        }
     }
 
     private fun loadInformation() {

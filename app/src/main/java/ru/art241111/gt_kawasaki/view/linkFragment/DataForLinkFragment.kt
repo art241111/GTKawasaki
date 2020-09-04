@@ -47,9 +47,17 @@ class DataForLinkFragment : Fragment() {
         binding.executePendingBindings()
 
         loadIpAndPortFromSharedPreferences()
-        setButtonListener()
+        setButtonListenerOnConnectionButton()
+        setClickListenerOnCancelButton()
 
         return binding.root
+    }
+
+    private fun setClickListenerOnCancelButton() {
+        binding.bCancel.setOnClickListener {
+            hideKeyboard()
+            findNavController().popBackStack()
+        }
     }
 
     private fun loadIpAndPortFromSharedPreferences() {
@@ -67,7 +75,7 @@ class DataForLinkFragment : Fragment() {
         } else binding.defaultPort  = portFromSP
     }
 
-    private fun setButtonListener() {
+    private fun setButtonListenerOnConnectionButton() {
         binding.bConnect.setOnClickListener {
             ip = preferences.update(ip, binding.etIp.text.toString(), APP_PREFERENCES_IP)
             port = preferences.update(port, binding.etPort.text.toString(), APP_PREFERENCES_PORT)
