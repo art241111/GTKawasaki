@@ -54,7 +54,8 @@ class AddPointsFragment : Fragment() {
         binding.executePendingBindings()
 
         // Create buttonPressedListener and set it
-        setClickListeners()
+        setClickListenersOnAddButton()
+        setClickListenerOnCancelButton()
 
         loadInformation()
 
@@ -75,7 +76,7 @@ class AddPointsFragment : Fragment() {
         }
     }
 
-    private fun setClickListeners() {
+    private fun setClickListenersOnAddButton() {
         binding.bAddPoint.setOnClickListener {
             val name = binding.etPointName.text.toString()
             val coordinate = viewModel.robot.robot.specifications.position
@@ -92,6 +93,13 @@ class AddPointsFragment : Fragment() {
             } else{
                 Toast.makeText(activity,R.string.do_not_enter_value, Toast.LENGTH_LONG).show()
             }
+        }
+    }
+
+    private fun setClickListenerOnCancelButton() {
+        binding.bCancel.setOnClickListener {
+            hideKeyboard()
+            findNavController().popBackStack()
         }
     }
 

@@ -57,6 +57,7 @@ class AddMovingToPointFragment : Fragment() {
         binding.executePendingBindings()
 
         setAddButtonListener()
+        setClickListenerOnCancelButton()
         passingAnArrayToTheChoosePointSpinner()
 
         //Verification a new position is created or an old one is edit
@@ -81,6 +82,13 @@ class AddMovingToPointFragment : Fragment() {
 
         // Вызываем адаптер
         spinner.adapter = adapter
+    }
+
+    private fun setClickListenerOnCancelButton() {
+        binding.bCancel.setOnClickListener {
+            hideKeyboard()
+            findNavController().popBackStack()
+        }
     }
 
     /**
