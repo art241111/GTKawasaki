@@ -1,5 +1,6 @@
 package ru.art241111.gt_kawasaki.view.util
 
+import ru.art241111.gt_kawasaki.repository.enities.enums.TypesOfMovementToThePoint
 import ru.art241111.gt_kawasaki.utils.Delay
 import ru.art241111.gt_kawasaki.viewModel.RobotViewModel
 import kotlin.concurrent.thread
@@ -15,16 +16,41 @@ class RobotControlModel(private val viewModel: RobotViewModel) {
         viewModel.robot.cleanQueue()
         thread {
             while (isSending){
-                if(typesOfMovement[0] != 0.0) viewModel.robot.moveByX(typesOfMovement[0].toInt())
-                if(typesOfMovement[1] != 0.0) viewModel.robot.moveByY(typesOfMovement[1].toInt())
-                if(typesOfMovement[2] != 0.0) viewModel.robot.moveByZ(typesOfMovement[2].toInt())
-                if(typesOfMovement[3] != 0.0) viewModel.robot.moveByDX(typesOfMovement[3].toInt())
-                if(typesOfMovement[4] != 0.0) viewModel.robot.moveByDY(typesOfMovement[4].toInt())
-                if(typesOfMovement[5] != 0.0) viewModel.robot.moveByDZ(typesOfMovement[5].toInt())
-                Delay.customDelay(20L)
+//                sendCommandMoveByPosition()
+                sendCommandMoveByAxis()
             }
         }
     }
+
+    private fun sendCommandMoveByAxis(){
+        if(typesOfMovement[0] != 0.0) viewModel.robot.moveByX(typesOfMovement[0].toInt())
+        if(typesOfMovement[1] != 0.0) viewModel.robot.moveByY(typesOfMovement[1].toInt())
+        if(typesOfMovement[2] != 0.0) viewModel.robot.moveByZ(typesOfMovement[2].toInt())
+        if(typesOfMovement[3] != 0.0) viewModel.robot.moveByDX(typesOfMovement[3].toInt())
+        if(typesOfMovement[4] != 0.0) viewModel.robot.moveByDY(typesOfMovement[4].toInt())
+        if(typesOfMovement[5] != 0.0) viewModel.robot.moveByDZ(typesOfMovement[5].toInt())
+        Delay.customDelay(20L)
+    }
+
+    private fun sendCommandMoveByPosition(){
+        if((typesOfMovement[0] != 0.0)
+        || (typesOfMovement[1] != 0.0)
+                || (typesOfMovement[2] != 0.0)
+                || (typesOfMovement[3] != 0.0)
+                || (typesOfMovement[4] != 0.0)
+                || (typesOfMovement[5] != 0.0)){
+            val newPosition = mutableListOf<Double>()
+
+            for(i in 0 until viewModel.robot.robot.specifications.position.size){
+                newPosition.add(viewModel.robot.robot.specifications.position[i]
+                        + typesOfMovement[i])
+            }
+
+            viewModel.robot.moveToPoint(TypesOfMovementToThePoint.LMOVE, newPosition)
+        }
+        Delay.customDelay(20L)
+    }
+
 
     fun addMove(button:Buttons, coefficientAmountOfMovement: AmountOfMovement){
         settingTheValueOfTheDesiredButton(button,
