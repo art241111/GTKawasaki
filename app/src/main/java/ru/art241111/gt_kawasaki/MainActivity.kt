@@ -13,6 +13,9 @@ class MainActivity : AppCompatActivity() {
         
     }
 
+    /**
+     * Disconnect from robot, when application destroy
+     */
     override fun onDestroy() {
         val viewModel = ViewModelProvider(this).get(RobotViewModel::class.java)
         viewModel.disconnect()
