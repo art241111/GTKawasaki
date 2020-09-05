@@ -1,7 +1,5 @@
 package ru.art241111.gt_kawasaki.view.programAndPoint
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,17 +15,13 @@ import ru.art241111.gt_kawasaki.configuringRv.adapters.PointsRecyclerViewAdapter
 import ru.art241111.gt_kawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.gt_kawasaki.databinding.FragmentShowPointsBinding
 import ru.art241111.gt_kawasaki.viewModel.RobotViewModel
-import androidx.lifecycle.Observer
 import ru.art241111.gt_kawasaki.configuringRv.adapters.protocols.OnDeleteButtonClick
-import ru.art241111.gt_kawasaki.repository.enities.Position
-import ru.art241111.gt_kawasaki.repository.enities.RobotCommands
 import ru.art241111.gt_kawasaki.utils.JsonHelper
 import ru.art241111.gt_kawasaki.utils.sharedPreferences.SharedPreferencesHelperForString
 
 /**
- * A simple [Fragment] subclass.
- * Use the [ShowPointsFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Фрагмент отвечает за отображения всех сохраненых точек
+ * @author Artem Gerasimov
  */
 private const val APP_PREFERENCES = "Points"
 private const val APP_PREFERENCES_NAME = "pointsName"
@@ -37,10 +31,13 @@ class ShowPointsFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick 
 
     private lateinit var preferences: SharedPreferencesHelperForString
     private val jsonHelper = JsonHelper()
-    private var oldCommands = mutableListOf<Position>()
 
     private lateinit var pointRecyclerView: PointsRecyclerViewAdapter
 
+    /**
+     * При нажатии на item в recyclerview происходит
+     * переход во фрагмент, который изменяет позицию.
+     */
     override fun onItemClick(position: Int) {
         val bundle = Bundle()
         bundle.putInt("position", position)
@@ -48,11 +45,22 @@ class ShowPointsFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick 
         findNavController().navigate(R.id.addPointsFragment, bundle)
     }
 
+    /**
+     * При нажатии на кнопку delete в item в recyclerview -
+     * удаление позиции из массива
+     */
     override fun onDeleteButtonClick(position: Int) {
         viewModel.pointList.value?.removeAt(position)
         updateItems()
     }
 
+    /**
+     * При создании фрагмента: настройка dataBinding,
+     *                         поключение viewModel,
+     *                         настройка кнопки добавления точки,
+     *                         настройка recyclerview,
+     *                         получение сохраненных точек из sharedPreferences.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
@@ -74,6 +82,9 @@ class ShowPointsFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick 
         return binding.root
     }
 
+    /**
+     * Получение старых точек из sharedPreferences
+     */
     private fun getPointsFromSharedPreferences() {
         preferences = SharedPreferencesHelperForString(activity as MainActivity,APP_PREFERENCES)
         val oldCommands = jsonHelper.jsonArrayToPosition(preferences.load(APP_PREFERENCES_NAME))
@@ -87,13 +98,21 @@ class ShowPointsFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick 
         }
     }
 
+    /**
+     * При закрытии фрагмента - сохранение измененных точек
+     */
     override fun onStop() {
-        preferences.save(APP_PREFERENCES_NAME,jsonHelper.positionArrayToJsonString(viewModel.pointList.value!!))
+        preferences.save(APP_PREFERENCES_NAME,
+                         jsonHelper.positionArrayToJsonString(viewModel.pointList.value!!))
         super.onStop()
     }
 
+    /**
+     * Настройка RecyclerView
+     */
     private fun customizationRecycleView() {
-        pointRecyclerView = PointsRecyclerViewAdapter(arrayListOf(), this, this, resources)
+        pointRecyclerView = PointsRecyclerViewAdapter(arrayListOf(), this,
+                                           this, resources)
 
         binding.rvShowPoints.layoutManager = LinearLayoutManager(activity)
         binding.rvShowPoints.adapter = pointRecyclerView
@@ -101,31 +120,23 @@ class ShowPointsFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick 
         updateItems()
     }
 
+    /**
+     * Добавление onClickListener, который при нажатии будет
+     * открывать фрагмент для создания новой точки
+     */
     private fun setAddPointButtonListener() {
         binding.ibAddNewPoint.setOnClickListener {
             findNavController().navigate(R.id.addPointsFragment)
         }
     }
 
+    /**
+     * Обновление значение в recyclerView
+     */
     private fun updateItems(){
         viewModel.pointList.observe(activity as MainActivity,
-            Observer{
-                it?.let{ pointRecyclerView.replaceData(it.toList())}
-            })
+                {
+                    it?.let{ pointRecyclerView.replaceData(it.toList())}
+                })
     }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         * @return A new instance of fragment ShowPointsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance() = ShowPointsFragment().apply {}
-    }
-
-
-
-
 }
