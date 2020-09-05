@@ -18,12 +18,20 @@ class ProgramAndPointFragment : Fragment() {
     private lateinit var binding: FragmentProgramAndPointBinding
 
     private var tabHostPosition = 0
+
+    /**
+     * Получаем позицию tabHost из InstateState,
+     * если там нет данных, то откроется начальная вкладка
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         tabHostPosition = savedInstanceState?.getInt("position") ?: 0
 
         super.onCreate(savedInstanceState)
     }
 
+    /**
+     * Подключаем dataBinding и настраиваем TabHost
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,15 +45,22 @@ class ProgramAndPointFragment : Fragment() {
         return binding.root
     }
 
+    /**
+     * Сохранение позиции tabHost.
+     * Требуется для того, чтобы при восстановление фрагмента,
+     * открывалась последняя вкладка.
+     */
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         val bundle = Bundle()
-
         bundle.putInt("position", tabHostPosition)
 
         outState.putInt("position", tabHostPosition)
     }
 
+    /**
+     * Customization TabHost
+     */
     private fun setTabHost() {
         val tabHost = binding.tabHostFromProgram
 
@@ -70,16 +85,5 @@ class ProgramAndPointFragment : Fragment() {
                 "tabCreatePoints" -> tabHostPosition = 1
             }
         }
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment ProgrammAndPointFragment.
-         */
-        @JvmStatic
-        fun newInstance() = ProgramAndPointFragment().apply {}
     }
 }
