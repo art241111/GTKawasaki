@@ -20,11 +20,9 @@ import ru.art241111.gt_kawasaki.utils.JsonHelper
 import ru.art241111.gt_kawasaki.utils.sharedPreferences.SharedPreferencesHelperForString
 import ru.art241111.gt_kawasaki.viewModel.RobotViewModel
 
-
 /**
- * A simple [Fragment] subclass.
- * Use the [ShowProgramFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Фрагмент отвечает за отображения всех сохраненых точек
+ * @author Artem Gerasimov
  */
 private const val APP_PREFERENCES = "Programs"
 private const val APP_PREFERENCES_NAME = "programName"
@@ -34,15 +32,22 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
 
     private lateinit var preferences: SharedPreferencesHelperForString
     private val jsonHelper = JsonHelper()
-    private var oldCommands = mutableListOf<RobotCommands>()
 
     private lateinit var customizationCommandRecyclerView: CustomizationCommandRecyclerView
 
+    /**
+     * При нажатии на кнопку delete в item в recyclerview -
+     * удаление позиции из массива
+     */
     override fun onDeleteButtonClick(position: Int) {
         viewModel.programList.value?.removeAt(position)
         customizationCommandRecyclerView.updateItems()
     }
 
+    /**
+     * При нажатии на item в recyclerview происходит
+     * переход во фрагмент, который изменяет команду.
+     */
     override fun onItemClick(position: Int) {
         val bundle = Bundle()
         bundle.putInt("position", position)
@@ -53,6 +58,13 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
         }
     }
 
+    /**
+     * При создании фрагмента: настройка dataBinding,
+     *                         поключение viewModel,
+     *                         настройка кнопки добавления точки,
+     *                         настройка recyclerview,
+     *                         получение сохраненных точек из sharedPreferences.
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Create viewModel
@@ -63,7 +75,7 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
                 R.layout.fragment_show_program, container, false)
         binding.executePendingBindings()
 
-        setButtonListener()
+        setAddButtonListener()
 
         // Customization RecycleView: set layoutManager, adapter, data.
         customizationCommandRecyclerView = CustomizationCommandRecyclerView(binding.rvShowProgram,
@@ -77,9 +89,12 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
         return binding.root
     }
 
+    /**
+     * Получение старых точек из sharedPreferences
+     */
     private fun getProgramFromSharedPreferences() {
         preferences = SharedPreferencesHelperForString(activity as MainActivity,APP_PREFERENCES)
-        oldCommands = jsonHelper.jsonArrayToRobotCommands(preferences.load(APP_PREFERENCES_NAME))
+        val oldCommands = jsonHelper.jsonArrayToRobotCommands(preferences.load(APP_PREFERENCES_NAME))
 
         if(viewModel.programList.value!!.isEmpty()){
             viewModel.programList.value?.addAll(oldCommands)
@@ -90,23 +105,32 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
         }
     }
 
+    /**
+     * При закрытии фрагмента - сохранение измененных точек
+     */
     override fun onStop() {
         preferences.save(APP_PREFERENCES_NAME,jsonHelper.robotCommandsArrayToJsonString(viewModel.programList.value!!))
         super.onStop()
     }
 
-    private fun setButtonListener() {
+    /**
+     * При нажатии на кнопку Add появляется меню с
+     * выбором команд
+     */
+    private fun setAddButtonListener() {
         binding.ibAddProgram.setOnClickListener {
             showPopup(it)
         }
     }
 
+    /**
+     * Создается меню для создания команд
+     */
     private fun showPopup(view: View) {
         val popup = PopupMenu(activity, view)
         popup.inflate(R.menu.management_options_menu)
 
         popup.setOnMenuItemClickListener { item: MenuItem? ->
-
             when (item!!.itemId) {
                 R.id.moveAction ->
                     findNavController().navigate(R.id.addMoveActionFragment)
@@ -122,17 +146,4 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
         }
         popup.show()
     }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment ShowProgramFragment.
-         */
-        @JvmStatic
-        fun newInstance() = ShowProgramFragment().apply {}
-    }
-
-
 }
