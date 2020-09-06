@@ -8,18 +8,29 @@ import ru.art241111.gt_kawasaki.utils.sharedPreferences.protocols.LoadFromShared
 import ru.art241111.gt_kawasaki.utils.sharedPreferences.protocols.SaveSharedPreferences
 import ru.art241111.gt_kawasaki.utils.sharedPreferences.protocols.UpdateSharedPreferences
 
-class SharedPreferencesHelperForString( activity: Activity, sharedPreferences: String)
+class SharedPreferencesHelperForString(activity: Activity, sharedPreferences: String)
     :SaveSharedPreferences, LoadFromSharedPreferences, UpdateSharedPreferences {
 
     private val preferences: SharedPreferences
             = activity.getSharedPreferences(sharedPreferences, Context.MODE_PRIVATE)
 
-    fun load(preferencesKey: String): String {
+    /**
+     * Берется значение из sharedPreferences.
+     * Если такого значения нет, то возвращается defaultValue
+     *
+     * @param preferencesKey - key for sharedPreferences
+     * @param defaultValue - дефолтное значение, которое возвратиться, если
+     *                       с таким ключом значений нет
+     *
+     * @return Если существет значение в SharedPreferences, то возвращается оно,
+     * иначе возвращается defaultValue
+     */
+    fun load(preferencesKey: String, defaultValue: String = ""): String =
         if(preferences.contains(preferencesKey)) {
-            return preferences.getString(preferencesKey, "").toString()
+            preferences.getString(preferencesKey, defaultValue).toString()
+        } else{
+            defaultValue
         }
-        return ""
-    }
 
     fun save(preferencesKey: String, newValue: String) {
         val editor: SharedPreferences.Editor = preferences.edit()
