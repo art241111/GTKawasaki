@@ -43,18 +43,21 @@ class RobotViewModel(application: Application)
      * программа соединилась с роботом, то коннект
      * сохраняется во view model
      */
-    fun createConnection(ip: String, port: Int): Boolean{
-        val repositoryForRobotApi = RepositoryForRobotApi()
-        repositoryForRobotApi.connectToRobotTCP(address = ip, port = port)
+    fun createConnection(ip: String, port: Int?): Boolean =
+        if(ip != "" && port != null){
+            val repositoryForRobotApi = RepositoryForRobotApi()
+            repositoryForRobotApi.connectToRobotTCP(address = ip, port = port)
 
-        Delay.customDelay(500L)
-        return if(repositoryForRobotApi.isConnect()){
-            robot = repositoryForRobotApi
-            controlModel.startSending()
-            true
+            Delay.customDelay(500L)
+            if(repositoryForRobotApi.isConnect()){
+                robot = repositoryForRobotApi
+                controlModel.startSending()
+                true
+            } else{
+                repositoryForRobotApi.disconnect()
+                false
+            }
         } else{
-            repositoryForRobotApi.disconnect()
             false
         }
-    }
 }
