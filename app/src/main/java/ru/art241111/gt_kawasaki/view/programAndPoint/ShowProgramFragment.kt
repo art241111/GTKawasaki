@@ -21,7 +21,7 @@ import ru.art241111.gt_kawasaki.utils.sharedPreferences.SharedPreferencesHelperF
 import ru.art241111.gt_kawasaki.viewModel.RobotViewModel
 
 /**
- * Фрагмент отвечает за отображения всех сохраненых точек
+ * The fragment is responsible for displaying all saved points
  * @author Artem Gerasimov
  */
 private const val APP_PREFERENCES = "Programs"
@@ -36,8 +36,8 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
     private lateinit var customizationCommandRecyclerView: CustomizationCommandRecyclerView
 
     /**
-     * При нажатии на кнопку delete в item в recyclerview -
-     * удаление позиции из массива
+     * When you click the delete button in item
+     * in recyclerview-delete a position from the array
      */
     override fun onDeleteButtonClick(position: Int) {
         viewModel.programList.value?.removeAt(position)
@@ -45,25 +45,25 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
     }
 
     /**
-     * При нажатии на item в recyclerview происходит
-     * переход во фрагмент, который изменяет команду.
+     * Clicking on an item in recyclerview takes
+     * you to a fragment that changes the command.
      */
     override fun onItemClick(position: Int) {
         val bundle = Bundle()
         bundle.putInt("position", position)
 
-        when(viewModel.programList.value?.get(position)){
+        when (viewModel.programList.value?.get(position)) {
             is MoveToPoint -> findNavController().navigate(R.id.addMovingToPointFragment, bundle)
             is Move -> findNavController().navigate(R.id.addMoveActionFragment, bundle)
         }
     }
 
     /**
-     * При создании фрагмента: настройка dataBinding,
-     *                         поключение viewModel,
-     *                         настройка кнопки добавления точки,
-     *                         настройка recyclerview,
-     *                         получение сохраненных точек из sharedPreferences.
+     * When creating a fragment: configuring dataBinding,
+     *                           connect the viewModel,
+     *                           setting up the button for adding a point,
+     *                           setting up the recycler view,
+     *                           getting saved points from sharedPreferences.
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -90,32 +90,32 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
     }
 
     /**
-     * Получение старых точек из sharedPreferences
+     * Getting old points from sharedPreferences
      */
     private fun getProgramFromSharedPreferences() {
-        preferences = SharedPreferencesHelperForString(activity as MainActivity,APP_PREFERENCES)
+        preferences = SharedPreferencesHelperForString(activity as MainActivity, APP_PREFERENCES)
         val oldCommands = jsonHelper.jsonArrayToRobotCommands(preferences.load(APP_PREFERENCES_NAME))
 
-        if(viewModel.programList.value!!.isEmpty()){
+        if (viewModel.programList.value!!.isEmpty()) {
             viewModel.programList.value?.addAll(oldCommands)
-        } else{
-            if(oldCommands.size != viewModel.programList.value!!.size){
-                preferences.save(APP_PREFERENCES_NAME,jsonHelper.robotCommandsArrayToJsonString(viewModel.programList.value!!))
+        } else {
+            if (oldCommands.size != viewModel.programList.value!!.size) {
+                preferences.save(APP_PREFERENCES_NAME, jsonHelper.robotCommandsArrayToJsonString(viewModel.programList.value!!))
             }
         }
     }
 
     /**
-     * При закрытии фрагмента - сохранение измененных точек
+     * When closing a fragment, save the changed points
      */
     override fun onStop() {
-        preferences.save(APP_PREFERENCES_NAME,jsonHelper.robotCommandsArrayToJsonString(viewModel.programList.value!!))
+        preferences.save(APP_PREFERENCES_NAME, jsonHelper.robotCommandsArrayToJsonString(viewModel.programList.value!!))
         super.onStop()
     }
 
     /**
-     * При нажатии на кнопку Add появляется меню с
-     * выбором команд
+     * When you click the Add button,
+     * a menu appears with the command selection
      */
     private fun setAddButtonListener() {
         binding.ibAddProgram.setOnClickListener {
@@ -124,7 +124,7 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
     }
 
     /**
-     * Создается меню для создания команд
+     * Creates a menu for creating commands
      */
     private fun showPopup(view: View) {
         val popup = PopupMenu(activity, view)
