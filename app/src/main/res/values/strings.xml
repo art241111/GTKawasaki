@@ -8,6 +8,7 @@
     // Move command
     <string name="enter_distance_to_move">Enter the distance to move</string>
     <string name="creating_move_command">Creating the MOVE command</string>
+    <string name="change_move_command">Change the MOVE command</string>
     <string name="distance_to_be_moved">The distance to be moved</string>
 
     // Move to point command
@@ -18,7 +19,6 @@
     <string name="create_point_if_you_want_use_move_to_point">
         To use this command, ypu need to create a point</string>
 
-
     // Create new point
     <string name="add_new_point">Add new point</string>
     <string name="point_name">Point name</string>
@@ -27,7 +27,6 @@
     //Change pont
     <string name="change_point_header">Changing a point</string>
     <string name="change_point">To change the point</string>
-
 
     // Control panel
     <string name="connection">Connection</string>

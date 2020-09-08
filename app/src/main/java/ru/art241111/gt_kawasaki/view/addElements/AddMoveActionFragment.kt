@@ -60,17 +60,20 @@ class AddMoveActionFragment : Fragment() {
 
     private fun setClickListenerOnCancelButton() {
         binding.bCancel.setOnClickListener {
-            hideKeyboard()
-            findNavController().popBackStack()
+            popStack()
         }
     }
 
+    /**
+     * Если при открытии фрагмента передана позиция команды, то
+     * нужно загрузить данные и изменить текстовые поля
+     */
     private fun loadInformation() {
         if(position != -1){
             val command = viewModel.programList.value?.get(position) as Move
 
+            binding.tvMove.text = getString(R.string.change_move_command)
             binding.etTheShiftDistance.text?.append(command.sizeOfPlant.toString())
-
             binding.bAddMoveAction.text = resources.getText(R.string.change_command)
 
             setCoordinateSpinner(command.coordinate)
@@ -98,8 +101,7 @@ class AddMoveActionFragment : Fragment() {
                 Toast.makeText(activity, R.string.enter_distance_to_move, Toast.LENGTH_LONG).show()
             } else{
                 addOrChangeValue(Move(coordinate, value.toFloat()))
-                hideKeyboard()
-                findNavController().popBackStack()
+                popStack()
             }
         }
     }
@@ -123,6 +125,10 @@ class AddMoveActionFragment : Fragment() {
             }
         }
 
+    private fun popStack(){
+        hideKeyboard()
+        findNavController().popBackStack()
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of

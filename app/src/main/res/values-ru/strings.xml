@@ -7,6 +7,7 @@
     // Move command
     <string name="enter_distance_to_move">Введите расстояние, на которое нужно переместиться</string>
     <string name="creating_move_command">Создание команды MOVE</string>
+    <string name="change_move_command">Изменение команды MOVE</string>
     <string name="distance_to_be_moved">Расстояния для перемещения</string>
 
     // Move to point command
