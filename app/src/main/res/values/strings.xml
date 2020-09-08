@@ -16,6 +16,7 @@
     <string name="select_type_of_movement">Select type of movement</string>
     <string name="choose_point_to_move_to">Choose point to move to</string>
     <string name="moving_to_the_point">Moving to the point</string>
+    <string name="change_move_to_point_command">Change the moving to the point</string>
     <string name="create_point_if_you_want_use_move_to_point">
         To use this command, ypu need to create a point</string>
 

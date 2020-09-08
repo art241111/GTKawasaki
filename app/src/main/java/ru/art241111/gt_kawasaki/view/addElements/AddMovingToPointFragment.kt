@@ -99,13 +99,14 @@ class AddMovingToPointFragment : Fragment() {
         if(position != -1){
             val command = viewModel.programList.value?.get(position) as MoveToPoint
 
-            changeTextAtAddButton()
+            changeTextAtAddButtonAndHeader()
             setChoosePointSpinner(command)
             setChooseTypeOfMovementSpinner(command)
         }
     }
-        private fun changeTextAtAddButton(){
+        private fun changeTextAtAddButtonAndHeader(){
             binding.bSaveCommand.text = resources.getText(R.string.change_command)
+            binding.tvMoveToPoint.text = getString(R.string.change_move_to_point_command)
         }
 
         private fun setChooseTypeOfMovementSpinner(command: MoveToPoint){

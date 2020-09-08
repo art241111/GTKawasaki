@@ -15,6 +15,7 @@
     <string name="select_type_of_movement">Выберите тип движения</string>
     <string name="choose_point_to_move_to">Выберите точку для перемещения</string>
     <string name="moving_to_the_point">Перемещение в точку</string>
+    <string name="change_move_to_point_command">Изменение перемещения в точку</string>
     <string name="create_point_if_you_want_use_move_to_point">
         Чтобы использовать данную команду - нужно создать точку</string>
 
