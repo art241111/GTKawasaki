@@ -71,7 +71,7 @@
                 </LinearLayout>
 
                 <androidx.fragment.app.FragmentContainerView
-                    android:id="@+id/fragmentContainerView8"
+                    android:id="@+id/f_control_panel"
                     android:name="ru.art241111.gt_kawasaki.view.controlElements.ControlPanel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                     tools:layout="@layout/fragment_control_panel" />
 
                 <androidx.fragment.app.FragmentContainerView
-                    android:id="@+id/fragmentContainerView7"
+                    android:id="@+id/f_arrow_controls"
                     android:name="ru.art241111.gt_kawasaki.view.controlElements.ArrowControlsFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -92,11 +92,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView8"
                     tools:layout="@layout/fragment_arrow_controls" />
-
             </LinearLayout>
         </ScrollView>
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
