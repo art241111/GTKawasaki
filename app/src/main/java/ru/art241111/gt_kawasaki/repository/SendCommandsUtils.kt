@@ -12,11 +12,19 @@ class SendCommandsUtils(private val robotApi: RepositoryForRobotApi) {
         if(!isProgramRun){
             isProgramRun = true
 
+            setDefaultStatus(commands)
+
             commands.forEach{
                 sendCommand(it)
                 Delay.customDelay(1000L)
             }
             isProgramRun = false
+        }
+    }
+
+    private fun setDefaultStatus(commands: List<RobotCommands>){
+        commands.forEach {
+            it.status.set(0)
         }
     }
 
