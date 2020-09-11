@@ -6,9 +6,6 @@
         <shape android:shape="oval">
             <solid android:color="@color/design_default_color_primary_dark"/>
         </shape>
-
-        <bitmap>
-        </bitmap>
     </item>
 
     <item android:state_focused="true"
