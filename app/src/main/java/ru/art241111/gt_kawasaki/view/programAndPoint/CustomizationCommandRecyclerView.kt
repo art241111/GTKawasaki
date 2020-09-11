@@ -37,7 +37,7 @@ class CustomizationCommandRecyclerView(recyclerView: RecyclerView,
     private var programRecyclerView: ProgramRecyclerViewAdapter
             = ProgramRecyclerViewAdapter(arrayListOf(),
                                          onItemClickListener,
-                                         onDeleteButtonClick, this, resources)
+                                         onDeleteButtonClick, this)
 
     init {
         recyclerView.layoutManager = LinearLayoutManager(activity)

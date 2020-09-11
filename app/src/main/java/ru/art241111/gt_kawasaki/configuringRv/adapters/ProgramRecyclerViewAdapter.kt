@@ -14,8 +14,7 @@ import ru.art241111.gt_kawasaki.repository.enities.*
 class ProgramRecyclerViewAdapter(private var items: MutableList<RobotCommands>,
                                  private var itemListener: OnItemClickListener,
                                  private var deleteListener: OnDeleteButtonClick,
-                                 private val itemTouchHelperAdapter: ItemTouchHelperAdapter,
-                                 private val resources: Resources)
+                                 private val itemTouchHelperAdapter: ItemTouchHelperAdapter)
     : RecyclerView.Adapter<ProgramRecyclerViewAdapter.ViewHolder>(),
         ItemTouchHelperAdapter {
 
@@ -26,19 +25,8 @@ class ProgramRecyclerViewAdapter(private var items: MutableList<RobotCommands>,
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(program: RobotCommands, listener: OnItemClickListener?,
-                 deleteListener:OnDeleteButtonClick, resources: Resources) {
-
-            binding.programName = program.toString()
-            when (program) {
-                is CloseGripper -> binding.programName = resources.getText(R.string.command_gripper_close) as String
-                is OpenGripper -> binding.programName = resources.getText(R.string.command_gripper_open) as String
-                is Move -> binding.programName =
-                    "${resources.getText(R.string.command_move) as String} ${program.coordinate} " +
-                        "${resources.getText(R.string.command_move_value) as String} ${program.sizeOfPlant}"
-                is MoveToPoint -> binding.programName =
-                    "${resources.getText(R.string.command_move_to_point) as String}: ${program.coordinate.name} \n"+
-                            "${resources.getText(R.string.command_move_to_point_type) as String} ${program.type}"
-            }
+                 deleteListener:OnDeleteButtonClick) {
+            binding.command = program
 
             if (listener != null) {
                 binding.root.setOnClickListener {
@@ -61,7 +49,7 @@ class ProgramRecyclerViewAdapter(private var items: MutableList<RobotCommands>,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int)
-            = holder.bind(items[position], itemListener, deleteListener, resources)
+            = holder.bind(items[position], itemListener, deleteListener)
 
     override fun getItemCount(): Int = items.size
 

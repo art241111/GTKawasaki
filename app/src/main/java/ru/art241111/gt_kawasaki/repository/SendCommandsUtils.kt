@@ -21,6 +21,7 @@ class SendCommandsUtils(private val robotApi: RepositoryForRobotApi) {
     }
 
     private fun sendCommand(command: RobotCommands){
+        command.status.set(1)
         when(command){
             //TODO: TOINT!!!
             is Move -> move(command.coordinate, command.sizeOfPlant.toInt())
