@@ -20,6 +20,11 @@
     <string name="create_point_if_you_want_use_move_to_point">
         To use this command, ypu need to create a point</string>
 
+    // For command
+    <string name="for_command">FOR</string>
+    <string name="creating_for_command">Creating the MOVE command</string>
+    <string name="change_for_command">Change the MOVE command</string>
+
     // Create new point
     <string name="add_new_point">Add new point</string>
     <string name="point_name">Point name</string>
@@ -79,5 +84,4 @@
         <item>On axes</item>
         <item>Linearly</item>
     </string-array>
-
 </resources>

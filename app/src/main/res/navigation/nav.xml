@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_showProgramFragment_to_addMovingToPointFragment"
             app:destination="@id/addMovingToPointFragment" />
+        <action
+            android:id="@+id/action_showProgramFragment_to_addForCommandFragment"
+            app:destination="@id/addForCommandFragment" />
     </fragment>
     <fragment
         android:id="@+id/addMoveActionFragment"
@@ -81,5 +84,15 @@
         <action
             android:id="@+id/action_programAndPointFragment_to_showPointsFragment"
             app:destination="@id/showPointsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addForCommandFragment"
+        android:name="ru.art241111.gt_kawasaki.view.addElements.AddForCommandFragment"
+        android:label="fragment_add_for_command"
+        tools:layout="@layout/fragment_add_for_command">
+        <argument
+            android:name="position"
+            android:defaultValue="-1"
+            app:argType="integer" />
     </fragment>
 </navigation>

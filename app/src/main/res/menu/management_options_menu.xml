@@ -13,4 +13,9 @@
     <item
         android:id="@+id/moveToPointAction"
         android:title="@string/command_move_to_point" />
+
+    <item
+        android:id="@+id/forCommand"
+        android:title="@string/for_command"
+        android:visible="false"/>
 </menu>

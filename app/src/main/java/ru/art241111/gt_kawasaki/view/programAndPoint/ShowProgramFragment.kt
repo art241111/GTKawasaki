@@ -55,6 +55,7 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
         when (viewModel.programList.value?.get(position)) {
             is MoveToPoint -> findNavController().navigate(R.id.addMovingToPointFragment, bundle)
             is Move -> findNavController().navigate(R.id.addMoveActionFragment, bundle)
+            is For -> findNavController().navigate(R.id.addForCommandFragment, bundle)
         }
     }
 
@@ -140,6 +141,8 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
                     viewModel.programList.value?.add(CloseGripper())
                 R.id.moveToPointAction ->
                     findNavController().navigate(R.id.addMovingToPointFragment)
+                R.id.forCommand ->
+                    findNavController().navigate(R.id.addForCommandFragment)
             }
             customizationCommandRecyclerView.updateItems()
             true

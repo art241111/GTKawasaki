@@ -46,3 +46,11 @@ class CloseGripper:RobotCommands(){
     override fun getCommandText(): String =
         GTKawasakiApp.instance.resources.getText(R.string.command_gripper_close) as String
 }
+
+data class For(val variable: String, val from:Int, val before: Int): RobotCommands(){
+    override fun getCommandText(): String = "$variable FOR from $from to $before"
+}
+
+data class ForEnd(val variable: String): RobotCommands(){
+    override fun getCommandText(): String = "$variable FOR"
+}
