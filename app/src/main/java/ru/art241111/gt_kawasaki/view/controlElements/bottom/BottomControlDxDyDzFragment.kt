@@ -102,7 +102,6 @@ class BottomControlDxDyDzFragment : Fragment(), MethodWorkWhenCommandReceived {
          *
          * @return A new instance of fragment BottomControlDxDyDzFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() = BottomControlDxDyDzFragment().apply { }
     }
