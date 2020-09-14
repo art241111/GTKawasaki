@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import ru.art241111.gt_kawasaki.repository.enities.Position
 import ru.art241111.gt_kawasaki.repository.RepositoryForRobotApi
-import ru.art241111.gt_kawasaki.repository.enities.RobotCommands
+import ru.art241111.gt_kawasaki.repository.enities.commands.RobotCommands
 import ru.art241111.gt_kawasaki.utils.Delay
 import ru.art241111.gt_kawasaki.view.util.RobotControlModel
 

@@ -1,11 +1,12 @@
 package ru.art241111.gt_kawasaki.utils
 
-import android.content.SharedPreferences
-import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import org.json.JSONArray
 import ru.art241111.gt_kawasaki.repository.enities.*
+import ru.art241111.gt_kawasaki.repository.enities.commands.CloseGripper
+import ru.art241111.gt_kawasaki.repository.enities.commands.Move
+import ru.art241111.gt_kawasaki.repository.enities.commands.MoveToPoint
+import ru.art241111.gt_kawasaki.repository.enities.commands.RobotCommands
 import ru.art241111.gt_kawasaki.repository.enities.enums.getCoordinate
 import ru.art241111.gt_kawasaki.repository.enities.enums.getTypeOfMovementToThePoint
 
@@ -31,13 +32,13 @@ class JsonHelper {
         return returnCommands
     }
 
-    private fun parseMoveCommand(commands: String): Move{
+    private fun parseMoveCommand(commands: String): Move {
         val coordinate = commands.substringBefore(",").substringAfter("coordinate=")
         val sizeOfPlant = commands.substringBefore(")").substringAfter("sizeOfPlant=")
         return Move(coordinate.getCoordinate(), sizeOfPlant.toFloat())
     }
 
-    private fun parseMoveToPointCommand(commands: String): MoveToPoint{
+    private fun parseMoveToPointCommand(commands: String): MoveToPoint {
         val typesOfMovement = commands.substringBefore(",").substringAfter("type=")
         val coordinate = commands.substringBefore(")").substringAfter("coordinate=Position(")
         return MoveToPoint(typesOfMovement.getTypeOfMovementToThePoint(), parsePosition(coordinate))

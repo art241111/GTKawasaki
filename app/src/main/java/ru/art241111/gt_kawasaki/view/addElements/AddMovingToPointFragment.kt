@@ -14,10 +14,9 @@ import androidx.navigation.fragment.findNavController
 import ru.art241111.gt_kawasaki.MainActivity
 import ru.art241111.gt_kawasaki.R
 import ru.art241111.gt_kawasaki.databinding.FragmentAddMovingToPointBinding
-import ru.art241111.gt_kawasaki.repository.enities.MoveToPoint
+import ru.art241111.gt_kawasaki.repository.enities.commands.MoveToPoint
 import ru.art241111.gt_kawasaki.repository.enities.enums.TypesOfMovementToThePoint
 import ru.art241111.gt_kawasaki.utils.hideKeyboard
-import ru.art241111.gt_kawasaki.utils.setSelection
 import ru.art241111.gt_kawasaki.viewModel.RobotViewModel
 
 /**

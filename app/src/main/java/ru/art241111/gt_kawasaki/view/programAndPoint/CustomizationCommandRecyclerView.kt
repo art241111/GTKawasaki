@@ -11,7 +11,7 @@ import ru.art241111.gt_kawasaki.configuringRv.adapters.ProgramRecyclerViewAdapte
 import ru.art241111.gt_kawasaki.configuringRv.adapters.protocols.OnDeleteButtonClick
 import ru.art241111.gt_kawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.gt_kawasaki.configuringRv.helpers.SimpleItemTouchHelperCallback
-import ru.art241111.gt_kawasaki.repository.enities.RobotCommands
+import ru.art241111.gt_kawasaki.repository.enities.commands.RobotCommands
 import java.util.*
 
 /**

@@ -1,9 +1,10 @@
-package ru.art241111.gt_kawasaki.repository.enities
+package ru.art241111.gt_kawasaki.repository.enities.commands
 
 import androidx.databinding.ObservableField
 import ru.art241111.gt_kawasaki.GTKawasakiApp
-import ru.art241111.gt_kawasaki.MainActivity
 import ru.art241111.gt_kawasaki.R
+import ru.art241111.gt_kawasaki.repository.RepositoryForRobotApi
+import ru.art241111.gt_kawasaki.repository.enities.Position
 import ru.art241111.gt_kawasaki.repository.enities.enums.Coordinate
 import ru.art241111.gt_kawasaki.repository.enities.enums.TypesOfMovementToThePoint
 
@@ -14,22 +15,26 @@ open class Status{
 interface GetCommandText{
     fun getCommandText(): String
 }
+
+interface RunCommand{
+    fun runCommand(robot: RepositoryForRobotApi)
+}
 abstract class RobotCommands: Status(), GetCommandText
 
 // TODO: Check Float!!!
-data class Move(val coordinate: Coordinate, val sizeOfPlant: Float):RobotCommands() {
+data class Move(val coordinate: Coordinate, val sizeOfPlant: Float): RobotCommands() {
     override fun getCommandText(): String =
         "${GTKawasakiApp.instance.resources.getText(R.string.command_move) as String} $coordinate " +
                 "${GTKawasakiApp.instance.resources.getText(R.string.command_move_value) as String} $sizeOfPlant"
 }
 
-data class MoveToPoint(val type: TypesOfMovementToThePoint,val coordinate: Position):RobotCommands() {
+data class MoveToPoint(val type: TypesOfMovementToThePoint,val coordinate: Position): RobotCommands() {
     override fun getCommandText(): String =
         "${GTKawasakiApp.instance.resources.getText(R.string.command_move_to_point) as String}: ${coordinate.name} \n"+
                 "${GTKawasakiApp.instance.resources.getText(R.string.command_move_to_point_type) as String} $type"
 }
 
-class OpenGripper:RobotCommands(){
+class OpenGripper: RobotCommands(){
     override fun toString(): String {
         return "OpenGripper"
     }
@@ -38,7 +43,7 @@ class OpenGripper:RobotCommands(){
         GTKawasakiApp.instance.resources.getText(R.string.command_gripper_open) as String
 }
 
-class CloseGripper:RobotCommands(){
+class CloseGripper: RobotCommands(){
     override fun toString(): String {
         return "CloseGripper"
     }

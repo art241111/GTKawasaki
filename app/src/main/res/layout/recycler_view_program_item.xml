@@ -12,7 +12,7 @@
 
         <variable
             name="command"
-            type="ru.art241111.gt_kawasaki.repository.enities.RobotCommands" />
+            type="ru.art241111.gt_kawasaki.repository.enities.commands.RobotCommands" />
     </data>
 
     <androidx.cardview.widget.CardView

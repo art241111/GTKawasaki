@@ -2,7 +2,7 @@ package ru.art241111.gt_kawasaki.repository
 
 import android.util.Log
 import androidx.databinding.ObservableInt
-import ru.art241111.gt_kawasaki.repository.enities.*
+import ru.art241111.gt_kawasaki.repository.enities.commands.*
 import ru.art241111.gt_kawasaki.repository.enities.enums.Coordinate
 import ru.art241111.gt_kawasaki.repository.enities.enums.TypesOfMovementToThePoint
 import ru.art241111.gt_kawasaki.utils.Delay
