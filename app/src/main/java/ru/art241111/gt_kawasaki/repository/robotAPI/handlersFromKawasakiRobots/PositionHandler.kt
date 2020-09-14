@@ -1,27 +1,38 @@
 package ru.art241111.gt_kawasaki.repository.robotAPI.handlersFromKawasakiRobots
 
-import android.util.Log
 import ru.art241111.gt_kawasaki.repository.robotAPI.RobotEntity
-import java.lang.Exception
 
 /**
  * Class that tracks changes in position
  */
-class PositionHandler(): Handler {
+class PositionHandler: Handler {
     val pointCommandCame:MutableList<MethodWorkWhenCommandReceived> = mutableListOf()
+
+    private var oldPositionValueStr = ""
 
     override fun listener(command: String, robotEntity: RobotEntity){
         if (command.substringBefore(";").trim() == "POINT"){
-            val positions = command.substringAfter(";").substringBeforeLast(";")
-
-            robotEntity.position = getFlatArrayFromString(positions)
-
-            pointCommandCame.forEach {
-                it.runMethodWhenHandlerWork()
-            }
+            positionListener(command, robotEntity)
         }
     }
 
+    private fun positionListener(position: String, robotEntity: RobotEntity){
+        // Если старой позиции еще нет или новая отличается от предыдущей
+        if(oldPositionValueStr == "" || oldPositionValueStr != position){
+            oldPositionValueStr = position
+            upgradePosition(position, robotEntity)
+        }
+    }
+
+    private fun upgradePosition(position: String, robotEntity: RobotEntity){
+        val positions = position.substringAfter(";").substringBeforeLast(";")
+
+        robotEntity.position = getFlatArrayFromString(positions)
+
+        pointCommandCame.forEach {
+            it.runMethodWhenHandlerWork()
+        }
+    }
     private fun getFlatArrayFromString(position: String):MutableList<Double>
             = position.split(";")
                        .map{value ->
