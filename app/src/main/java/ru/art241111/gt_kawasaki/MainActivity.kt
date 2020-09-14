@@ -11,14 +11,4 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
-
-    /**
-     * Disconnect from robot, when application destroy
-     */
-    override fun onDestroy() {
-        val viewModel = ViewModelProvider(this).get(RobotViewModel::class.java)
-        viewModel.disconnect()
-
-        super.onDestroy()
-    }
 }
