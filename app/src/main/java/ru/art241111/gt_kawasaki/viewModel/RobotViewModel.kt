@@ -1,6 +1,7 @@
 package ru.art241111.gt_kawasaki.viewModel
 
 import android.app.Application
+import androidx.databinding.ObservableArrayList
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import ru.art241111.gt_kawasaki.repository.enities.Position
@@ -14,6 +15,7 @@ class RobotViewModel(application: Application)
     // Создание объекта, хранящего коннект с роботом
     var robot: RepositoryForRobotApi = RepositoryForRobotApi()
     var isProgramRun = robot.getProgramStatusValue()
+    var robotPosition = ObservableArrayList<Double>()
 
     // Массив для хранения всех точек
     val pointList = MutableLiveData<MutableList<Position>>()
@@ -29,6 +31,7 @@ class RobotViewModel(application: Application)
     init {
         programList.value = arrayListOf()
         pointList.value = arrayListOf()
+        robotPosition.addAll(listOf(0.0,0.0,0.0,0.0,0.0,0.0))
     }
 
     /**

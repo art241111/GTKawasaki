@@ -4,6 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.controlElements.bottom.BottomControlDxDyDzFragment">
 
+    <data>
+        <variable
+            name="view_model"
+            type="ru.art241111.gt_kawasaki.viewModel.RobotViewModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -47,7 +52,7 @@
 
             android:selectAllOnFocus="false"
             android:singleLine="true"
-            android:text="10"
+            android:text="@{view_model.robotPosition.get(3).toString()}"
             android:textAlignment="center"
             app:layout_constraintStart_toEndOf="@+id/fl_x_down"
             app:layout_constraintTop_toTopOf="parent" />
@@ -118,7 +123,7 @@
             android:inputType="number|numberDecimal"
             android:selectAllOnFocus="false"
             android:singleLine="true"
-            android:text="10"
+            android:text="@{view_model.robotPosition.get(4).toString()}"
             android:textAlignment="center"
             app:layout_constraintStart_toEndOf="@+id/fl_y_down"
             app:layout_constraintTop_toBottomOf="@+id/et_x_coordinate" />
@@ -188,7 +193,7 @@
             android:inputType="number|numberDecimal"
             android:selectAllOnFocus="false"
             android:singleLine="true"
-            android:text="10"
+            android:text="@{view_model.robotPosition.get(5).toString()}"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/fl_z_down"

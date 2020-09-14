@@ -1,7 +1,6 @@
 package ru.art241111.gt_kawasaki.view.controlElements.bottom
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,6 @@ import ru.art241111.gt_kawasaki.view.util.AmountOfMovement
 import ru.art241111.gt_kawasaki.view.util.Buttons
 import ru.art241111.gt_kawasaki.view.util.WhenButtonHold
 import ru.art241111.gt_kawasaki.viewModel.RobotViewModel
-
 
 /**
  * A simple [Fragment] subclass.
@@ -42,11 +40,14 @@ class BottomControlDxDyDzFragment : Fragment(), MethodWorkWhenCommandReceived {
             R.layout.fragment_bottom_control_dxdydz, container, false)
         binding.executePendingBindings()
 
+        binding.viewModel = viewModel
+
         repositoryForRobotApi = viewModel.robot
 
         // Create buttonPressedListener and set it
         setClickListeners()
 
+        updateRobotPosition()
         setUpdateMethod()
         
         return binding.root
@@ -60,12 +61,19 @@ class BottomControlDxDyDzFragment : Fragment(), MethodWorkWhenCommandReceived {
      * Метод срабатывает, когда приходят новые координаты
      */
     override fun runMethodWhenHandlerWork() {
-        (activity as MainActivity).runOnUiThread {
-            binding.etXCoordinate.setText(viewModel.robot.robot.specifications.position[3].toString())
-            binding.etYCoordinate.setText(viewModel.robot.robot.specifications.position[4].toString())
-            binding.etZCoordinate.setText(viewModel.robot.robot.specifications.position[5].toString())
-        }
+        updateRobotPosition()
+    }
 
+    private  fun updateRobotPosition(){
+        viewModel.robotPosition.clear()
+        val position = viewModel.robot.robot.specifications.position
+        viewModel.robotPosition.addAll(
+            if(position.isEmpty()){
+                listOf(0.0,0.0,0.0,0.0,0.0,0.0)
+            } else{
+                position
+            }
+        )
     }
 
     override fun onStop() {
