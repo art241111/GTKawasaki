@@ -16,50 +16,65 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/iv_connection"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-
-            android:src="@{connect_status ? @drawable/ic_baseline_link_24 :@drawable/ic_baseline_link_off_24}"
-            android:cropToPadding="true"
-            android:background="@{connect_status ? @drawable/connect_button :@drawable/disconnect_button}"
-            app:layout_constraintEnd_toEndOf="@+id/tv_connection"
-            app:layout_constraintStart_toStartOf="@+id/tv_connection"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_connection"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/connection"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_connection" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/ib_run_program"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/ic_baseline_play_arrow_24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/iv_connection"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:background="@{connect_status ? @drawable/connect_button :@drawable/disconnect_button}"
+                android:cropToPadding="true"
+                android:src="@{connect_status ? @drawable/ic_baseline_link_24 :@drawable/ic_baseline_link_off_24}" />
 
-        <TextView
-            android:id="@+id/tv_run"
+            <TextView
+                android:id="@+id/tv_connection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="2dp"
+                android:text="@string/connection"
+                android:textAlignment="center"
+                app:layout_constraintTop_toBottomOf="@+id/iv_connection" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:text="@string/run"
-            app:layout_constraintEnd_toEndOf="@+id/ib_run_program"
-            app:layout_constraintStart_toStartOf="@+id/ib_run_program"
-            app:layout_constraintTop_toBottomOf="@+id/ib_run_program" />
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/ib_run_program"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/ic_baseline_play_arrow_24" />
+
+            <TextView
+                android:id="@+id/tv_run"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="2dp"
+                android:text="@string/run"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
