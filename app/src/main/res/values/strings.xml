@@ -70,6 +70,7 @@
     <string name="cancel">Cancel</string>
     <string name="stop">Stop</string>
     <string name="pause">Pause</string>
+    <string name="delay">Delay</string>
 
     // Coordinate type
     <string-array name="coordinateOptions" translatable="false">
