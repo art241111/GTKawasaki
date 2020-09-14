@@ -100,7 +100,7 @@ class AddMoveActionFragment : Fragment() {
             if (value == ""){
                 Toast.makeText(activity, R.string.enter_distance_to_move, Toast.LENGTH_LONG).show()
             } else{
-                addOrChangeValue(Move(coordinate, value.toFloat()))
+                addOrChangeValue(Move(coordinate, value.toDouble()))
                 popStack()
             }
         }

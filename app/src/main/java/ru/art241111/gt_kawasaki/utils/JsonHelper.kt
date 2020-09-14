@@ -35,7 +35,7 @@ class JsonHelper {
     private fun parseMoveCommand(commands: String): Move {
         val coordinate = commands.substringBefore(",").substringAfter("coordinate=")
         val sizeOfPlant = commands.substringBefore(")").substringAfter("sizeOfPlant=")
-        return Move(coordinate.getCoordinate(), sizeOfPlant.toFloat())
+        return Move(coordinate.getCoordinate(), sizeOfPlant.toDouble())
     }
 
     private fun parseMoveToPointCommand(commands: String): MoveToPoint {

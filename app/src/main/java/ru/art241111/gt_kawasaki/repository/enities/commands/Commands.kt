@@ -8,7 +8,7 @@ import ru.art241111.gt_kawasaki.repository.enities.Position
 import ru.art241111.gt_kawasaki.repository.enities.enums.Coordinate
 import ru.art241111.gt_kawasaki.repository.enities.enums.TypesOfMovementToThePoint
 
-abstract class RobotCommands: Status(), GetCommandText
+abstract class RobotCommands: Status(), GetCommandText, RunCommand
 
     open class Status{
         var status = ObservableField(0)
@@ -19,7 +19,7 @@ abstract class RobotCommands: Status(), GetCommandText
     }
 
     interface RunCommand{
-        fun runCommand(robot: RepositoryForRobotApi)
+        fun runCommand(robotApi: RepositoryForRobotApi)
     }
 
 
