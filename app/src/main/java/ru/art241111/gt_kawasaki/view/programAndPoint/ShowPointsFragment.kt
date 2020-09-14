@@ -42,6 +42,7 @@ class ShowPointsFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick 
         val bundle = Bundle()
         bundle.putInt("position", position)
 
+        viewModel.robot.stopSendCommands()
         findNavController().navigate(R.id.addPointsFragment, bundle)
     }
 

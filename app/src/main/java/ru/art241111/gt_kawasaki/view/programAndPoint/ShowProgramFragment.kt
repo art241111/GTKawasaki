@@ -52,6 +52,7 @@ class ShowProgramFragment : Fragment(), OnItemClickListener, OnDeleteButtonClick
         val bundle = Bundle()
         bundle.putInt("position", position)
 
+        viewModel.robot.stopSendCommands()
         when (viewModel.programList.value?.get(position)) {
             is MoveToPoint -> findNavController().navigate(R.id.addMovingToPointFragment, bundle)
             is Move -> findNavController().navigate(R.id.addMoveActionFragment, bundle)
