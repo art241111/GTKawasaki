@@ -13,6 +13,7 @@ class RobotViewModel(application: Application)
     : AndroidViewModel(application) {
     // Создание объекта, хранящего коннект с роботом
     var robot: RepositoryForRobotApi = RepositoryForRobotApi()
+    var isProgramRun = robot.getProgramStatusValue()
 
     // Массив для хранения всех точек
     val pointList = MutableLiveData<MutableList<Position>>()

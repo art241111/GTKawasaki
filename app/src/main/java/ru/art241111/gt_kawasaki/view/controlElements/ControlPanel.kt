@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import ru.art241111.gt_kawasaki.MainActivity
@@ -32,7 +33,10 @@ class ControlPanel : Fragment() {
 
         binding.connectStatus = viewModel.robot.isConnect()
         setConnectButtonListener()
+
         setRunButtonListener()
+        setStopButtonListener()
+        setPauseButtonListener()
 
         return binding.root
 
@@ -40,8 +44,21 @@ class ControlPanel : Fragment() {
 
     private fun setRunButtonListener() {
         binding.ibRunProgram.setOnClickListener {
+            viewModel.isProgramRun = viewModel.robot.getProgramStatusValue()
+            binding.isProgramRun = viewModel
+
             viewModel.robot.sendCommands(viewModel.programList.value!!)
         }
+    }
+
+    private fun setStopButtonListener(){
+        binding.ibStopProgram.setOnClickListener {
+            viewModel.robot.stopSendCommands()
+        }
+    }
+
+    private fun setPauseButtonListener(){
+
     }
 
     private fun setConnectButtonListener() {

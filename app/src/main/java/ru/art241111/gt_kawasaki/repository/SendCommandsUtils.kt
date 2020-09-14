@@ -1,27 +1,34 @@
 package ru.art241111.gt_kawasaki.repository
 
 import android.util.Log
+import androidx.databinding.ObservableField
 import ru.art241111.gt_kawasaki.repository.enities.*
 import ru.art241111.gt_kawasaki.repository.enities.enums.Coordinate
 import ru.art241111.gt_kawasaki.repository.enities.enums.TypesOfMovementToThePoint
 import ru.art241111.gt_kawasaki.utils.Delay
 
 class SendCommandsUtils(private val robotApi: RepositoryForRobotApi) {
-    private var isProgramRun = false
+    var isProgramRun = ObservableField(false)
+
     fun sendCommands(commands: List<RobotCommands>){
-        if(!isProgramRun){
-            isProgramRun = true
+        if(!isProgramRun.get()!!){
+            isProgramRun.set(true)
 
             setDefaultStatus(commands)
 
             commands.forEach{
-                sendCommand(it)
-                Delay.customDelay(1000L)
+                if(isProgramRun.get()!!){
+                    sendCommand(it)
+                    Delay.customDelay(1000L)
+                }
             }
-            isProgramRun = false
+            isProgramRun.set(false)
         }
     }
 
+    fun stopProgram(){
+        isProgramRun.set(false)
+    }
     private fun setDefaultStatus(commands: List<RobotCommands>){
         commands.forEach {
             it.status.set(0)

@@ -111,6 +111,17 @@ class RepositoryForRobotApi {
         }
     }
 
+    /**
+     * Stop sending a command array
+     */
+    fun stopSendCommands(){
+        thread {
+           sendCommandsUtils.stopProgram()
+        }
+    }
+
+    fun getProgramStatusValue() = sendCommandsUtils.isProgramRun
+
     fun addMethodAtPointHandler(method: MethodWorkWhenCommandReceived){
         robot.service.addMethodToPositionHandler(method)
     }
