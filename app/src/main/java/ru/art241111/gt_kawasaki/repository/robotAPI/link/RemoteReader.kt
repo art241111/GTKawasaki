@@ -7,7 +7,7 @@ import java.util.*
 import kotlin.concurrent.thread
 
 class RemoteReader(private val robotEntity: RobotEntity,
-                   val positionHandler: PositionHandler = PositionHandler()) {
+                   private val positionHandler: PositionHandler = PositionHandler()) {
     private var connection = false
 
     /**
