@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -18,9 +17,8 @@ import ru.art241111.gt_kawasaki.utils.sharedPreferences.SharedPreferencesHelperF
 import ru.art241111.gt_kawasaki.viewModel.RobotViewModel
 
 /**
- * A simple [Fragment] subclass.
- * Use the [DataForLinkFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Фрагмент, который позволяет созавать новое соединение
+ * @author Artem Gerasimov
  */
 private const val APP_PREFERENCES = "CharacteristicsOfTheConnection"
 private const val APP_PREFERENCES_IP = "IP"
@@ -53,59 +51,44 @@ class DataForLinkFragment : Fragment() {
         return binding.root
     }
 
-    private fun setClickListenerOnCancelButton() {
-        binding.bCancel.setOnClickListener {
-            hideKeyboard()
-            findNavController().popBackStack()
-        }
-    }
-
     private fun loadIpAndPortFromSharedPreferences() {
         preferences = SharedPreferencesHelperForString(activity as MainActivity,
                                                                       APP_PREFERENCES)
-        val ipFromSP = preferences.load(APP_PREFERENCES_IP)
-        if(ipFromSP == ""){
-            binding.defaultIp = ip
-        } else binding.defaultIp = ipFromSP
-
-
-        val portFromSP = preferences.load(APP_PREFERENCES_PORT)
-        if(portFromSP == ""){
-            binding.defaultPort  = port
-        } else binding.defaultPort  = portFromSP
+        loadIp()
+        loadPort()
     }
+        private fun loadIp(){
+            ip = preferences.load(APP_PREFERENCES_IP, defaultValue =  ip)
+            binding.defaultIp = ip
+        }
+
+        private fun loadPort(){
+            port = preferences.load(APP_PREFERENCES_PORT, defaultValue = port)
+            binding.defaultPort  = port
+        }
 
     private fun setButtonListenerOnConnectionButton() {
         binding.bConnect.setOnClickListener {
             ip = preferences.update(ip, binding.etIp.text.toString(), APP_PREFERENCES_IP)
             port = preferences.update(port, binding.etPort.text.toString(), APP_PREFERENCES_PORT)
-            clearFocus()
 
-            if(viewModel.createConnection(ip, port.toInt())){
-                hideKeyboard()
-                findNavController().popBackStack()
+            if(viewModel.createConnection(ip, port.toIntOrNull())){
+                popBackStack()
             } else{
-                Toast.makeText(activity as MainActivity, R.string.connection_is_failed, Toast.LENGTH_LONG).show()
+                Toast.makeText(activity as MainActivity, R.string.connection_is_failed, Toast.LENGTH_LONG)
+                     .show()
             }
         }
     }
 
-    private fun clearFocus() {
-        binding.etIp.clearFocus()
-        binding.etPort.clearFocus()
-
-        this.requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+    private fun setClickListenerOnCancelButton() {
+        binding.bCancel.setOnClickListener {
+            popBackStack()
+        }
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment DataForLinkFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance() = DataForLinkFragment().apply {}
+    private fun popBackStack(){
+        hideKeyboard()
+        findNavController().popBackStack()
     }
 }
