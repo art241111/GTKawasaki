@@ -1,26 +1,28 @@
 package ru.art241111.gt_kawasaki.repository
 
 import android.util.Log
-import androidx.databinding.ObservableField
+import androidx.databinding.ObservableInt
 import ru.art241111.gt_kawasaki.repository.enities.*
 import ru.art241111.gt_kawasaki.repository.enities.enums.Coordinate
 import ru.art241111.gt_kawasaki.repository.enities.enums.TypesOfMovementToThePoint
 import ru.art241111.gt_kawasaki.utils.Delay
 
 class SendCommandsUtils(private val robotApi: RepositoryForRobotApi) {
-    val isProgramRun: ObservableField<Int> = ObservableField(0)
+    val isProgramRun: ObservableInt = ObservableInt(0)
 
     private val defaultCommands: MutableList<RobotCommands> = mutableListOf()
 
     fun sendCommands(commands: List<RobotCommands>){
-        if(defaultCommands.isNotEmpty()){
-            val defaultCommandsCopy = mutableListOf<RobotCommands>()
-            defaultCommandsCopy.addAll(defaultCommands)
+        when(isProgramRun.get()){
+            2 -> {
+                val defaultCommandsCopy = mutableListOf<RobotCommands>()
+                defaultCommandsCopy.addAll(defaultCommands)
 
-            sendCommandsFromList(defaultCommandsCopy)
-        } else if(isProgramRun.get() == 0){
-            setDefaultStatus(commands)
-            sendCommandsFromList(commands)
+                sendCommandsFromList(defaultCommandsCopy)}
+
+            0 ->{
+                setDefaultStatus(commands)
+                sendCommandsFromList(commands)}
         }
     }
 
@@ -38,7 +40,7 @@ class SendCommandsUtils(private val robotApi: RepositoryForRobotApi) {
             }
         }
 
-        isProgramRun.set(0)
+        if (isProgramRun.get() != 2)isProgramRun.set(0)
     }
 
     fun stopProgram(){
