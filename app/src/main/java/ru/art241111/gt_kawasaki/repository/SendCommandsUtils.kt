@@ -8,27 +8,28 @@ import ru.art241111.gt_kawasaki.repository.enities.enums.TypesOfMovementToThePoi
 import ru.art241111.gt_kawasaki.utils.Delay
 
 class SendCommandsUtils(private val robotApi: RepositoryForRobotApi) {
-    var isProgramRun = ObservableField(false)
+    var isProgramRun = ObservableField(0)
 
     fun sendCommands(commands: List<RobotCommands>){
-        if(!isProgramRun.get()!!){
-            isProgramRun.set(true)
+        if(isProgramRun.get()!! == 0){
+            isProgramRun.set(1)
 
             setDefaultStatus(commands)
 
             commands.forEach{
-                if(isProgramRun.get()!!){
+                if(isProgramRun.get()!! != 0){
                     sendCommand(it)
                     Delay.customDelay(1000L)
                 }
             }
-            isProgramRun.set(false)
+            isProgramRun.set(0)
         }
     }
 
     fun stopProgram(){
-        isProgramRun.set(false)
+        isProgramRun.set(0)
     }
+
     private fun setDefaultStatus(commands: List<RobotCommands>){
         commands.forEach {
             it.status.set(0)
