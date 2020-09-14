@@ -68,6 +68,7 @@
     <string name="moving_xyz_tab">Move by x, y, z</string>
     <string name="moving_dxdydz_tab">Move by dx,dy,dz</string>
     <string name="cancel">Cancel</string>
+    <string name="stop">Stop</string>
 
     // Coordinate type
     <string-array name="coordinateOptions" translatable="false">
