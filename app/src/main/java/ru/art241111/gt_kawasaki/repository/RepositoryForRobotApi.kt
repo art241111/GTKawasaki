@@ -120,6 +120,15 @@ class RepositoryForRobotApi {
         }
     }
 
+    /**
+     * Pause sending a command array
+     */
+    fun pauseSendCommands(){
+        thread {
+            sendCommandsUtils.pauseProgram()
+        }
+    }
+
     fun getProgramStatusValue() = sendCommandsUtils.isProgramRun
 
     fun addMethodAtPointHandler(method: MethodWorkWhenCommandReceived){

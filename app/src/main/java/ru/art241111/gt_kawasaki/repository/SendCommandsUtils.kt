@@ -8,26 +8,46 @@ import ru.art241111.gt_kawasaki.repository.enities.enums.TypesOfMovementToThePoi
 import ru.art241111.gt_kawasaki.utils.Delay
 
 class SendCommandsUtils(private val robotApi: RepositoryForRobotApi) {
-    var isProgramRun = ObservableField(0)
+    val isProgramRun: ObservableField<Int> = ObservableField(0)
+
+    private val defaultCommands: MutableList<RobotCommands> = mutableListOf()
 
     fun sendCommands(commands: List<RobotCommands>){
-        if(isProgramRun.get()!! == 0){
-            isProgramRun.set(1)
+        if(defaultCommands.isNotEmpty()){
+            val defaultCommandsCopy = mutableListOf<RobotCommands>()
+            defaultCommandsCopy.addAll(defaultCommands)
 
+            sendCommandsFromList(defaultCommandsCopy)
+        } else if(isProgramRun.get() == 0){
             setDefaultStatus(commands)
-
-            commands.forEach{
-                if(isProgramRun.get()!! != 0){
-                    sendCommand(it)
-                    Delay.customDelay(1000L)
-                }
-            }
-            isProgramRun.set(0)
+            sendCommandsFromList(commands)
         }
+    }
+
+    private fun sendCommandsFromList(commands: List<RobotCommands>){
+        isProgramRun.set(1)
+        defaultCommands.clear()
+
+        commands.forEach{
+            if(isProgramRun.get() == 1){
+                sendCommand(it)
+                Delay.customDelay(1000L)
+            } else if(isProgramRun.get() == 2){
+                defaultCommands.add(it)
+                Log.d("debug_default_list", defaultCommands.toString())
+            }
+        }
+
+        isProgramRun.set(0)
     }
 
     fun stopProgram(){
         isProgramRun.set(0)
+        defaultCommands.clear()
+    }
+
+    fun pauseProgram(){
+        isProgramRun.set(2)
     }
 
     private fun setDefaultStatus(commands: List<RobotCommands>){

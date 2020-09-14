@@ -68,6 +68,7 @@
     <string name="do_not_enter_value">Вы не ввели значение</string>
     <string name="cancel">Отменить</string>
     <string name="stop">Stop</string>
+    <string name="pause">Pause</string>
 
     // Type of movement
     <string-array name="typeOfMovement">

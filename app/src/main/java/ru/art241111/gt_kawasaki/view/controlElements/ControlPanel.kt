@@ -58,7 +58,9 @@ class ControlPanel : Fragment() {
     }
 
     private fun setPauseButtonListener(){
-
+        binding.ibPauseProgram.setOnClickListener{
+            viewModel.robot.pauseSendCommands()
+        }
     }
 
     private fun setConnectButtonListener() {

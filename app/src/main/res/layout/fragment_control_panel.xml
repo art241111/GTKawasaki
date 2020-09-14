@@ -52,7 +52,7 @@
         <LinearLayout
             android:id="@+id/ll_stop_program"
 
-            android:visibility="@{is_program_run.isProgramRun == 1 ? View.VISIBLE : View.GONE}"
+            android:visibility="@{is_program_run.isProgramRun > 0 ? View.VISIBLE : View.GONE}"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
@@ -105,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="2dp"
-                android:text="@string/stop"
+                android:text="@string/pause"
                 android:textAlignment="center" />
 
         </LinearLayout>
