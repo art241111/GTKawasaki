@@ -7,7 +7,7 @@ import ru.art241111.gt_kawasaki.configuringRv.adapters.protocols.ItemTouchHelper
 import ru.art241111.gt_kawasaki.configuringRv.adapters.protocols.OnDeleteButtonClick
 import ru.art241111.gt_kawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.gt_kawasaki.databinding.RecyclerViewProgramItemBinding
-import ru.art241111.gt_kawasaki.repository.enities.commands.RobotCommands
+import ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.commands.RobotCommands
 
 class ProgramRecyclerViewAdapter(private var items: MutableList<RobotCommands>,
                                  private var itemListener: OnItemClickListener,

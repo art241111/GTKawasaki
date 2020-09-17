@@ -8,7 +8,7 @@ import ru.art241111.gt_kawasaki.R
 import ru.art241111.gt_kawasaki.configuringRv.adapters.protocols.OnDeleteButtonClick
 import ru.art241111.gt_kawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.gt_kawasaki.databinding.RecyclerViewPointsItemBinding
-import ru.art241111.gt_kawasaki.repository.enities.Position
+import ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.Position
 
 class PointsRecyclerViewAdapter(private var items: List<Position>,
                                 private var itemListener: OnItemClickListener,

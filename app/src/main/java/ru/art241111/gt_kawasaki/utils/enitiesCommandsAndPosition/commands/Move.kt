@@ -1,9 +1,9 @@
-package ru.art241111.gt_kawasaki.repository.enities.commands
+package ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.commands
 
 import ru.art241111.gt_kawasaki.GTKawasakiApp
 import ru.art241111.gt_kawasaki.R
 import ru.art241111.gt_kawasaki.repository.RepositoryForRobotApi
-import ru.art241111.gt_kawasaki.repository.enities.enums.Coordinate
+import ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.enums.Coordinate
 
 data class Move(val coordinate: Coordinate, val sizeOfPlant: Double): RobotCommands() {
     override fun getCommandText(): String =

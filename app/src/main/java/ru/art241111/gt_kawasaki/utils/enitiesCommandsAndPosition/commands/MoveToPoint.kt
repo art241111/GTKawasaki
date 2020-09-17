@@ -1,11 +1,11 @@
-package ru.art241111.gt_kawasaki.repository.enities.commands
+package ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.commands
 
 import android.util.Log
 import ru.art241111.gt_kawasaki.GTKawasakiApp
 import ru.art241111.gt_kawasaki.R
 import ru.art241111.gt_kawasaki.repository.RepositoryForRobotApi
-import ru.art241111.gt_kawasaki.repository.enities.Position
-import ru.art241111.gt_kawasaki.repository.enities.enums.TypesOfMovementToThePoint
+import ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.Position
+import ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.enums.TypesOfMovementToThePoint
 
 
 data class MoveToPoint(val type: TypesOfMovementToThePoint, val coordinate: Position): RobotCommands() {

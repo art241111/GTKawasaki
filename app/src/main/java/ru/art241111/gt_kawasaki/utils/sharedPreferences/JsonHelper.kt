@@ -1,14 +1,14 @@
-package ru.art241111.gt_kawasaki.utils
+package ru.art241111.gt_kawasaki.utils.sharedPreferences
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import ru.art241111.gt_kawasaki.repository.enities.*
-import ru.art241111.gt_kawasaki.repository.enities.commands.CloseGripper
-import ru.art241111.gt_kawasaki.repository.enities.commands.Move
-import ru.art241111.gt_kawasaki.repository.enities.commands.MoveToPoint
-import ru.art241111.gt_kawasaki.repository.enities.commands.RobotCommands
-import ru.art241111.gt_kawasaki.repository.enities.enums.getCoordinate
-import ru.art241111.gt_kawasaki.repository.enities.enums.getTypeOfMovementToThePoint
+import ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.*
+import ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.commands.CloseGripper
+import ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.commands.Move
+import ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.commands.MoveToPoint
+import ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.commands.RobotCommands
+import ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.enums.getCoordinate
+import ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.enums.getTypeOfMovementToThePoint
 
 class JsonHelper {
     fun robotCommandsArrayToJsonString(commands: List<RobotCommands>):  String = commands.joinToString(separator = ";")

@@ -12,9 +12,9 @@ import androidx.navigation.fragment.findNavController
 import ru.art241111.gt_kawasaki.MainActivity
 import ru.art241111.gt_kawasaki.R
 import ru.art241111.gt_kawasaki.databinding.FragmentAddForCommandBinding
-import ru.art241111.gt_kawasaki.repository.enities.commands.For
-import ru.art241111.gt_kawasaki.repository.enities.commands.ForEnd
-import ru.art241111.gt_kawasaki.utils.hideKeyboard
+import ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.commands.For
+import ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.commands.ForEnd
+import ru.art241111.gt_kawasaki.view.util.hideKeyboard
 import ru.art241111.gt_kawasaki.viewModel.RobotViewModel
 
 /**

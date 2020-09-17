@@ -1,4 +1,4 @@
-package ru.art241111.gt_kawasaki.repository.enities.commands
+package ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.commands
 
 import ru.art241111.gt_kawasaki.repository.RepositoryForRobotApi
 
