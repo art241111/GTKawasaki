@@ -3,6 +3,8 @@ package ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.commands
 import ru.art241111.gt_kawasaki.GTKawasakiApp
 import ru.art241111.gt_kawasaki.R
 import ru.art241111.gt_kawasaki.repository.RepositoryForRobotApi
+import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.Position
+import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.enums.getTypeOfMovementToThePoint
 
 class OpenGripper: RobotCommands(){
     override fun toString(): String = "OpenGripper"
@@ -15,7 +17,9 @@ class OpenGripper: RobotCommands(){
         robotApi.openGripper()
     }
 
-    override fun parse(stringParse: String): OpenGripper = this
+    companion object{
+        fun parse(commands: String): OpenGripper = OpenGripper()
+    }
 }
 
 class CloseGripper: RobotCommands(){
@@ -30,5 +34,7 @@ class CloseGripper: RobotCommands(){
         robotApi.closeGripper()
     }
 
-    override fun parse(stringParse: String): CloseGripper = this
+    companion object{
+        fun parse(commands: String): CloseGripper = CloseGripper()
+    }
 }

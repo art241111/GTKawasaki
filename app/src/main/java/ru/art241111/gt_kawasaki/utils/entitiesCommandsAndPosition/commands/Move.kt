@@ -3,7 +3,10 @@ package ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.commands
 import ru.art241111.gt_kawasaki.GTKawasakiApp
 import ru.art241111.gt_kawasaki.R
 import ru.art241111.gt_kawasaki.repository.RepositoryForRobotApi
+import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.Position
 import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.enums.Coordinate
+import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.enums.getCoordinate
+import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.enums.getTypeOfMovementToThePoint
 
 data class Move(val coordinate: Coordinate, val sizeOfPlant: Double): RobotCommands() {
     override fun getCommandText(): String =
@@ -21,5 +24,11 @@ data class Move(val coordinate: Coordinate, val sizeOfPlant: Double): RobotComma
         }
     }
 
-    override fun parse(stringParse: String): Move = this
+    companion object{
+        fun parse(commands: String): Move {
+            val coordinate = commands.substringBefore(",").substringAfter("coordinate=")
+            val sizeOfPlant = commands.substringBefore(")").substringAfter("sizeOfPlant=")
+            return Move(coordinate.getCoordinate(), sizeOfPlant.toDouble())
+        }
+    }
 }

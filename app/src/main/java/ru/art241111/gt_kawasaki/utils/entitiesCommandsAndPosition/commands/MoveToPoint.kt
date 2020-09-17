@@ -6,6 +6,8 @@ import ru.art241111.gt_kawasaki.R
 import ru.art241111.gt_kawasaki.repository.RepositoryForRobotApi
 import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.Position
 import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.enums.TypesOfMovementToThePoint
+import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.enums.getTypeOfMovementToThePoint
+import ru.art241111.gt_kawasaki.view.addElements.AddForCommandFragment
 
 
 data class MoveToPoint(val type: TypesOfMovementToThePoint, val coordinate: Position): RobotCommands() {
@@ -22,5 +24,26 @@ data class MoveToPoint(val type: TypesOfMovementToThePoint, val coordinate: Posi
         }
     }
 
-    override fun parse(stringParse: String): MoveToPoint = this
+    companion object{
+        fun parse(commands: String): MoveToPoint {
+            val typesOfMovement = commands.substringBefore(",").substringAfter("type=")
+            val coordinate = commands.substringBefore(")").substringAfter("coordinate=Position(")
+            return MoveToPoint(typesOfMovement.getTypeOfMovementToThePoint(), parsePosition(coordinate))
+        }
+
+        private fun parsePosition(commands: String): Position{
+            val name = commands.substringBefore(",").substringAfter("name=")
+            val position = commands.substringBefore(")").substringAfter("position=")
+            return Position(name, parsePositionForMutable(position))
+        }
+
+        private fun parsePositionForMutable(position: String): MutableList<Double>{
+            val pos = position.substringAfter("[").substringBefore("]")
+            return if(pos.isEmpty()){
+                mutableListOf()
+            } else{
+                pos.split(",").map { it.toDouble()} as MutableList<Double>
+            }
+        }
+    }
 }

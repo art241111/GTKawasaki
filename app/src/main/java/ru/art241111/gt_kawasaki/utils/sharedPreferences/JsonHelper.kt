@@ -7,60 +7,27 @@ import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.commands.Close
 import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.commands.Move
 import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.commands.MoveToPoint
 import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.commands.RobotCommands
-import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.enums.getCoordinate
-import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.enums.getTypeOfMovementToThePoint
 
 class JsonHelper {
     fun robotCommandsArrayToJsonString(commands: List<RobotCommands>):  String = commands.joinToString(separator = ";")
 
-    // TODO: Implementation json library and do this class
     fun jsonArrayToRobotCommands(commands: String): MutableList<RobotCommands>{
-
         val command = commands.split(";")
         val returnCommands = mutableListOf<RobotCommands>()
 
         command.forEach {
             when{
-                it == "CloseGripper" -> returnCommands.add(CloseGripper().parse())
-                it == "OpenGripper" -> returnCommands.add(CloseGripper().parse())
-                it.contains("MoveToPoint", ignoreCase = true)-> returnCommands.add(parseMoveToPointCommand(it))
-                it.contains("MOVE", ignoreCase = true)-> returnCommands.add(parseMoveCommand(it))
+                it == "CloseGripper" -> returnCommands.add(CloseGripper.parse(it))
+                it == "OpenGripper" -> returnCommands.add(CloseGripper.parse(it))
+                it.contains("MoveToPoint", ignoreCase = true)-> returnCommands.add(MoveToPoint.parse(it))
+                it.contains("MOVE", ignoreCase = true)-> returnCommands.add(Move.parse(it))
             }
-
         }
-
         return returnCommands
     }
 
-    private fun parseMoveCommand(commands: String): Move {
-        val coordinate = commands.substringBefore(",").substringAfter("coordinate=")
-        val sizeOfPlant = commands.substringBefore(")").substringAfter("sizeOfPlant=")
-        return Move(coordinate.getCoordinate(), sizeOfPlant.toDouble())
-    }
-
-    private fun parseMoveToPointCommand(commands: String): MoveToPoint {
-        val typesOfMovement = commands.substringBefore(",").substringAfter("type=")
-        val coordinate = commands.substringBefore(")").substringAfter("coordinate=Position(")
-        return MoveToPoint(typesOfMovement.getTypeOfMovementToThePoint(), parsePosition(coordinate))
-    }
-
-    private fun parsePosition(commands: String): Position{
-        val name = commands.substringBefore(",").substringAfter("name=")
-        val position = commands.substringBefore(")").substringAfter("position=")
-        return Position(name, parsePositionForMutable(position))
-    }
-
-    private fun parsePositionForMutable(position: String): MutableList<Double>{
-        val pos = position.substringAfter("[").substringBefore("]")
-        return if(pos.isEmpty()){
-            mutableListOf()
-        } else{
-            pos.split(",").map { it.toDouble()} as MutableList<Double>
-        }
-    }
-
     fun jsonArrayToPosition(position: String): List<Position>{
-// Converting json to array.
+        // Converting json to array.
         var point: MutableList<Position>? = Gson().fromJson(position,
             object : TypeToken<MutableList<Position>>() {}.type)
 
