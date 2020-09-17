@@ -20,4 +20,6 @@ data class Move(val coordinate: Coordinate, val sizeOfPlant: Double): RobotComma
             Coordinate.DZ -> robotApi.moveByDZ(sizeOfPlant)
         }
     }
+
+    override fun parse(stringParse: String): Move = this
 }

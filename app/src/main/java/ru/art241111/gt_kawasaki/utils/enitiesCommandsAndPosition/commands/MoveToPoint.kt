@@ -21,4 +21,6 @@ data class MoveToPoint(val type: TypesOfMovementToThePoint, val coordinate: Posi
             Log.e("MoveToPoint", "Не введены координаты")
         }
     }
+
+    override fun parse(stringParse: String): MoveToPoint = this
 }

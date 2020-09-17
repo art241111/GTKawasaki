@@ -14,6 +14,8 @@ class OpenGripper: RobotCommands(){
     override fun runCommand(robotApi: RepositoryForRobotApi) {
         robotApi.openGripper()
     }
+
+    override fun parse(stringParse: String): OpenGripper = this
 }
 
 class CloseGripper: RobotCommands(){
@@ -27,4 +29,6 @@ class CloseGripper: RobotCommands(){
     override fun runCommand(robotApi: RepositoryForRobotApi) {
         robotApi.closeGripper()
     }
+
+    override fun parse(stringParse: String): CloseGripper = this
 }
