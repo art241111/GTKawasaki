@@ -1,7 +1,7 @@
 package ru.art241111.gt_kawasaki.repository
 
-import ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.commands.RobotCommands
-import ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.enums.TypesOfMovementToThePoint
+import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.commands.RobotCommands
+import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.enums.TypesOfMovementToThePoint
 import ru.art241111.gt_kawasaki.repository.robotAPI.KawasakiRobot
 import ru.art241111.gt_kawasaki.repository.robotAPI.handlersFromKawasakiRobots.MethodWorkWhenCommandReceived
 import kotlin.concurrent.thread

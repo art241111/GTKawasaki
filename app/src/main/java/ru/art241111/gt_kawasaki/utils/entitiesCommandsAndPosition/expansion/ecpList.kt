@@ -1,4 +1,4 @@
-package ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.expansion
+package ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.expansion
 
 fun List<Float>.toStringForRobot():String{
     var returnString = ""

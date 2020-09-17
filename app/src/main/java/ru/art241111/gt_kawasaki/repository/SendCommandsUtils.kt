@@ -1,7 +1,7 @@
 package ru.art241111.gt_kawasaki.repository
 
 import androidx.databinding.ObservableInt
-import ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.commands.*
+import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.commands.*
 import ru.art241111.gt_kawasaki.utils.Delay
 
 class SendCommandsUtils(private val robotApi: RepositoryForRobotApi) {

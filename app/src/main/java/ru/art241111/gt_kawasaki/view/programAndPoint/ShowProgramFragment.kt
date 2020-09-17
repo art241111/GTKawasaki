@@ -15,7 +15,7 @@ import ru.art241111.gt_kawasaki.R
 import ru.art241111.gt_kawasaki.configuringRv.adapters.protocols.OnDeleteButtonClick
 import ru.art241111.gt_kawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.gt_kawasaki.databinding.FragmentShowProgramBinding
-import ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.commands.*
+import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.commands.*
 import ru.art241111.gt_kawasaki.utils.sharedPreferences.JsonHelper
 import ru.art241111.gt_kawasaki.utils.sharedPreferences.SharedPreferencesHelperForString
 import ru.art241111.gt_kawasaki.viewModel.RobotViewModel

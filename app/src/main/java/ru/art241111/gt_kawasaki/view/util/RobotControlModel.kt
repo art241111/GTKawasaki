@@ -1,6 +1,6 @@
 package ru.art241111.gt_kawasaki.view.util
 
-import ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.enums.TypesOfMovementToThePoint
+import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.enums.TypesOfMovementToThePoint
 import ru.art241111.gt_kawasaki.utils.Delay
 import ru.art241111.gt_kawasaki.viewModel.RobotViewModel
 import kotlin.concurrent.thread

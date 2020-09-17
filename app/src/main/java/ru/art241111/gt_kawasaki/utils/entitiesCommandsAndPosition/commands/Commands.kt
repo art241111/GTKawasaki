@@ -1,4 +1,4 @@
-package ru.art241111.gt_kawasaki.utils.enitiesCommandsAndPosition.commands
+package ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.commands
 
 import androidx.databinding.ObservableField
 import ru.art241111.gt_kawasaki.repository.RepositoryForRobotApi
@@ -9,13 +9,12 @@ abstract class RobotCommands: Status(), GetCommandText, RunCommand, ParseCommand
         var status = ObservableField(0)
     }
 
-
     interface GetCommandText{
         fun getCommandText(): String
     }
 
     interface ParseCommand{
-        fun parse(stringParse: String): RobotCommands
+        fun parse(stringParse: String = ""): RobotCommands
     }
 
     interface RunCommand{
