@@ -12,6 +12,7 @@ import ru.art241111.gt_kawasaki.R
 import ru.art241111.gt_kawasaki.databinding.FragmentBottomControlDxdydzBinding
 import ru.art241111.gt_kawasaki.repository.RepositoryForRobotApi
 import ru.art241111.gt_kawasaki.repository.robotAPI.handlersFromKawasakiRobots.MethodWorkWhenCommandReceived
+import ru.art241111.gt_kawasaki.repository.robotAPI.handlersFromKawasakiRobots.PositionCommandReceived
 import ru.art241111.gt_kawasaki.view.util.AmountOfMovement
 import ru.art241111.gt_kawasaki.view.util.Buttons
 import ru.art241111.gt_kawasaki.view.util.WhenButtonHold
@@ -22,7 +23,7 @@ import ru.art241111.gt_kawasaki.viewModel.RobotViewModel
  * Use the [BottomControlDxDyDzFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class BottomControlDxDyDzFragment : Fragment(), MethodWorkWhenCommandReceived {
+class BottomControlDxDyDzFragment : Fragment(), PositionCommandReceived {
     private lateinit var binding: FragmentBottomControlDxdydzBinding
     private lateinit var viewModel: RobotViewModel
 

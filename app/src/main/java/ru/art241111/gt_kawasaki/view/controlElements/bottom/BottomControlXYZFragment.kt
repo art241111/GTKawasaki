@@ -1,16 +1,19 @@
 package ru.art241111.gt_kawasaki.view.controlElements.bottom
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.android.synthetic.main.fragment_bottom_control_xyz.*
 import ru.art241111.gt_kawasaki.MainActivity
 import ru.art241111.gt_kawasaki.R
 import ru.art241111.gt_kawasaki.databinding.FragmentBottomControlXyzBinding
 import ru.art241111.gt_kawasaki.repository.RepositoryForRobotApi
+import ru.art241111.gt_kawasaki.repository.robotAPI.handlersFromKawasakiRobots.MethodWorkWhenCommandReceived
 import ru.art241111.gt_kawasaki.view.util.AmountOfMovement
 import ru.art241111.gt_kawasaki.view.util.Buttons
 import ru.art241111.gt_kawasaki.view.util.WhenButtonHold
@@ -21,7 +24,7 @@ import ru.art241111.gt_kawasaki.viewModel.RobotViewModel
  * Use the [BottomControlXYZFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class BottomControlXYZFragment : Fragment(){
+class BottomControlXYZFragment : Fragment(), MethodWorkWhenCommandReceived {
     private lateinit var binding: FragmentBottomControlXyzBinding
     private lateinit var viewModel: RobotViewModel
 
@@ -38,14 +41,35 @@ class BottomControlXYZFragment : Fragment(){
             R.layout.fragment_bottom_control_xyz, container, false)
         binding.executePendingBindings()
 
-        binding.viewModel = viewModel
-
         repositoryForRobotApi = viewModel.robot
 
         // Create buttonPressedListener and set it
         setClickListeners()
 
+        setUpdateMethod()
+
         return binding.root
+    }
+
+    private fun setUpdateMethod() {
+        viewModel.robot.addMethodAtPointHandler(this)
+    }
+
+    /**
+     * Метод срабатывает, когда приходят новые координаты
+     */
+    override fun runMethodWhenHandlerWork() {
+       (activity as MainActivity).runOnUiThread {
+           binding.etXCoordinate.setText(viewModel.robot.robot.specifications.position[0].toString())
+           binding.etYCoordinate.setText(viewModel.robot.robot.specifications.position[1].toString())
+           binding.etZCoordinate.setText(viewModel.robot.robot.specifications.position[2].toString())
+       }
+
+    }
+
+    override fun onStop() {
+        viewModel.robot.removeMethodAtPointHandler(this)
+        super.onStop()
     }
 
     private fun setClickListeners() {

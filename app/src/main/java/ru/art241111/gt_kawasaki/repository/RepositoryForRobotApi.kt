@@ -4,6 +4,7 @@ import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.commands.Robot
 import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.enums.TypesOfMovementToThePoint
 import ru.art241111.gt_kawasaki.repository.robotAPI.KawasakiRobot
 import ru.art241111.gt_kawasaki.repository.robotAPI.handlersFromKawasakiRobots.MethodWorkWhenCommandReceived
+import ru.art241111.gt_kawasaki.repository.robotAPI.handlersFromKawasakiRobots.PositionCommandReceived
 import kotlin.concurrent.thread
 
 class RepositoryForRobotApi {
@@ -131,11 +132,11 @@ class RepositoryForRobotApi {
 
     fun getProgramStatusValue() = sendCommandsUtils.isProgramRun
 
-    fun addMethodAtPointHandler(method: MethodWorkWhenCommandReceived){
+    fun addMethodAtPointHandler(method: PositionCommandReceived){
         robot.service.addMethodToPositionHandler(method)
     }
 
-    fun removeMethodAtPointHandler(method: MethodWorkWhenCommandReceived){
+    fun removeMethodAtPointHandler(method: PositionCommandReceived){
         robot.service.removeMethodToPositionHandler(method)
     }
 }

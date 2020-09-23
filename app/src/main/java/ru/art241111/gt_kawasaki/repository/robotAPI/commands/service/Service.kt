@@ -4,6 +4,7 @@ import kawasakiRobots.commands.service.ServiceCommand.*
 import link.State
 import ru.art241111.gt_kawasaki.repository.robotAPI.RobotEntity
 import ru.art241111.gt_kawasaki.repository.robotAPI.handlersFromKawasakiRobots.MethodWorkWhenCommandReceived
+import ru.art241111.gt_kawasaki.repository.robotAPI.handlersFromKawasakiRobots.PositionCommandReceived
 
 class Service(private var robotEntity: RobotEntity) {
     /**
@@ -45,11 +46,11 @@ class Service(private var robotEntity: RobotEntity) {
     /**
      * TODO: Rename method
      */
-    fun addMethodToPositionHandler(method: MethodWorkWhenCommandReceived){
+    fun addMethodToPositionHandler(method: PositionCommandReceived){
         robotEntity.positionHandler.pointCommandCame.add(method)
     }
 
-    fun removeMethodToPositionHandler(method: MethodWorkWhenCommandReceived){
+    fun removeMethodToPositionHandler(method: PositionCommandReceived){
         robotEntity.positionHandler.pointCommandCame.remove(method)
     }
 }

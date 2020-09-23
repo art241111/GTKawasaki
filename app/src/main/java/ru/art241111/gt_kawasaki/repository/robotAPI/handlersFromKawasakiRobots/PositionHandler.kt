@@ -3,10 +3,17 @@ package ru.art241111.gt_kawasaki.repository.robotAPI.handlersFromKawasakiRobots
 import ru.art241111.gt_kawasaki.repository.robotAPI.RobotEntity
 
 /**
+ * Interface for position handler.
+ * If you want to connect class with this handler,
+ * you should implements this interface.
+ */
+interface PositionCommandReceived:MethodWorkWhenCommandReceived
+
+/**
  * Class that tracks changes in position
  */
 class PositionHandler: Handler {
-    val pointCommandCame:MutableList<MethodWorkWhenCommandReceived> = mutableListOf()
+    val pointCommandCame:MutableList<PositionCommandReceived> = mutableListOf()
 
     private var oldPositionValueStr = ""
 
