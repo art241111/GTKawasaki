@@ -1,6 +1,6 @@
 package ru.art241111.gt_kawasaki.view.util
 
-import ru.art241111.gt_kawasaki.repository.enities.enums.TypesOfMovementToThePoint
+import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.enums.TypesOfMovementToThePoint
 import ru.art241111.gt_kawasaki.utils.Delay
 import ru.art241111.gt_kawasaki.viewModel.RobotViewModel
 import kotlin.concurrent.thread
@@ -23,12 +23,12 @@ class RobotControlModel(private val viewModel: RobotViewModel) {
     }
 
     private fun sendCommandMoveByAxis(){
-        if(typesOfMovement[0] != 0.0) viewModel.robot.moveByX(typesOfMovement[0].toInt())
-        if(typesOfMovement[1] != 0.0) viewModel.robot.moveByY(typesOfMovement[1].toInt())
-        if(typesOfMovement[2] != 0.0) viewModel.robot.moveByZ(typesOfMovement[2].toInt())
-        if(typesOfMovement[3] != 0.0) viewModel.robot.moveByDX(typesOfMovement[3].toInt())
-        if(typesOfMovement[4] != 0.0) viewModel.robot.moveByDY(typesOfMovement[4].toInt())
-        if(typesOfMovement[5] != 0.0) viewModel.robot.moveByDZ(typesOfMovement[5].toInt())
+        if(typesOfMovement[0] != 0.0) viewModel.robot.moveByX(typesOfMovement[0])
+        if(typesOfMovement[1] != 0.0) viewModel.robot.moveByY(typesOfMovement[1])
+        if(typesOfMovement[2] != 0.0) viewModel.robot.moveByZ(typesOfMovement[2])
+        if(typesOfMovement[3] != 0.0) viewModel.robot.moveByDX(typesOfMovement[3])
+        if(typesOfMovement[4] != 0.0) viewModel.robot.moveByDY(typesOfMovement[4])
+        if(typesOfMovement[5] != 0.0) viewModel.robot.moveByDZ(typesOfMovement[5])
         Delay.customDelay(20L)
     }
 

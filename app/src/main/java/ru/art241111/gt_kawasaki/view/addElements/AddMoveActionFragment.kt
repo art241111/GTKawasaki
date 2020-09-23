@@ -12,9 +12,9 @@ import androidx.navigation.fragment.findNavController
 import ru.art241111.gt_kawasaki.MainActivity
 import ru.art241111.gt_kawasaki.R
 import ru.art241111.gt_kawasaki.databinding.FragmentAddMoveActionBinding
-import ru.art241111.gt_kawasaki.repository.enities.Move
-import ru.art241111.gt_kawasaki.repository.enities.enums.Coordinate
-import ru.art241111.gt_kawasaki.utils.hideKeyboard
+import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.commands.Move
+import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.enums.Coordinate
+import ru.art241111.gt_kawasaki.view.util.hideKeyboard
 import ru.art241111.gt_kawasaki.viewModel.RobotViewModel
 
 /**
@@ -100,7 +100,7 @@ class AddMoveActionFragment : Fragment() {
             if (value == ""){
                 Toast.makeText(activity, R.string.enter_distance_to_move, Toast.LENGTH_LONG).show()
             } else{
-                addOrChangeValue(Move(coordinate, value.toFloat()))
+                addOrChangeValue(Move(coordinate, value.toDouble()))
                 popStack()
             }
         }

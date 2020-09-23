@@ -1,4 +1,4 @@
-package ru.art241111.gt_kawasaki.utils
+package ru.art241111.gt_kawasaki.view.util
 
 import android.app.Activity
 import android.content.Context

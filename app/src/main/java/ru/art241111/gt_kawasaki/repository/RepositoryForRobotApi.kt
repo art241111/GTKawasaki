@@ -1,7 +1,7 @@
 package ru.art241111.gt_kawasaki.repository
 
-import ru.art241111.gt_kawasaki.repository.enities.*
-import ru.art241111.gt_kawasaki.repository.enities.enums.TypesOfMovementToThePoint
+import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.commands.RobotCommands
+import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.enums.TypesOfMovementToThePoint
 import ru.art241111.gt_kawasaki.repository.robotAPI.KawasakiRobot
 import ru.art241111.gt_kawasaki.repository.robotAPI.handlersFromKawasakiRobots.MethodWorkWhenCommandReceived
 import ru.art241111.gt_kawasaki.repository.robotAPI.handlersFromKawasakiRobots.PositionCommandReceived
@@ -46,42 +46,42 @@ class RepositoryForRobotApi {
      * Moving the robot along the x coordinate.
      * @param position - the distance to be moved.
      */
-    fun moveByX(position: Int) =
+    fun moveByX(position: Double) =
         robot.moving.moveByX(position)
 
     /**
      * Moving the robot along the y coordinate.
      * @param position - the distance to be moved.
      */
-    fun moveByY(position: Int) =
+    fun moveByY(position: Double) =
         robot.moving.moveByY(position)
 
     /**
      * Moving the robot along the z coordinate.
      * @param position - the distance to be moved.
      */
-    fun moveByZ(position: Int) =
+    fun moveByZ(position: Double) =
         robot.moving.moveByZ(position)
 
     /**
      * Moving the robot along the dx coordinate.
      * @param position - the distance to be moved.
      */
-    fun moveByDX(position: Int) =
+    fun moveByDX(position: Double) =
         robot.moving.moveByDX(position)
 
     /**
      * Moving the robot along the dy coordinate.
      * @param position - the distance to be moved.
      */
-    fun moveByDY(position: Int) =
+    fun moveByDY(position: Double) =
         robot.moving.moveByDY(position)
 
     /**
      * Moving the robot along the dz coordinate.
      * @param position - the distance to be moved.
      */
-    fun moveByDZ(position: Int) =
+    fun moveByDZ(position: Double) =
         robot.moving.moveByDZ(position)
 
 

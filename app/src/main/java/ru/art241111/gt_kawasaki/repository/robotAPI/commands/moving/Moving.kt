@@ -8,42 +8,42 @@ class Moving(private val robotEntity: RobotEntity) {
      * Moving the robot along the x coordinate.
      * @param position - the distance to be moved.
      */
-    fun moveByX(position: Int) =
+    fun moveByX(position: Double) =
             robotEntity.writer.sendCommandWithChangeStatus(MovingCommand.MOVE_BY_X.command + position)
 
     /**
      * Moving the robot along the y coordinate.
      * @param position - the distance to be moved.
      */
-    fun moveByY(position: Int) =
+    fun moveByY(position: Double) =
             robotEntity.writer.sendCommandWithChangeStatus(MovingCommand.MOVE_BY_Y.command + position)
 
     /**
      * Moving the robot along the z coordinate.
      * @param position - the distance to be moved.
      */
-    fun moveByZ(position: Int) =
+    fun moveByZ(position: Double) =
             robotEntity.writer.sendCommandWithChangeStatus(MovingCommand.MOVE_BY_Z.command + position)
 
     /**
      * Moving the robot along the dx coordinate.
      * @param position - the distance to be moved.
      */
-    fun moveByDX(position: Int) =
+    fun moveByDX(position: Double) =
         robotEntity.writer.sendCommandWithChangeStatus(MovingCommand.MOVE_BY_DX.command + position)
 
     /**
      * Moving the robot along the dy coordinate.
      * @param position - the distance to be moved.
      */
-    fun moveByDY(position: Int) =
+    fun moveByDY(position: Double) =
         robotEntity.writer.sendCommandWithChangeStatus(MovingCommand.MOVE_BY_DY.command + position)
 
     /**
      * Moving the robot along the dz coordinate.
      * @param position - the distance to be moved.
      */
-    fun moveByDZ(position: Int) =
+    fun moveByDZ(position: Double) =
         robotEntity.writer.sendCommandWithChangeStatus(MovingCommand.MOVE_BY_DZ.command + position)
 
     /**

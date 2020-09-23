@@ -1,4 +1,4 @@
-package ru.art241111.gt_kawasaki.repository.enities.enums
+package ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.enums
 
 enum class Coordinate {
     X,

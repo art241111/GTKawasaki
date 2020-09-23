@@ -1,15 +1,13 @@
 package ru.art241111.gt_kawasaki.configuringRv.adapters
 
-import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ru.art241111.gt_kawasaki.R
 import ru.art241111.gt_kawasaki.configuringRv.adapters.protocols.ItemTouchHelperAdapter
 import ru.art241111.gt_kawasaki.configuringRv.adapters.protocols.OnDeleteButtonClick
 import ru.art241111.gt_kawasaki.configuringRv.adapters.protocols.OnItemClickListener
 import ru.art241111.gt_kawasaki.databinding.RecyclerViewProgramItemBinding
-import ru.art241111.gt_kawasaki.repository.enities.*
+import ru.art241111.gt_kawasaki.utils.entitiesCommandsAndPosition.commands.RobotCommands
 
 class ProgramRecyclerViewAdapter(private var items: MutableList<RobotCommands>,
                                  private var itemListener: OnItemClickListener,
